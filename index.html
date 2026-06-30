@@ -888,25 +888,136 @@
     .promise-why .bi-ar { font-size: 0.88em; margin-top: 8px; }
     .promise-stats { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
     .promise-stat-arrow { font-size: 1.5rem; color: var(--gold); }
-    .what-offer { padding: 80px 48px; background: var(--ink); border-top: 1px solid var(--border); }
-    .what-offer-title { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--pearl); margin-bottom: 12px; text-align: center; }
-    .what-offer-title .bi-ar { font-size: 0.55em; margin-top: 8px; }
-    .what-offer-desc { text-align: center; color: var(--text-2); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
-    .what-offer-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
-    .what-offer-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 700px; margin: 0 auto; }
-    .what-offer-item {
-      padding: 16px 20px 16px 36px; border: 1px solid var(--border); background: var(--surface);
-      font-size: .9rem; color: var(--text);
-      transition: border-color .3s, background .3s, transform .3s var(--ease);
+    .what-offer {
+      padding: 100px 48px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 255, 0, 0.04) 0%, transparent 60%), var(--ink);
+      border-top: 1px solid rgba(0, 255, 0, 0.12);
       position: relative;
+      overflow: hidden;
     }
-    .what-offer-item::before {
-      content: ''; position: absolute; left: 16px; top: 50%;
-      width: 6px; height: 6px; background: var(--gold);
-      transform: translateY(-50%) rotate(45deg);
+    .what-offer::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
     }
-    .what-offer-item:hover { border-color: rgba(255,255,255,.25); background: var(--surface-2); transform: translateX(6px); }
-    .what-offer-item .bi-ar { font-size: 0.85em; margin-top: 4px; color: var(--pearl); }
+    .what-offer .container { position: relative; z-index: 1; }
+    .what-offer-title {
+      font-family: 'Orbitron', var(--display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--pearl);
+      margin-bottom: 16px; text-align: center;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      text-shadow: 0 0 30px rgba(0, 255, 0, 0.25);
+    }
+    .what-offer-title .bi-ar { font-size: 0.45em; margin-top: 10px; letter-spacing: 0; text-transform: none; }
+    .what-offer-desc {
+      text-align: center; color: var(--text-2);
+      margin-bottom: 56px; max-width: 640px;
+      margin-left: auto; margin-right: auto;
+      font-size: 1.02rem; line-height: 1.7;
+    }
+    .what-offer-desc .bi-ar { font-size: 0.88em; margin-top: 8px; }
+
+    @keyframes monsterPop {
+      0%   { opacity: 0; transform: scale(0.4); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .monster-offers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .monster-offer-card {
+      position: relative;
+      padding: 28px 24px 24px;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 6px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.15), 0 20px 50px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.4);
+      animation: monsterPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation-play-state: paused;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .what-offer.monster-live .monster-offer-card {
+      animation-play-state: running;
+    }
+
+    .monster-offer-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #00ff00, transparent);
+      opacity: 0.7;
+    }
+
+    .monster-offer-card::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at 20% 0%, rgba(0, 255, 0, 0.08) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .monster-offer-card:hover {
+      border-color: rgba(0, 255, 0, 0.45);
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.25), 0 0 60px rgba(0, 255, 0, 0.1), 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .monster-offer-card:hover::after { opacity: 1; }
+
+    .monster-offer-index {
+      font-family: 'Orbitron', var(--display);
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; color: #00ff00;
+      text-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
+      margin-bottom: 16px;
+    }
+
+    .monster-offer-card .bi-en {
+      display: block;
+      font-family: 'Orbitron', var(--display);
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--pearl);
+      line-height: 1.35;
+    }
+
+    .monster-offer-card .bi-ar {
+      display: block;
+      font-family: var(--arabic);
+      font-size: 0.78rem; font-weight: 400;
+      color: rgba(255, 255, 255, 0.85);
+      direction: rtl; text-align: right;
+      margin-top: 8px; line-height: 1.5;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .monster-offer-corner {
+      position: absolute; bottom: 12px; right: 12px;
+      width: 8px; height: 8px;
+      border-right: 1px solid rgba(0, 255, 0, 0.5);
+      border-bottom: 1px solid rgba(0, 255, 0, 0.5);
+      opacity: 0.6;
+    }
     .offer-cat-intro { font-size: .95rem; color: var(--text-2); margin: -16px 0 28px; }
     .offer-cat-intro .bi-ar { font-size: 0.88em; margin-top: 6px; }
     .offer-footer { font-size: .82rem; color: var(--text-3); margin-top: 12px; font-style: italic; line-height: 1.5; }
@@ -1009,12 +1120,14 @@
       .process-steps::before { display: none; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .monster-offers-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
       .cta { padding: 100px 24px; }
       .promise-banner, .what-offer { padding: 64px 24px; }
       footer { padding: 48px 24px 24px; }
-      .promise-grid, .what-offer-list { grid-template-columns: 1fr; }
+      .promise-grid { grid-template-columns: 1fr; }
+      .monster-offers-grid { grid-template-columns: 1fr; }
       .promise-stats { flex-direction: column; }
       .promise-stat-arrow { transform: rotate(90deg); }
       .offers-grid { grid-template-columns: 1fr; }
@@ -1242,26 +1355,67 @@
     </div>
   </section>
 
-  <!-- What You Can Offer -->
+  <!-- Our Offers — Monster Energy UI -->
   <section class="what-offer" id="what-offer">
-    <div class="container reveal">
-      <h3 class="what-offer-title cyber-headline bi-block">
+    <div class="container">
+      <h3 class="what-offer-title cyber-headline bi-block reveal">
         <span class="bi-en">Our Offers</span>
         <span class="bi-ar">عروضنا</span>
       </h3>
-      <p class="what-offer-desc bi-block">
+      <p class="what-offer-desc bi-block reveal">
         <span class="bi-en">Everything we deliver for brands in Kuwait — from websites to AI automation.</span>
         <span class="bi-ar">كل ما نقدمه للعلامات في الكويت — من المواقع إلى أتمتة الذكاء الاصطناعي.</span>
       </p>
-      <div class="what-offer-list">
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Custom Website Design</span><span class="bi-ar">تصميم مواقع مخصصة</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Website Development</span><span class="bi-ar">تطوير المواقع</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Branding & Identity</span><span class="bi-ar">العلامة التجارية والهوية</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Digital Marketing</span><span class="bi-ar">التسويق الرقمي</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">AI & Automation</span><span class="bi-ar">الذكاء الاصطناعي والأتمتة</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Social Media Management</span><span class="bi-ar">إدارة وسائل التواصل</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Paid Advertising</span><span class="bi-ar">الإعلانات المدفوعة</span></div>
-        <div class="what-offer-item data-card bi-block"><span class="bi-en">Content Creation</span><span class="bi-ar">إنشاء المحتوى</span></div>
+
+      <div class="monster-offers-grid">
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.1s;">
+          <span class="monster-offer-index">01</span>
+          <span class="bi-en">Custom Website Design</span>
+          <span class="bi-ar">تصميم مواقع مخصصة</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.2s;">
+          <span class="monster-offer-index">02</span>
+          <span class="bi-en">Website Development</span>
+          <span class="bi-ar">تطوير المواقع</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.3s;">
+          <span class="monster-offer-index">03</span>
+          <span class="bi-en">Branding & Identity</span>
+          <span class="bi-ar">العلامة التجارية والهوية</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.4s;">
+          <span class="monster-offer-index">04</span>
+          <span class="bi-en">Digital Marketing</span>
+          <span class="bi-ar">التسويق الرقمي</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.5s;">
+          <span class="monster-offer-index">05</span>
+          <span class="bi-en">AI & Automation</span>
+          <span class="bi-ar">الذكاء الاصطناعي والأتمتة</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.6s;">
+          <span class="monster-offer-index">06</span>
+          <span class="bi-en">Social Media Management</span>
+          <span class="bi-ar">إدارة وسائل التواصل</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.7s;">
+          <span class="monster-offer-index">07</span>
+          <span class="bi-en">Paid Advertising</span>
+          <span class="bi-ar">الإعلانات المدفوعة</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
+        <article class="monster-offer-card bi-block" style="animation-delay: 0.8s;">
+          <span class="monster-offer-index">08</span>
+          <span class="bi-en">Content Creation</span>
+          <span class="bi-ar">إنشاء المحتوى</span>
+          <span class="monster-offer-corner" aria-hidden="true"></span>
+        </article>
       </div>
     </div>
   </section>
@@ -1583,6 +1737,18 @@
       });
     };
     initDataCards();
+
+    // Monster Offers — trigger pop animation on scroll
+    const monsterOffers = document.getElementById('what-offer');
+    if (monsterOffers) {
+      const monsterObs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          monsterOffers.classList.add('monster-live');
+          monsterObs.unobserve(monsterOffers);
+        }
+      }, { threshold: 0.15 });
+      monsterObs.observe(monsterOffers);
+    }
 
     // Scroll reveal (non-card elements)
     const revealEls = document.querySelectorAll('.reveal:not(.data-card)');

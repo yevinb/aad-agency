@@ -239,7 +239,7 @@ nav.scrolled {
 
 /* Card-specific overrides */
 .pillar, .promise-block, .adv-card, .stat-item, .step,
-.what-offer-item, .offer-card, .service-card, .work-card {
+.offer-card, .service-card, .work-card {
   border-radius: 4px;
 }
 
@@ -358,4 +358,8 @@ main { position: relative; z-index: 1; }
   .data-card { transform: none; opacity: 1; }
   .data-card.pop-in { transform: none; }
   .hero-title .word { transform: none; opacity: 1; animation: none; }
+  .monster-offer-card {
+    opacity: 1; transform: none;
+    animation: none;
+  }
 }
