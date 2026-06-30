@@ -104,11 +104,10 @@ const T = {
   cta_label: { en: "Let's Talk", ar: 'لنتحدث' },
   cta_title: { html: true, en: 'Ready to own<br><em>Kuwait?</em>', ar: 'مستعد لتملك<br><em>الكويت؟</em>' },
   cta_desc: { en: "Whether you're launching, rebranding, or scaling — The AAD Agency is your partner in building a brand that wins.", ar: 'سواء كنت تُطلق علامتك أو تعيد بناء هويتها أو تتوسع — وكالة AAD شريكك في بناء علامة تفوز.' },
-  cta_placeholder: { en: 'your@email.com', ar: 'بريدك@email.com' },
-  cta_btn: { en: 'Get Started', ar: 'ابدأ الآن' },
+  cta_wa_btn: { en: 'Chat on WhatsApp', ar: 'تواصل عبر واتساب' },
+  cta_wa_hint: { en: 'We reply fast — usually within minutes', ar: 'نرد بسرعة — عادةً خلال دقائق' },
   whatsapp_cta: { en: 'WhatsApp +965 9721 9411', ar: 'واتساب +965 9721 9411' },
   footer_whatsapp: { en: 'WhatsApp +965 9721 9411', ar: 'واتساب +965 9721 9411' },
-  cta_alert: { en: 'Thank you! We will be in touch shortly.', ar: 'شكراً لك! سنتواصل معك قريباً.' },
   footer_desc: { en: "Kuwait's premier brand agency. We build identities, campaigns, and growth engines for businesses ready to lead the market.", ar: 'أفضل وكالة علامات تجارية في الكويت. نبني هويات وحملات ومحركات نمو للشركات الجاهزة لقيادة السوق.' },
   footer_nav: { en: 'Navigate', ar: 'تصفح' },
   footer_services: { en: 'Services', ar: 'الخدمات' },
@@ -144,14 +143,6 @@ function applyBilingual() {
     el.classList.add('bi-block');
     el.innerHTML = biBlock(entry.en, entry.ar);
   });
-
-  const ph = document.getElementById('ctaEmail');
-  if (ph && T.cta_placeholder) ph.placeholder = T.cta_placeholder.en;
 }
 
 applyBilingual();
-
-document.getElementById('ctaForm').addEventListener('submit', e => {
-  e.preventDefault();
-  alert(T.cta_alert.en + '\n' + T.cta_alert.ar);
-});
