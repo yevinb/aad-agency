@@ -275,7 +275,7 @@ const offersData = [
 ];
 
 function renderOfferCard(offer) {
-  let html = `<div class="offer-card reveal">
+  let html = `<div class="offer-card data-card">
     <div class="offer-icon">${offer.icon}</div>
     <h4 class="bi-block">${bi(offer.title.en, offer.title.ar)}</h4>`;
   if (offer.desc) html += `<p class="offer-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
@@ -298,12 +298,7 @@ function renderOffers() {
       <div class="offers-grid">${cat.offers.map(renderOfferCard).join('')}</div>
     </div>
   `).join('');
-  document.querySelectorAll('#offersRoot .reveal').forEach(el => {
-    const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { el.classList.add('visible'); obs.unobserve(el); }
-    }, { threshold: 0.05 });
-    obs.observe(el);
-  });
+  if (window.initDataCards) window.initDataCards(root);
 }
 
 document.addEventListener('DOMContentLoaded', renderOffers);

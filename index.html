@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="The AAD Agency — Kuwait's premier brand strategy and creative agency. We build brands that dominate the Gulf market."/>
-  <meta name="theme-color" content="#000000"/>
+  <meta name="theme-color" content="#050505"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://yevinb.github.io/aad-agency/"/>
   <meta property="og:type" content="website"/>
@@ -20,7 +20,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-size='14' font-weight='800' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Noto+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Noto+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cyber-theme.css"/>
   <style>
     :root {
       --void: #000000;
@@ -1032,6 +1033,7 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
   <div class="grain"></div>
+  <div class="cyber-grid" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
@@ -1122,7 +1124,7 @@
     <div class="container">
       <div class="reveal">
         <div class="section-label" data-bi="about_label">Who We Are</div>
-        <h2 class="section-title" data-bi-html="about_title">The agency Kuwait<br><em>has been waiting for.</em></h2>
+        <h2 class="section-title cyber-headline" data-bi-html="about_title">The agency Kuwait<br><em>has been waiting for.</em></h2>
       </div>
       <div class="about-grid">
         <div class="about-visual reveal">
@@ -1140,22 +1142,22 @@
             The AAD Agency was founded on a simple belief: Kuwait deserves an agency that thinks globally but executes locally. We bring the knowledge, systems, and creative firepower that the market has never seen — and we deploy it for brands ready to lead.
           </p>
           <div class="about-pillars">
-            <div class="pillar">
+            <div class="pillar data-card">
               <div class="pillar-num">01</div>
               <h4 data-bi="pillar1_t">First-Mover Edge</h4>
               <p data-bi="pillar1_d">We're pioneering a new standard of brand work in Kuwait. No legacy baggage, pure ambition.</p>
             </div>
-            <div class="pillar">
+            <div class="pillar data-card">
               <div class="pillar-num">02</div>
               <h4 data-bi="pillar2_t">Deep Knowledge</h4>
               <p data-bi="pillar2_d">World-class frameworks applied to a market hungry for excellence and differentiation.</p>
             </div>
-            <div class="pillar">
+            <div class="pillar data-card">
               <div class="pillar-num">03</div>
               <h4 data-bi="pillar3_t">Infinite Pipeline</h4>
               <p data-bi="pillar3_d">Every mall, café, clinic, and startup in Kuwait is a potential partner. The market is ours to define.</p>
             </div>
-            <div class="pillar">
+            <div class="pillar data-card">
               <div class="pillar-num">04</div>
               <h4 data-bi="pillar4_t">Relentless Execution</h4>
               <p data-bi="pillar4_d">Strategy without execution is noise. We deliver end-to-end — from concept to campaign to conversion.</p>
@@ -1170,7 +1172,7 @@
   <section class="promise-banner" id="promise">
     <div class="container">
       <div class="reveal">
-        <h2 class="promise-title bi-block">
+        <h2 class="promise-title cyber-headline bi-block">
           <span class="bi-en">More leads. More sales.</span>
           <span class="bi-ar">المزيد من العملاء المحتملين. المزيد من المبيعات.</span>
         </h2>
@@ -1181,7 +1183,7 @@
       </div>
 
       <div class="promise-grid reveal">
-        <div class="promise-block">
+        <div class="promise-block data-card">
           <h3 class="promise-block-title bi-block">
             <span class="bi-en">More leads</span>
             <span class="bi-ar">المزيد من العملاء المحتملين</span>
@@ -1198,7 +1200,7 @@
           </ul>
         </div>
 
-        <div class="promise-block">
+        <div class="promise-block data-card">
           <h3 class="promise-block-title bi-block">
             <span class="bi-en">More sales</span>
             <span class="bi-ar">المزيد من المبيعات</span>
@@ -1221,18 +1223,18 @@
         <span class="bi-ar"><strong>مسارك المبسّط:</strong> الزوار يصبحون عملاء محتملين، والعملاء المحتملون يصبحون زبائن. نُهندس كل خطوة.</span>
       </p>
 
-      <div class="promise-stats reveal">
-        <div class="promise-stat bi-block">
+      <div class="promise-stats funnel-track reveal">
+        <div class="promise-stat data-card bi-block">
           <div class="promise-stat-num">100</div>
           <div class="promise-stat-label"><span class="bi-en">Website visitors</span><span class="bi-ar">زوار الموقع</span></div>
         </div>
         <div class="promise-stat-arrow">→</div>
-        <div class="promise-stat bi-block">
+        <div class="promise-stat data-card bi-block">
           <div class="promise-stat-num">10</div>
           <div class="promise-stat-label"><span class="bi-en">Leads</span><span class="bi-ar">عملاء محتملون</span></div>
         </div>
         <div class="promise-stat-arrow">→</div>
-        <div class="promise-stat bi-block">
+        <div class="promise-stat data-card bi-block">
           <div class="promise-stat-num">3</div>
           <div class="promise-stat-label"><span class="bi-en">Sales</span><span class="bi-ar">مبيعات</span></div>
         </div>
@@ -1243,7 +1245,7 @@
   <!-- What You Can Offer -->
   <section class="what-offer" id="what-offer">
     <div class="container reveal">
-      <h3 class="what-offer-title bi-block">
+      <h3 class="what-offer-title cyber-headline bi-block">
         <span class="bi-en">Our Offers</span>
         <span class="bi-ar">عروضنا</span>
       </h3>
@@ -1252,14 +1254,14 @@
         <span class="bi-ar">كل ما نقدمه للعلامات في الكويت — من المواقع إلى أتمتة الذكاء الاصطناعي.</span>
       </p>
       <div class="what-offer-list">
-        <div class="what-offer-item bi-block"><span class="bi-en">Custom Website Design</span><span class="bi-ar">تصميم مواقع مخصصة</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">Website Development</span><span class="bi-ar">تطوير المواقع</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">Branding & Identity</span><span class="bi-ar">العلامة التجارية والهوية</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">Digital Marketing</span><span class="bi-ar">التسويق الرقمي</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">AI & Automation</span><span class="bi-ar">الذكاء الاصطناعي والأتمتة</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">Social Media Management</span><span class="bi-ar">إدارة وسائل التواصل</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">Paid Advertising</span><span class="bi-ar">الإعلانات المدفوعة</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">Content Creation</span><span class="bi-ar">إنشاء المحتوى</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Custom Website Design</span><span class="bi-ar">تصميم مواقع مخصصة</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Website Development</span><span class="bi-ar">تطوير المواقع</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Branding & Identity</span><span class="bi-ar">العلامة التجارية والهوية</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Digital Marketing</span><span class="bi-ar">التسويق الرقمي</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">AI & Automation</span><span class="bi-ar">الذكاء الاصطناعي والأتمتة</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Social Media Management</span><span class="bi-ar">إدارة وسائل التواصل</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Paid Advertising</span><span class="bi-ar">الإعلانات المدفوعة</span></div>
+        <div class="what-offer-item data-card bi-block"><span class="bi-en">Content Creation</span><span class="bi-ar">إنشاء المحتوى</span></div>
       </div>
     </div>
   </section>
@@ -1270,7 +1272,7 @@
       <div class="services-header reveal">
         <div>
           <div class="section-label" data-bi="offers_label">Services</div>
-          <h2 class="section-title" data-bi-html="offers_title">Everything we<br><em>deliver for brands.</em></h2>
+          <h2 class="section-title cyber-headline" data-bi-html="offers_title">Everything we<br><em>deliver for brands.</em></h2>
         </div>
         <p class="section-desc" data-bi="offers_desc">From AI automation to branding, marketing, and web design — the full stack your business needs to win in Kuwait.</p>
       </div>
@@ -1285,21 +1287,21 @@
         Kuwait has infinite brands and almost zero agencies doing this right. We're not competing — we're creating the category.
       </blockquote>
       <div class="advantage-cards">
-        <div class="adv-card reveal">
+        <div class="adv-card data-card reveal">
           <div class="adv-icon">KW</div>
           <div>
             <h4 data-bi="adv1_t">Local Intelligence</h4>
             <p data-bi="adv1_d">We understand Kuwaiti consumer behavior, cultural nuances, and the channels that actually convert here.</p>
           </div>
         </div>
-        <div class="adv-card reveal">
+        <div class="adv-card data-card reveal">
           <div class="adv-icon">GL</div>
           <div>
             <h4 data-bi="adv2_t">Global Standards</h4>
             <p data-bi="adv2_d">Agency-grade processes and creative benchmarks from London, Dubai, and New York — executed in Kuwait City.</p>
           </div>
         </div>
-        <div class="adv-card reveal">
+        <div class="adv-card data-card reveal">
           <div class="adv-icon">∞</div>
           <div>
             <h4 data-bi="adv3_t">Unlimited Opportunity</h4>
@@ -1313,19 +1315,19 @@
   <!-- Stats -->
   <section class="stats">
     <div class="stats-grid">
-      <div class="stat-item reveal">
+      <div class="stat-item data-card reveal">
         <div class="stat-num" data-target="500">0<span>+</span></div>
         <div class="stat-label" data-bi="stat1">Brands in Our Pipeline</div>
       </div>
-      <div class="stat-item reveal">
+      <div class="stat-item data-card reveal">
         <div class="stat-num" data-target="6">0</div>
         <div class="stat-label" data-bi="stat2">Core Service Lines</div>
       </div>
-      <div class="stat-item reveal">
+      <div class="stat-item data-card reveal">
         <div class="stat-num" data-target="100">0<span>%</span></div>
         <div class="stat-label" data-bi="stat3">Kuwait-Focused</div>
       </div>
-      <div class="stat-item reveal">
+      <div class="stat-item data-card reveal">
         <div class="stat-num">#1</div>
         <div class="stat-label" data-bi="stat4">Our Ambition</div>
       </div>
@@ -1337,25 +1339,25 @@
     <div class="container">
       <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto;">
         <div class="section-label" style="justify-content:center;" data-bi="process_label">How We Work</div>
-        <h2 class="section-title" data-bi-html="process_title">From brief to<br><em>brand dominance.</em></h2>
+        <h2 class="section-title cyber-headline" data-bi-html="process_title">From brief to<br><em>brand dominance.</em></h2>
       </div>
       <div class="process-steps">
-        <div class="step reveal">
+        <div class="step data-card reveal">
           <div class="step-circle">01</div>
           <h4 data-bi="step1_t">Discover</h4>
           <p data-bi="step1_d">Deep dive into your brand, market, competitors, and untapped opportunities in Kuwait.</p>
         </div>
-        <div class="step reveal">
+        <div class="step data-card reveal">
           <div class="step-circle">02</div>
           <h4 data-bi="step2_t">Define</h4>
           <p data-bi="step2_d">Strategy, positioning, and creative direction that separates you from every competitor.</p>
         </div>
-        <div class="step reveal">
+        <div class="step data-card reveal">
           <div class="step-circle">03</div>
           <h4 data-bi="step3_t">Design</h4>
           <p data-bi="step3_d">World-class creative execution — identity, content, campaigns, and digital assets.</p>
         </div>
-        <div class="step reveal">
+        <div class="step data-card reveal">
           <div class="step-circle">04</div>
           <h4 data-bi="step4_t">Dominate</h4>
           <p data-bi="step4_d">Launch, optimize, and scale. We measure everything and iterate until you lead.</p>
@@ -1370,12 +1372,12 @@
       <div class="services-header reveal">
         <div>
           <div class="section-label" data-bi="work_label">Selected Work</div>
-          <h2 class="section-title" data-bi-html="work_title">Brands we're<br><em>building next.</em></h2>
+          <h2 class="section-title cyber-headline" data-bi-html="work_title">Brands we're<br><em>building next.</em></h2>
         </div>
         <p class="section-desc" data-bi="work_desc">Your brand could be here. We're selectively partnering with ambitious Kuwaiti businesses ready to lead.</p>
       </div>
       <div class="work-grid">
-        <div class="work-card reveal">
+        <div class="work-card data-card reveal">
           <a href="#contact" class="work-card-link" aria-label="Project Noor — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
@@ -1386,7 +1388,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </div>
         </div>
-        <div class="work-card reveal">
+        <div class="work-card data-card reveal">
           <a href="#contact" class="work-card-link" aria-label="Vital Kuwait — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
@@ -1397,7 +1399,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </div>
         </div>
-        <div class="work-card reveal">
+        <div class="work-card data-card reveal">
           <a href="#contact" class="work-card-link" aria-label="Sahara Collective — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
@@ -1408,7 +1410,7 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </div>
         </div>
-        <div class="work-card reveal">
+        <div class="work-card data-card reveal">
           <a href="#contact" class="work-card-link" aria-label="NextGen KW — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
@@ -1428,7 +1430,7 @@
     <div class="cta-bg"></div>
     <div class="cta-content reveal">
       <div class="section-label" style="justify-content:center;" data-bi="cta_label">Let's Talk</div>
-      <h2 class="cta-title" data-bi-html="cta_title">Ready to own<br><em>Kuwait?</em></h2>
+      <h2 class="cta-title cyber-headline" data-bi-html="cta_title">Ready to own<br><em>Kuwait?</em></h2>
       <p class="cta-desc" data-bi="cta_desc">Whether you're launching, rebranding, or scaling — The AAD Agency is your partner in building a brand that wins.</p>
       <div class="cta-actions">
         <a href="https://wa.me/96597219411" class="cta-wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp +965 9721 9411">
@@ -1544,12 +1546,12 @@
       el.addEventListener('mouseenter', () => {
         dot.style.width = '16px'; dot.style.height = '16px';
         ring.style.width = '60px'; ring.style.height = '60px';
-        ring.style.borderColor = 'rgba(255,255,255,.7)';
+        ring.style.borderColor = 'rgba(0,255,0,.7)';
       });
       el.addEventListener('mouseleave', () => {
         dot.style.width = '8px'; dot.style.height = '8px';
         ring.style.width = '40px'; ring.style.height = '40px';
-        ring.style.borderColor = 'rgba(255,255,255,.35)';
+        ring.style.borderColor = 'rgba(0,255,0,.35)';
       });
     });
 
@@ -1566,8 +1568,24 @@
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
     });
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
+    // Data card elastic pop-in (staggered)
+    window.initDataCards = function initDataCards(root = document) {
+      root.querySelectorAll('.data-card:not(.pop-in)').forEach(card => {
+        const parent = card.parentElement;
+        const siblings = parent ? [...parent.children].filter(c => c.classList.contains('data-card')) : [card];
+        const idx = siblings.indexOf(card);
+        const obs = new IntersectionObserver(entries => {
+          if (!entries[0].isIntersecting) return;
+          setTimeout(() => card.classList.add('pop-in'), idx * 110);
+          obs.unobserve(card);
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        obs.observe(card);
+      });
+    };
+    initDataCards();
+
+    // Scroll reveal (non-card elements)
+    const revealEls = document.querySelectorAll('.reveal:not(.data-card)');
     const observer = new IntersectionObserver(entries => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
