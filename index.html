@@ -1391,7 +1391,7 @@
   </div>
 
   <!-- About -->
-  <section class="about" id="about">
+  <section class="about monster-zone" id="about" data-watermark="AAD">
     <div class="container">
       <div class="reveal">
         <div class="section-label" data-bi="about_label">Who We Are</div>
@@ -1440,7 +1440,7 @@
   </section>
 
   <!-- Promise / More Leads More Sales -->
-  <section class="promise-banner" id="promise">
+  <section class="promise-banner monster-zone" id="promise" data-watermark="100">
     <div class="container">
       <div class="reveal">
         <h2 class="promise-title cyber-headline bi-block">
@@ -1514,7 +1514,7 @@
   </section>
 
   <!-- Our Offers — Monster Energy carousel -->
-  <section class="what-offer" id="what-offer">
+  <section class="what-offer monster-zone" id="what-offer">
     <span class="monster-watermark" aria-hidden="true">08</span>
     <div class="monster-zone-inner">
       <div class="monster-header">
@@ -1619,7 +1619,7 @@
   </section>
 
   <!-- Offers / Services -->
-  <section class="services" id="services">
+  <section class="services monster-zone" id="services" data-watermark="SVC">
     <div class="container">
       <div class="services-header reveal">
         <div>
@@ -1633,7 +1633,7 @@
   </section>
 
   <!-- Advantage -->
-  <section class="advantage">
+  <section class="advantage monster-zone" data-watermark="KW">
     <div class="container advantage-inner">
       <blockquote class="advantage-quote reveal" data-bi="adv_quote">
         Kuwait has infinite brands and almost zero agencies doing this right. We're not competing — we're creating the category.
@@ -1665,7 +1665,7 @@
   </section>
 
   <!-- Stats -->
-  <section class="stats">
+  <section class="stats monster-zone" data-watermark="500">
     <div class="stats-grid">
       <div class="stat-item data-card reveal">
         <div class="stat-num" data-target="500">0<span>+</span></div>
@@ -1687,7 +1687,7 @@
   </section>
 
   <!-- Process -->
-  <section class="process" id="process">
+  <section class="process monster-zone" id="process" data-watermark="04">
     <div class="container">
       <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto;">
         <div class="section-label" style="justify-content:center;" data-bi="process_label">How We Work</div>
@@ -1719,7 +1719,7 @@
   </section>
 
   <!-- Work -->
-  <section class="work" id="work">
+  <section class="work monster-zone" id="work" data-watermark="NEXT">
     <div class="container">
       <div class="services-header reveal">
         <div>
@@ -1778,7 +1778,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta" id="contact">
+  <section class="cta monster-zone" id="contact" data-watermark="GO">
     <div class="cta-bg"></div>
     <div class="cta-content reveal">
       <div class="section-label" style="justify-content:center;" data-bi="cta_label">Let's Talk</div>
@@ -1920,24 +1920,47 @@
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
     });
 
-    // Data card elastic pop-in (staggered)
-    window.initDataCards = function initDataCards(root = document) {
-      root.querySelectorAll('.data-card:not(.pop-in)').forEach(card => {
-        const parent = card.parentElement;
-        const siblings = parent ? [...parent.children].filter(c => c.classList.contains('data-card')) : [card];
-        const idx = siblings.indexOf(card);
+    // Monster zones — site-wide pop animations (fixes invisible content)
+    function activateMonsterZone(zone) {
+      if (zone.classList.contains('monster-live')) return;
+      zone.classList.add('monster-live');
+      zone.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      let i = 0;
+      zone.querySelectorAll('.data-card, .monster-can, .monster-service-can').forEach(card => {
+        if (!card.style.animationDelay) {
+          card.style.animationDelay = `${Math.min(i * 0.07, 0.9)}s`;
+        }
+        i++;
+      });
+      zone.querySelectorAll('.monster-subzone').forEach(sub => activateMonsterZone(sub));
+    }
+
+    window.initMonsterZones = function initMonsterZones(root = document) {
+      root.querySelectorAll('.monster-zone').forEach(zone => {
+        if (zone.dataset.monsterBound) return;
+        zone.dataset.monsterBound = '1';
         const obs = new IntersectionObserver(entries => {
           if (!entries[0].isIntersecting) return;
-          setTimeout(() => card.classList.add('pop-in'), idx * 110);
-          obs.unobserve(card);
-        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-        obs.observe(card);
+          activateMonsterZone(zone);
+          obs.unobserve(zone);
+        }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+        obs.observe(zone);
       });
     };
-    initDataCards();
+    initMonsterZones();
 
-    // Monster Offers carousel
-    const monsterOffers = document.getElementById('what-offer');
+    // Safety: force-show any cards stuck invisible
+    setTimeout(() => {
+      document.querySelectorAll('.data-card, .monster-can, .monster-service-can').forEach(el => {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.1) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.animation = 'none';
+        }
+      });
+    }, 3000);
+
+    // Our Offers carousel (top section)
     const monsterCarousel = document.getElementById('monsterCarousel');
     const monsterDots = document.getElementById('monsterDots');
     const monsterCans = monsterCarousel ? [...monsterCarousel.querySelectorAll('.monster-can')] : [];
@@ -1955,17 +1978,6 @@
       const left = can.offsetLeft - (monsterCarousel.clientWidth - can.offsetWidth) / 2;
       monsterCarousel.scrollTo({ left, behavior: 'smooth' });
       setActiveMonsterCan(index);
-    }
-
-    if (monsterOffers) {
-      const monsterObs = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          monsterOffers.classList.add('monster-live');
-          setActiveMonsterCan(0);
-          monsterObs.unobserve(monsterOffers);
-        }
-      }, { threshold: 0.2 });
-      monsterObs.observe(monsterOffers);
     }
 
     if (monsterCarousel && monsterCans.length) {
@@ -1991,8 +2003,8 @@
       }, { passive: true });
     }
 
-    // Scroll reveal (non-card elements)
-    const revealEls = document.querySelectorAll('.reveal:not(.data-card)');
+    // Scroll reveal (non-card elements outside monster zones)
+    const revealEls = document.querySelectorAll('.reveal:not(.data-card):not(.monster-zone .reveal)');
     const observer = new IntersectionObserver(entries => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {

@@ -160,34 +160,124 @@ nav.scrolled {
 .section-label { color: var(--gold); text-shadow: 0 0 12px rgba(0, 255, 0, 0.3); }
 .section-label::before { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
 
-/* DATA CARDS — Monster can pop-in style */
+/* DATA CARDS — Monster pop (CSS-driven, no JS required to show) */
+@keyframes monsterPop {
+  0%   { opacity: 0; transform: scale(0.4) translateY(24px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Global Monster zones */
+.monster-zone,
+.monster-subzone {
+  position: relative;
+  background: #000 !important;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.monster-zone[data-watermark]::before {
+  content: attr(data-watermark);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -52%);
+  font-family: var(--display);
+  font-size: clamp(7rem, 18vw, 16rem);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.monster-zone > .container,
+.monster-zone .monster-zone-inner,
+.monster-subzone {
+  position: relative;
+  z-index: 1;
+}
+
 .data-card {
   background: rgba(255, 255, 255, 0.02) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  filter: drop-shadow(0 20px 50px rgba(0, 255, 0, 0.15));
-  transform: scale(0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.12);
   opacity: 0;
-  transition:
-    transform 0.75s var(--spring),
-    opacity 0.5s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
-  will-change: transform, opacity;
+  transform: scale(0.4);
+  animation: monsterPop 0.8s var(--spring) forwards;
+  animation-play-state: paused;
 }
 
-.data-card.pop-in {
-  transform: scale(1);
-  opacity: 1;
+.monster-zone.monster-live .data-card,
+.monster-subzone.monster-live .data-card,
+.monster-subzone.monster-live .monster-can,
+.monster-subzone.monster-live .monster-service-can,
+.what-offer.monster-live .monster-can {
+  animation-play-state: running;
 }
 
-.data-card:hover {
-  border-color: rgba(0, 255, 0, 0.45) !important;
-  box-shadow:
-    0 0 30px rgba(0, 255, 0, 0.12),
-    0 20px 50px rgba(0, 255, 0, 0.1),
-    inset 0 0 30px rgba(0, 255, 0, 0.03);
+.data-card:hover,
+.monster-service-can:hover {
+  border-color: rgba(0, 255, 0, 0.4) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.2), 0 0 60px rgba(0, 255, 0, 0.08) !important;
+}
+
+/* Service detail carousels (offers.js) */
+.monster-service-wrap { margin: 0 -24px; }
+.monster-service-carousel { padding: 32px 24px 24px; gap: 24px; }
+.monster-service-can {
+  flex: 0 0 clamp(260px, 30vw, 320px) !important;
+  scroll-snap-align: start;
+  cursor: default;
+}
+.monster-service-body {
+  min-height: 320px !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  padding: 28px 22px !important;
+}
+.monster-emoji-icon {
+  font-size: 1.6rem !important;
+  width: 56px !important;
+  height: 56px !important;
+}
+.monster-service-title .bi-en,
+.monster-service-title {
+  font-family: var(--display) !important;
+  font-size: 0.78rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.monster-service-desc {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 10px 0;
+}
+.monster-service-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
+.monster-service-list {
+  list-style: none;
+  width: 100%;
+  margin-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.monster-service-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.78rem;
+  color: var(--text-2);
+  line-height: 1.45;
+}
+.monster-service-list .bi-ar { font-size: 0.85em; margin-top: 3px; }
+.monster-more { font-size: 0.72rem; color: var(--gold); margin-top: 8px; }
+.offer-category { margin-bottom: 64px; }
+.offer-category:last-child { margin-bottom: 0; }
+.services.monster-zone { padding-bottom: 100px; }
+
+/* About, promise, advantage — pure black panels */
+.about, .promise-banner, .advantage, .stats, .process, .work, .cta {
+  background: #000 !important;
 }
 
 /* Funnel track */
@@ -302,7 +392,8 @@ nav.scrolled {
   transform: translateY(48px);
   transition: opacity 0.9s var(--power-out), transform 0.9s var(--power-out);
 }
-.reveal:not(.data-card).visible {
+.reveal:not(.data-card).visible,
+.monster-zone.monster-live .reveal:not(.data-card) {
   opacity: 1;
   transform: translateY(0);
 }
@@ -355,12 +446,7 @@ main { position: relative; z-index: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .data-card { transform: none; opacity: 1; }
-  .data-card.pop-in { transform: none; }
-  .hero-title .word { transform: none; opacity: 1; animation: none; }
-  .monster-offer-card,
-  .monster-can {
-    opacity: 1; transform: none;
-    animation: none;
+  .data-card, .monster-can, .monster-service-can {
+    opacity: 1 !important; transform: none !important; animation: none !important;
   }
 }

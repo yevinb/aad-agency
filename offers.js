@@ -274,31 +274,42 @@ const offersData = [
   }
 ];
 
-function renderOfferCard(offer) {
-  let html = `<div class="offer-card data-card">
-    <div class="offer-icon">${offer.icon}</div>
-    <h4 class="bi-block">${bi(offer.title.en, offer.title.ar)}</h4>`;
-  if (offer.desc) html += `<p class="offer-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
-  if (offer.items?.length) html += `<ul class="offer-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
-  if (offer.footer) html += `<p class="offer-footer bi-block">${bi(offer.footer.en, offer.footer.ar)}</p>`;
+const MONSTER_COLORS = ['green', 'cyan', 'magenta', 'orange', 'lime', 'purple', 'blue', 'white'];
+let cardColorIndex = 0;
+
+function renderServiceCan(offer, delay) {
+  const color = MONSTER_COLORS[cardColorIndex++ % MONSTER_COLORS.length];
+  let html = `<article class="monster-can monster-service-can bi-block" data-color="${color}" style="animation-delay:${delay}s">
+    <div class="monster-can-glow"></div>
+    <div class="monster-can-body monster-service-body">
+      <div class="monster-can-icon monster-emoji-icon">${offer.icon}</div>
+      <h4 class="monster-service-title bi-block">${bi(offer.title.en, offer.title.ar)}</h4>`;
+  if (offer.desc) html += `<p class="monster-service-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
+  if (offer.items?.length) html += `<ul class="monster-service-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
+  if (offer.footer) html += `<p class="monster-service-desc bi-block" style="margin-top:10px;font-style:italic">${bi(offer.footer.en, offer.footer.ar)}</p>`;
   if (offer.tools?.length) {
-    html += `<div class="tools-label bi-block">${bi('Popular tools include:', 'الأدوات الشائعة تشمل:')}</div>
-      <div class="tools-row">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
+    html += `<div class="tools-row" style="margin-top:12px">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
   }
-  return html + '</div>';
+  return html + '</div></article>';
 }
 
 function renderOffers() {
   const root = document.getElementById('offersRoot');
   if (!root) return;
-  root.innerHTML = offersData.map(cat => `
-    <div class="offer-category reveal" id="offer-${cat.id}">
-      <h3 class="offer-category-title bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
+  cardColorIndex = 0;
+  let delay = 0;
+  root.innerHTML = offersData.map(cat => {
+    const cards = cat.offers.map(o => renderServiceCan(o, (delay += 0.06).toFixed(2))).join('');
+    return `
+    <div class="offer-category monster-subzone" id="offer-${cat.id}">
+      <h3 class="offer-category-title monster-headline bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
       ${cat.intro ? `<p class="offer-cat-intro bi-block">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
-      <div class="offers-grid">${cat.offers.map(renderOfferCard).join('')}</div>
-    </div>
-  `).join('');
-  if (window.initDataCards) window.initDataCards(root);
+      <div class="monster-carousel-wrap monster-service-wrap">
+        <div class="monster-carousel monster-service-carousel">${cards}</div>
+      </div>
+    </div>`;
+  }).join('');
+  if (window.initMonsterZones) window.initMonsterZones(root);
 }
 
 document.addEventListener('DOMContentLoaded', renderOffers);
