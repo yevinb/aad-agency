@@ -9,7 +9,7 @@ const offersData = [
   {
     id: 'automation',
     title: { en: 'AI & Automation', ar: 'الذكاء الاصطناعي والأتمتة' },
-    intro: { en: 'Here are examples you could offer:', ar: 'إليك أمثلة على ما يمكننا تقديمه:' },
+    intro: { en: 'What we build for your business:', ar: 'ما نبنيه لعملك:' },
     offers: [
       {
         icon: '🤖',
@@ -188,7 +188,7 @@ const offersData = [
   {
     id: 'web',
     title: { en: 'Web Design & Development', ar: 'تصميم وتطوير المواقع' },
-    intro: { en: 'What web design includes:', ar: 'ما يشمله تصميم المواقع:' },
+    intro: { en: 'Full-stack web design & development:', ar: 'تصميم وتطوير مواقع متكامل:' },
     offers: [
       {
         icon: '🎨',

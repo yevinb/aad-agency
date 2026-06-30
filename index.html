@@ -4,7 +4,20 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="The AAD Agency — Kuwait's premier brand strategy and creative agency. We build brands that dominate the Gulf market."/>
+  <meta name="theme-color" content="#000000"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://yevinb.github.io/aad-agency/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://yevinb.github.io/aad-agency/"/>
+  <meta property="og:title" content="The AAD Agency — Kuwait's Premier Brand Agency"/>
+  <meta property="og:description" content="We build brands that dominate. Strategy, design, marketing & AI automation for Kuwait."/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:locale:alternate" content="ar_KW"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="The AAD Agency"/>
+  <meta name="twitter:description" content="Kuwait's premier brand agency. More leads. More sales."/>
   <title>The AAD Agency — Kuwait's Premier Brand Agency</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='22' font-family='system-ui' font-size='14' font-weight='800' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Noto+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
@@ -36,7 +49,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 88px; }
     body {
       font-family: var(--body);
       background: var(--void);
@@ -44,6 +57,35 @@
       overflow-x: hidden;
       cursor: default;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    body.menu-open { overflow: hidden; }
+
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 10002;
+      padding: 12px 20px; background: var(--gold); color: var(--void);
+      font-size: .82rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; text-decoration: none;
+      transition: top .25s var(--ease);
+    }
+    .skip-link:focus { top: 16px; outline: 2px solid var(--pearl); outline-offset: 3px; }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee { animation: none; }
+      .preloader { display: none; }
     }
 
     ::selection { background: var(--gold); color: var(--void); }
@@ -130,8 +172,8 @@
       width: 0; height: 1px; background: var(--gold);
       transition: width .3s var(--ease);
     }
-    .nav-links a:hover { color: var(--pearl); }
-    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover, .nav-links a.active { color: var(--pearl); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
     .nav-cta {
       display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
       padding: 10px 24px; background: transparent;
@@ -313,6 +355,7 @@
       display: flex; animation: marquee 30s linear infinite;
       width: max-content;
     }
+    .marquee-wrap:hover .marquee { animation-play-state: paused; }
     .marquee-item {
       display: flex; align-items: center; gap: 32px;
       padding: 0 32px; white-space: nowrap;
@@ -405,9 +448,9 @@
     .pillar {
       padding: 24px; border: 1px solid var(--border);
       background: rgba(255,255,255,.02);
-      transition: border-color .3s, background .3s;
+      transition: border-color .3s, background .3s, transform .35s var(--ease);
     }
-    .pillar:hover { border-color: var(--gold); background: rgba(255,255,255,.04); }
+    .pillar:hover { border-color: var(--gold); background: rgba(255,255,255,.04); transform: translateY(-4px); }
     .pillar-num {
       font-family: var(--display); font-size: .75rem;
       color: var(--gold); letter-spacing: .1em; margin-bottom: 12px;
@@ -569,6 +612,10 @@
       overflow: hidden; cursor: pointer;
       border: 1px solid var(--border);
     }
+    .work-card-link {
+      position: absolute; inset: 0; z-index: 3;
+      text-decoration: none; color: inherit;
+    }
     .work-card-bg {
       position: absolute; inset: 0;
       transition: transform .6s var(--ease);
@@ -704,6 +751,7 @@
       100% { transform: scale(1.35); opacity: 0; }
     }
     .wa-float:active { transform: scale(.95); }
+    .wa-float:hover { transform: scale(1.08); }
 
     /* FOOTER */
     footer {
@@ -836,13 +884,25 @@
     .what-offer-desc { text-align: center; color: var(--text-2); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
     .what-offer-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
     .what-offer-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 700px; margin: 0 auto; }
-    .what-offer-item { padding: 16px 20px; border: 1px solid var(--border); background: var(--surface); font-size: .9rem; color: var(--text); }
+    .what-offer-item {
+      padding: 16px 20px 16px 36px; border: 1px solid var(--border); background: var(--surface);
+      font-size: .9rem; color: var(--text);
+      transition: border-color .3s, background .3s, transform .3s var(--ease);
+      position: relative;
+    }
+    .what-offer-item::before {
+      content: ''; position: absolute; left: 16px; top: 50%;
+      width: 6px; height: 6px; background: var(--gold);
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .what-offer-item:hover { border-color: rgba(255,255,255,.25); background: var(--surface-2); transform: translateX(6px); }
     .what-offer-item .bi-ar { font-size: 0.85em; margin-top: 4px; color: var(--pearl); }
     .offer-cat-intro { font-size: .95rem; color: var(--text-2); margin: -16px 0 28px; }
     .offer-cat-intro .bi-ar { font-size: 0.88em; margin-top: 6px; }
     .offer-footer { font-size: .82rem; color: var(--text-3); margin-top: 12px; font-style: italic; line-height: 1.5; }
     .offer-footer .bi-ar { font-size: 0.9em; margin-top: 4px; font-style: normal; }
-    .promise-stat { padding: 24px; border: 1px solid var(--border); background: var(--ink); }
+    .promise-stat { padding: 24px; border: 1px solid var(--border); background: var(--ink); transition: border-color .3s, transform .3s var(--ease); }
+    .promise-stat:hover { border-color: rgba(255,255,255,.2); transform: translateY(-4px); }
     .promise-stat-num { font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--gold); }
     .promise-stat-label { font-size: .78rem; color: var(--text-2); margin-top: 8px; }
     .offers-categories { display: flex; flex-direction: column; gap: 80px; margin-top: 64px; }
@@ -858,9 +918,19 @@
     }
     .offer-card {
       background: var(--ink); padding: 32px 28px;
-      transition: background .3s;
+      transition: background .35s, transform .35s var(--ease), box-shadow .35s;
+      position: relative;
     }
-    .offer-card:hover { background: var(--surface); }
+    .offer-card::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      border: 1px solid transparent; transition: border-color .35s;
+    }
+    .offer-card:hover {
+      background: var(--surface);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+    }
+    .offer-card:hover::after { border-color: rgba(255,255,255,.12); }
     .offer-icon { font-size: 1.8rem; margin-bottom: 16px; line-height: 1; }
     .offer-card h4 {
       font-family: var(--display); font-size: 1.05rem; font-weight: 700;
@@ -900,7 +970,14 @@
       color: var(--pearl); text-decoration: none;
       letter-spacing: -.02em; transition: color .3s;
     }
-    .mobile-menu a:hover { color: var(--pearl); }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-wa {
+      margin-top: 16px; padding: 14px 28px;
+      background: #25D366; color: #fff !important;
+      font-size: 1rem !important; border-radius: 100px;
+      letter-spacing: .06em !important;
+    }
+    .mobile-wa:hover { background: #1ebe5d !important; color: #fff !important; }
     .mobile-close {
       position: absolute; top: 24px; right: 24px;
       background: none; border: none; color: var(--pearl);
@@ -924,6 +1001,9 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
+      .cta { padding: 100px 24px; }
+      .promise-banner, .what-offer { padding: 64px 24px; }
+      footer { padding: 48px 24px 24px; }
       .promise-grid, .what-offer-list { grid-template-columns: 1fr; }
       .promise-stats { flex-direction: column; }
       .promise-stat-arrow { transform: rotate(90deg); }
@@ -941,6 +1021,7 @@
 </head>
 <body>
 
+  <a href="#main" class="skip-link">Skip to content</a>
   <div class="grain"></div>
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -958,6 +1039,7 @@
     <a href="#services" class="mobile-link" data-bi="nav_services">Services</a>
     <a href="#work" class="mobile-link" data-bi="nav_work">Work</a>
     <a href="#contact" class="mobile-link" data-bi="nav_contact">Contact</a>
+    <a href="https://wa.me/96597219411" class="mobile-wa" target="_blank" rel="noopener noreferrer" data-bi="whatsapp_cta">WhatsApp</a>
   </div>
 
   <!-- Navigation -->
@@ -974,6 +1056,7 @@
   </nav>
 
   <!-- Hero -->
+  <main id="main">
   <section class="hero" id="hero">
     <div class="hero-bg">
       <div class="hero-grid"></div>
@@ -1083,58 +1166,50 @@
           <span class="bi-ar">المزيد من العملاء المحتملين. المزيد من المبيعات.</span>
         </h2>
         <p class="promise-desc bi-block">
-          <span class="bi-en">"More leads. More sales." is a marketing promise that tells businesses the outcome they'll get.</span>
-          <span class="bi-ar">"المزيد من العملاء المحتملين. المزيد من المبيعات." وعد تسويقي يخبر الشركات بالنتيجة التي ستحصل عليها.</span>
+          <span class="bi-en">The only metrics that matter. We build systems that turn attention into enquiries — and enquiries into revenue.</span>
+          <span class="bi-ar">المقاييس الوحيدة التي تهم. نبني أنظمة تحوّل الاهتمام إلى استفسارات — والاستفسارات إلى إيرادات.</span>
         </p>
       </div>
 
       <div class="promise-grid reveal">
         <div class="promise-block">
           <h3 class="promise-block-title bi-block">
-            <span class="bi-en">📩 More leads</span>
-            <span class="bi-ar">📩 المزيد من العملاء المحتملين</span>
+            <span class="bi-en">More leads</span>
+            <span class="bi-ar">المزيد من العملاء المحتملين</span>
           </h3>
           <p class="promise-block-desc bi-block">
-            <span class="bi-en">A lead is someone who has shown interest in a business.</span>
-            <span class="bi-ar">العميل المحتمل هو شخص أبدى اهتماماً بالشركة.</span>
+            <span class="bi-en">Every form fill, DM, call, and booking is a potential customer waiting to hear from you.</span>
+            <span class="bi-ar">كل نموذج ورسالة ومكالمة وحجز هو عميل محتمل ينتظر تواصلك.</span>
           </p>
           <ul class="promise-list">
-            <li class="bi-block"><span class="bi-en">Someone fills out a contact form</span><span class="bi-ar">شخص يعبئ نموذج تواصل</span></li>
-            <li class="bi-block"><span class="bi-en">Someone books a consultation</span><span class="bi-ar">شخص يحجز استشارة</span></li>
-            <li class="bi-block"><span class="bi-en">Someone requests a quote</span><span class="bi-ar">شخص يطلب عرض سعر</span></li>
-            <li class="bi-block"><span class="bi-en">Someone subscribes to an email list</span><span class="bi-ar">شخص يشترك في القائمة البريدية</span></li>
-            <li class="bi-block"><span class="bi-en">Someone sends a DM asking about services</span><span class="bi-ar">شخص يرسل رسالة يسأل عن الخدمات</span></li>
+            <li class="bi-block"><span class="bi-en">Contact forms & landing pages</span><span class="bi-ar">نماذج التواصل وصفحات الهبوط</span></li>
+            <li class="bi-block"><span class="bi-en">WhatsApp & Instagram enquiries</span><span class="bi-ar">استفسارات واتساب وإنستغرام</span></li>
+            <li class="bi-block"><span class="bi-en">Consultation & quote requests</span><span class="bi-ar">طلبات الاستشارة وعروض الأسعار</span></li>
+            <li class="bi-block"><span class="bi-en">Email list sign-ups</span><span class="bi-ar">اشتراكات القائمة البريدية</span></li>
           </ul>
-          <p class="promise-note bi-block">
-            <span class="bi-en">Not every lead becomes a customer, but every customer usually starts as a lead.</span>
-            <span class="bi-ar">ليس كل عميل محتمل يصبح زبوناً، لكن كل زبون يبدأ عادة كعميل محتمل.</span>
-          </p>
         </div>
 
         <div class="promise-block">
           <h3 class="promise-block-title bi-block">
-            <span class="bi-en">💰 More sales</span>
-            <span class="bi-ar">💰 المزيد من المبيعات</span>
+            <span class="bi-en">More sales</span>
+            <span class="bi-ar">المزيد من المبيعات</span>
           </h3>
           <p class="promise-block-desc bi-block">
-            <span class="bi-en">A sale happens when a lead actually buys a product or service.</span>
-            <span class="bi-ar">تحدث المبيعة عندما يشتري العميل المحتمل منتجاً أو خدمة فعلياً.</span>
-          </p>
-          <p class="promise-block-desc bi-block">
-            <span class="bi-en">Example:</span>
-            <span class="bi-ar">مثال:</span>
+            <span class="bi-en">We don't stop at traffic. We optimize the full path from first click to signed deal.</span>
+            <span class="bi-ar">لا نتوقف عند الزيارات. نُحسّن المسار الكامل من أول نقرة إلى الصفقة الموقعة.</span>
           </p>
           <ul class="promise-list">
-            <li class="bi-block"><span class="bi-en">100 people visit a website</span><span class="bi-ar">١٠٠ شخص يزورون الموقع</span></li>
-            <li class="bi-block"><span class="bi-en">10 people fill out the contact form (10 leads)</span><span class="bi-ar">١٠ أشخاص يعبئون النموذج (١٠ عملاء محتملين)</span></li>
-            <li class="bi-block"><span class="bi-en">3 of those hire the business (3 sales)</span><span class="bi-ar">٣ منهم يتعاملون مع الشركة (٣ مبيعات)</span></li>
+            <li class="bi-block"><span class="bi-en">Conversion-focused website design</span><span class="bi-ar">تصميم مواقع يركز على التحويل</span></li>
+            <li class="bi-block"><span class="bi-en">Follow-up automation</span><span class="bi-ar">أتمتة المتابعة</span></li>
+            <li class="bi-block"><span class="bi-en">Retargeting & nurture campaigns</span><span class="bi-ar">حملات إعادة الاستهداف والرعاية</span></li>
+            <li class="bi-block"><span class="bi-en">Clear calls-to-action everywhere</span><span class="bi-ar">دعوات واضحة للعمل في كل مكان</span></li>
           </ul>
         </div>
       </div>
 
       <p class="promise-why reveal bi-block">
-        <span class="bi-en"><strong>Why agencies use this phrase:</strong> Businesses don't usually care about the website itself — they care about what the website helps them achieve.</span>
-        <span class="bi-ar"><strong>لماذا تستخدم الوكالات هذا العبارة:</strong> الشركات لا تهتم بالموقع بحد ذاته — بل بما يحققه لهم.</span>
+        <span class="bi-en"><strong>Your funnel, simplified:</strong> visitors become leads, leads become customers. We engineer every step.</span>
+        <span class="bi-ar"><strong>مسارك المبسّط:</strong> الزوار يصبحون عملاء محتملين، والعملاء المحتملون يصبحون زبائن. نُهندس كل خطوة.</span>
       </p>
 
       <div class="promise-stats reveal">
@@ -1168,14 +1243,14 @@
         <span class="bi-ar">كل ما نقدمه للعلامات في الكويت — من المواقع إلى أتمتة الذكاء الاصطناعي.</span>
       </p>
       <div class="what-offer-list">
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Custom Website Design</span><span class="bi-ar">✅ تصميم مواقع مخصصة</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Website Development</span><span class="bi-ar">✅ تطوير المواقع</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Branding & Identity</span><span class="bi-ar">✅ العلامة التجارية والهوية</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Digital Marketing</span><span class="bi-ar">✅ التسويق الرقمي</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ AI & Automation</span><span class="bi-ar">✅ الذكاء الاصطناعي والأتمتة</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Social Media Management</span><span class="bi-ar">✅ إدارة وسائل التواصل</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Paid Advertising</span><span class="bi-ar">✅ الإعلانات المدفوعة</span></div>
-        <div class="what-offer-item bi-block"><span class="bi-en">✅ Content Creation</span><span class="bi-ar">✅ إنشاء المحتوى</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Custom Website Design</span><span class="bi-ar">تصميم مواقع مخصصة</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Website Development</span><span class="bi-ar">تطوير المواقع</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Branding & Identity</span><span class="bi-ar">العلامة التجارية والهوية</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Digital Marketing</span><span class="bi-ar">التسويق الرقمي</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">AI & Automation</span><span class="bi-ar">الذكاء الاصطناعي والأتمتة</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Social Media Management</span><span class="bi-ar">إدارة وسائل التواصل</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Paid Advertising</span><span class="bi-ar">الإعلانات المدفوعة</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">Content Creation</span><span class="bi-ar">إنشاء المحتوى</span></div>
       </div>
     </div>
   </section>
@@ -1292,6 +1367,7 @@
       </div>
       <div class="work-grid">
         <div class="work-card reveal">
+          <a href="#contact" class="work-card-link" aria-label="Project Noor — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
             <div class="work-tag" data-bi="work1_tag">F&B / Lifestyle</div>
@@ -1302,6 +1378,7 @@
           </div>
         </div>
         <div class="work-card reveal">
+          <a href="#contact" class="work-card-link" aria-label="Vital Kuwait — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
             <div class="work-tag" data-bi="work2_tag">Healthcare / Wellness</div>
@@ -1312,6 +1389,7 @@
           </div>
         </div>
         <div class="work-card reveal">
+          <a href="#contact" class="work-card-link" aria-label="Sahara Collective — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
             <div class="work-tag" data-bi="work3_tag">Fashion / Retail</div>
@@ -1322,6 +1400,7 @@
           </div>
         </div>
         <div class="work-card reveal">
+          <a href="#contact" class="work-card-link" aria-label="NextGen KW — Start a project"></a>
           <div class="work-card-bg"></div>
           <div class="work-card-overlay">
             <div class="work-tag" data-bi="work4_tag">Tech / Startup</div>
@@ -1356,12 +1435,13 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#" class="nav-logo">AAD</a>
+        <a href="#hero" class="nav-logo">AAD</a>
         <p data-bi="footer_desc">Kuwait's premier brand agency. We build identities, campaigns, and growth engines for businesses ready to lead the market.</p>
       </div>
       <div class="footer-col">
@@ -1386,6 +1466,7 @@
         <h5 data-bi="footer_contact">Contact</h5>
         <ul>
           <li><a href="mailto:hello@aadagency.kw">hello@aadagency.kw</a></li>
+          <li><a href="https://wa.me/96597219411" target="_blank" rel="noopener noreferrer" data-bi="footer_whatsapp">WhatsApp +965 9721 9411</a></li>
           <li><a href="#" data-bi="footer_location">Kuwait City, Kuwait</a></li>
           <li><a href="#contact" data-bi="nav_cta">Start a Project</a></li>
         </ul>
@@ -1405,14 +1486,25 @@
   <script>
     // Preloader
     window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('preloader').classList.add('done'), 2000);
+      setTimeout(() => document.getElementById('preloader').classList.add('done'), 1200);
     });
 
-    // Nav scroll
+    // Nav scroll + active section
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = [...navAnchors].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function onScroll() {
       nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
+      const y = window.scrollY + 120;
+      let current = sections[0];
+      sections.forEach(sec => { if (sec.offsetTop <= y) current = sec; });
+      navAnchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     // Custom cursor
     const dot = document.getElementById('cursorDot');
@@ -1449,10 +1541,15 @@
 
     // Mobile menu
     const mobileMenu = document.getElementById('mobileMenu');
-    document.getElementById('navToggle').addEventListener('click', () => mobileMenu.classList.add('open'));
-    document.getElementById('mobileClose').addEventListener('click', () => mobileMenu.classList.remove('open'));
+    const openMenu = () => { mobileMenu.classList.add('open'); document.body.classList.add('menu-open'); };
+    const closeMenu = () => { mobileMenu.classList.remove('open'); document.body.classList.remove('menu-open'); };
+    document.getElementById('navToggle').addEventListener('click', openMenu);
+    document.getElementById('mobileClose').addEventListener('click', closeMenu);
     document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+      link.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
     });
 
     // Scroll reveal
@@ -1476,16 +1573,15 @@
         const target = parseInt(el.dataset.target);
         const suffix = el.querySelector('span');
         const suffixText = suffix ? suffix.outerHTML : '';
-        let current = 0;
-        const step = Math.ceil(target / 60);
-        const timer = setInterval(() => {
-          current += step;
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
-          el.innerHTML = current + suffixText;
-        }, 25);
+        const start = performance.now();
+        const duration = 1400;
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.innerHTML = Math.round(target * eased) + suffixText;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
         countObserver.unobserve(el);
       });
     }, { threshold: 0.5 });
@@ -1496,13 +1592,12 @@
       a.addEventListener('click', e => {
         const id = a.getAttribute('href');
         if (id === '#') return;
-        e.preventDefault();
         const target = document.querySelector(id);
-        if (target) {
-          const offset = 80;
-          const top = target.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
+        if (!target) return;
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       });
     });
   </script>
