@@ -275,61 +275,40 @@ const offersData = [
 ];
 
 const MONSTER_COLORS = ['green', 'cyan', 'magenta', 'orange', 'lime', 'purple', 'blue', 'white'];
-let cardColorIndex = 0;
 
-function renderServiceCan(offer, delay, num) {
-  const color = MONSTER_COLORS[cardColorIndex++ % MONSTER_COLORS.length];
-  const numStr = String(num).padStart(2, '0');
-  let html = `<article class="monster-can monster-can-tall bi-block" data-color="${color}" style="animation-delay:${delay}s">
-    <div class="monster-can-glow"></div>
-    <div class="monster-can-body">
-      <div class="monster-can-icon monster-emoji">${offer.icon}</div>
-      <span class="monster-can-num">${numStr}</span>
-      <span class="bi-en">${offer.title.en}</span>
-      <span class="bi-ar">${offer.title.ar}</span>`;
+function renderOfferCard(offer) {
+  let html = `<article class="offer-card bi-block">
+    <div class="offer-icon">${offer.icon}</div>
+    <h4>${bi(offer.title.en, offer.title.ar)}</h4>`;
   if (offer.desc) {
-    html += `<p class="monster-can-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
+    html += `<p class="offer-desc">${bi(offer.desc.en, offer.desc.ar)}</p>`;
   }
   if (offer.items?.length) {
-    html += `<ul class="monster-can-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
+    html += `<ul class="offer-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
   }
   if (offer.footer) {
-    html += `<p class="monster-can-desc bi-block" style="font-style:italic;color:var(--gold)">${bi(offer.footer.en, offer.footer.ar)}</p>`;
+    html += `<p class="offer-desc" style="font-style:italic;color:var(--gold);margin-top:12px">${bi(offer.footer.en, offer.footer.ar)}</p>`;
   }
   if (offer.tools?.length) {
-    html += `<div class="monster-can-tools">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
+    html += `<p class="tools-label">${bi('Tools we use', 'الأدوات التي نستخدمها')}</p>
+      <div class="tools-row">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
   }
-  return html + '</div></article>';
+  return html + '</article>';
 }
 
 function renderOffers() {
   const root = document.getElementById('offersRoot');
   if (!root) return;
-  cardColorIndex = 0;
-  let delay = 0;
-  root.innerHTML = offersData.map(cat => {
-    const cards = cat.offers.map((o, i) => renderServiceCan(o, (delay += 0.06).toFixed(2), i + 1)).join('');
-    const dots = cat.offers.map((_, i) => {
-      const color = MONSTER_COLORS[i % MONSTER_COLORS.length];
-      return `<button type="button" class="monster-dot${i === 0 ? ' active' : ''}" data-color="${color}" data-index="${i}" aria-label="Service ${i + 1}"></button>`;
-    }).join('');
-    return `
-    <div class="offer-category monster-subzone" id="offer-${cat.id}">
-      <div class="monster-cat-header">
-        <div class="monster-dots monster-cat-dots" aria-label="${cat.title.en} navigation">${dots}</div>
-        <h3 class="monster-headline bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
-      </div>
-      ${cat.intro ? `<p class="monster-sub offer-cat-intro bi-block">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
-      <div class="monster-carousel-wrap monster-service-wrap">
-        <div class="monster-carousel monster-service-carousel">${cards}</div>
-      </div>
-    </div>`;
-  }).join('');
+  root.innerHTML = offersData.map(cat => `
+    <div class="offer-category" id="offer-${cat.id}">
+      <h3 class="offer-category-title bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
+      ${cat.intro ? `<p class="monster-sub offer-cat-intro bi-block" style="margin-bottom:24px">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
+      <div class="offers-grid">${cat.offers.map(renderOfferCard).join('')}</div>
+    </div>`).join('');
   const slide2 = document.getElementById('slide-2');
   if (window.activateMonsterZone && slide2) {
     window.activateMonsterZone(slide2);
   }
-  if (window.initAllMonsterCarousels) window.initAllMonsterCarousels(root);
 }
 
 document.addEventListener('DOMContentLoaded', renderOffers);
