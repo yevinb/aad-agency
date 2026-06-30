@@ -292,6 +292,17 @@
 
 .offer-category.monster-subzone:last-child { margin-bottom: 0; }
 
+/* Keep carousel cards visible on load */
+.monster-zone .monster-carousel .monster-can,
+.monster-zone .monster-service-can {
+  opacity: 1 !important;
+  animation-play-state: running !important;
+}
+
+.monster-zone .monster-carousel .monster-can:not(.is-active) {
+  opacity: 0.75 !important;
+}
+
 /* Lenis smooth scroll */
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
