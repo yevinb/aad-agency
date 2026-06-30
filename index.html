@@ -880,7 +880,9 @@
       font-family: var(--arabic); font-weight: 400; color: var(--pearl);
     }
     .hero-desc .bi-ar, .section-desc .bi-ar, .cta-desc .bi-ar { font-size: 0.88em; margin-top: 10px; }
-    .hero-badge [data-bi] { display: none; }
+    html[lang="en"] .bi-ar { display: none !important; }
+    html[lang="ar"] .bi-en { display: none !important; }
+    html[lang="ar"] { direction: rtl; }
     .nav-logo .bi-ar { display: none; }
     .marquee-item { flex-direction: column; align-items: flex-start; gap: 2px; }
     .marquee-item .bi-ar { font-size: 0.72em; letter-spacing: 0; text-transform: none; color: var(--pearl); font-family: var(--arabic); }
@@ -1252,8 +1254,12 @@
       display: block;
     }
     .slide-1 .hero-compact { margin-bottom: 0; }
-    .slide-1 .hero-title { font-size: clamp(2rem, 5.5vw, 3.8rem) !important; }
-    .slide-1 .hero-desc { font-size: 0.9rem; max-width: 520px; }
+    .slide-1.premium-hero .hero-title {
+      font-size: clamp(2.6rem, 6.5vw, 5rem) !important;
+      line-height: 0.95 !important;
+      letter-spacing: -0.03em !important;
+    }
+    .slide-1 .hero-desc { font-size: 1.05rem; max-width: 520px; line-height: 1.75; }
     .slide-1 .hero-actions { margin-top: 16px; }
 
     /* Slide 2 */
@@ -1568,6 +1574,10 @@
     <a href="#slide-2" class="mobile-link" data-bi="nav_services">Services</a>
     <a href="#slide-3" class="mobile-link" data-bi="nav_work">Work</a>
     <a href="#contact" class="mobile-link" data-bi="nav_contact">Contact</a>
+    <div class="lang-toggle mobile-lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="ar">AR</button>
+    </div>
     <a href="https://wa.me/96597219411" class="mobile-wa" target="_blank" rel="noopener noreferrer" data-bi="whatsapp_cta">WhatsApp</a>
   </div>
 
@@ -1579,6 +1589,10 @@
       <li><a href="#slide-2" data-bi="nav_services">Services</a></li>
       <li><a href="#slide-3" data-bi="nav_work">Work</a></li>
     </ul>
+    <div class="lang-toggle" id="langToggle" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="ar">AR</button>
+    </div>
     <a href="#slide-3" class="nav-cta" data-bi="nav_cta">Start a Project</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
   </nav>
@@ -1586,23 +1600,21 @@
   <!-- Hero -->
   <main id="main" class="slides-deck">
 
-  <!-- ═══ SLIDE 1 — POWER ═══ -->
-  <section class="slide slide-1 monster-zone premium-hero" id="slide-1">
-    <div class="premium-hero-bg" aria-hidden="true">
-      <div class="premium-orb"></div>
-      <div class="premium-ring premium-ring-1"></div>
-      <div class="premium-ring premium-ring-2"></div>
-      <div class="premium-ring premium-ring-3"></div>
-    </div>
+  <!-- ═══ SLIDE 1 — HERO ═══ -->
+  <section class="slide slide-1 monster-zone premium-hero monster-live" id="slide-1">
     <div class="slide-inner">
-      <div class="slide-body-scroll premium-hero-grid">
-        <div class="hero-compact reveal premium-reveal">
+      <div class="premium-hero-grid">
+        <div class="hero-compact">
+          <div class="hero-badge">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="hero-badge-text" data-bi="hero_badge">Kuwait City — Est. 2026</span>
+          </div>
           <h1 class="hero-title" id="heroTitle">
-            <span class="line"><span class="word bi-block"><span class="bi-en">We build</span><span class="bi-ar">نبني</span></span></span>
-            <span class="line"><span class="word bi-block"><span class="bi-en"><span class="gold">brands</span> that</span><span class="bi-ar"><span class="gold">علامات تجارية</span></span></span></span>
-            <span class="line"><span class="word bi-block"><span class="bi-en">dominate Kuwait</span><span class="bi-ar">تسيطر على الكويت</span></span></span>
+            <span class="line"><span class="word"><span class="bi-en">We build</span><span class="bi-ar">نبني</span></span></span>
+            <span class="line"><span class="word"><span class="bi-en"><span class="gold">brands</span> that</span><span class="bi-ar"><span class="gold">علامات تجارية</span></span></span></span>
+            <span class="line"><span class="word"><span class="bi-en">dominate Kuwait</span><span class="bi-ar">تسيطر على الكويت</span></span></span>
           </h1>
-          <p class="hero-desc bi-block" data-bi="hero_desc"></p>
+          <p class="hero-desc" data-bi="hero_desc"></p>
           <div class="hero-actions">
             <a href="#slide-3" class="btn-primary">
               <span data-bi="hero_cta1"></span>
@@ -1611,26 +1623,33 @@
             <a href="#slide-2" class="btn-ghost" data-bi="hero_cta2"></a>
           </div>
         </div>
-        <div class="premium-visual reveal premium-reveal" data-premium-delay="150">
-          <div class="premium-logo-scene">
-            <div class="premium-logo-glow" aria-hidden="true"></div>
-            <div class="premium-logo-3d" aria-hidden="true">AAD</div>
+        <div class="premium-visual">
+          <div class="premium-visual-stage">
+            <div class="premium-hero-bg" aria-hidden="true">
+              <div class="premium-orb"></div>
+              <div class="premium-ring premium-ring-1"></div>
+              <div class="premium-ring premium-ring-2"></div>
+              <div class="premium-ring premium-ring-3"></div>
+            </div>
+            <div class="premium-logo-scene">
+              <div class="premium-logo-glow" aria-hidden="true"></div>
+              <div class="premium-logo-3d" aria-hidden="true">AAD</div>
+            </div>
           </div>
           <div class="glass-panel premium-stats">
             <div class="glass-stat">
-              <span class="glass-stat-num" data-count="8">0</span>
+              <span class="glass-stat-num" data-count="8">8</span>
               <span class="glass-stat-label" data-bi="premium_stat1">Core Services</span>
             </div>
             <div class="glass-stat">
-              <span class="glass-stat-num" data-count="50">0</span>
+              <span class="glass-stat-num" data-count="50">50</span>
               <span class="glass-stat-label" data-bi="premium_stat2">Projects Delivered</span>
             </div>
             <div class="glass-stat">
-              <span class="glass-stat-num" data-count="100" data-suffix="+">0</span>
+              <span class="glass-stat-num" data-count="100" data-suffix="+">100+</span>
               <span class="glass-stat-label" data-bi="premium_stat3">Brand Campaigns</span>
             </div>
           </div>
-          <p class="premium-visual-tag" data-bi="premium_tag">Visual Experience · Kuwait</p>
         </div>
       </div>
     </div>
