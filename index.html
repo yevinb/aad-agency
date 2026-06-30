@@ -86,8 +86,7 @@
         transition-duration: 0.01ms !important;
       }
       .marquee { animation: none; }
-      .preloader-word-3d { animation: none !important; transform: rotateX(32deg) rotateY(-22deg) !important; }
-      .preloader-word-face { animation: none !important; opacity: 1 !important; transform: translateZ(64px) !important; }
+      .aad-3d { animation: none !important; transform: perspective(700px) rotateX(48deg) rotateY(-28deg) !important; }
     }
 
     ::selection { background: var(--gold); color: var(--void); }
@@ -116,104 +115,73 @@
     }
     @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } }
 
-    /* PRELOADER — extruded 3D "AAD." */
+    /* PRELOADER — bold 3D AAD. (text-shadow extrusion + perspective) */
     .preloader {
       position: fixed; inset: 0; z-index: 10001;
       background: #000;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 40px;
+      align-items: center; justify-content: center; gap: 44px;
       transition: opacity .9s var(--ease), visibility .9s;
     }
     .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
 
     .preloader-scene {
-      perspective: 480px;
-      perspective-origin: 50% 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .preloader-word-3d {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(32deg) rotateY(-22deg);
-      animation: preloaderRock 2.4s ease-in-out infinite alternate;
-    }
-
-    @keyframes preloaderRock {
-      from { transform: rotateX(28deg) rotateY(-28deg); }
-      to   { transform: rotateX(36deg) rotateY(-14deg); }
-    }
-
-    .word-extrude {
-      position: absolute;
-      left: 0; top: 0;
-      transform-style: preserve-3d;
-      pointer-events: none;
-    }
-
-    .word-layer {
-      position: absolute;
-      left: 0; top: 0;
+    .aad-3d {
+      margin: 0;
+      padding: 0;
       font-family: 'Orbitron', var(--display);
-      font-size: clamp(5rem, 18vw, 10rem);
+      font-size: clamp(5.5rem, 22vw, 11rem);
       font-weight: 900;
-      letter-spacing: 0.08em;
-      line-height: 1;
-      white-space: nowrap;
-      color: hsl(120, 70%, calc(4% + var(--d) * 1.5%));
-      transform: translate3d(
-        calc(var(--d) * 0.7px),
-        calc(var(--d) * 1px),
-        calc(var(--d) * -2px)
-      );
-      user-select: none;
-    }
-
-    .preloader-word-face {
-      position: relative;
-      display: block;
-      font-family: 'Orbitron', var(--display);
-      font-size: clamp(5rem, 18vw, 10rem);
-      font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       line-height: 1;
       color: #ffffff;
-      transform: translateZ(64px);
-      text-shadow:
-        0 0 20px rgba(0, 255, 0, 0.6),
-        0 0 50px rgba(0, 255, 0, 0.35),
-        0 0 100px rgba(0, 255, 0, 0.15);
-      -webkit-text-stroke: 2px rgba(0, 255, 0, 0.5);
-      animation: wordFaceIn 1s cubic-bezier(.34, 1.56, .64, 1) backwards;
+      white-space: nowrap;
+      -webkit-text-stroke: 2.5px rgba(0, 255, 0, 0.65);
+      transform: perspective(700px) rotateX(48deg) rotateY(-28deg);
+      transform-origin: center center;
+      animation: aad3dFloat 2.2s ease-in-out infinite alternate;
+      will-change: transform;
     }
 
-    .preloader-word-face .dot {
+    .aad-3d .aad-dot {
       color: #00ff00;
-      -webkit-text-stroke: 2px rgba(0, 255, 0, 0.8);
+      -webkit-text-stroke: 2.5px #00ff00;
     }
 
-    @keyframes wordFaceIn {
-      from { opacity: 0; transform: translateZ(-180px) scale(0.3); }
-      to   { opacity: 1; transform: translateZ(64px) scale(1); }
+    @keyframes aad3dFloat {
+      from { transform: perspective(700px) rotateX(44deg) rotateY(-32deg) translateY(0); }
+      to   { transform: perspective(700px) rotateX(52deg) rotateY(-20deg) translateY(-8px); }
+    }
+
+    @keyframes aad3dIn {
+      from { opacity: 0; transform: perspective(700px) rotateX(60deg) rotateY(-40deg) scale(0.5); }
+      to   { opacity: 1; transform: perspective(700px) rotateX(48deg) rotateY(-28deg) scale(1); }
     }
 
     .preloader-glow {
-      width: min(320px, 70vw); height: 60px;
-      margin-top: 8px;
-      background: radial-gradient(ellipse, rgba(0, 255, 0, 0.5) 0%, transparent 70%);
-      filter: blur(16px);
-      transform: rotateX(32deg);
+      width: min(360px, 80vw); height: 70px;
+      margin-top: -10px;
+      background: radial-gradient(ellipse, rgba(0, 255, 0, 0.55) 0%, transparent 68%);
+      filter: blur(18px);
+      pointer-events: none;
     }
 
     .preloader-bar {
-      width: min(240px, 60vw); height: 2px;
-      background: rgba(255,255,255,0.1);
+      width: min(260px, 65vw); height: 3px;
+      background: rgba(255,255,255,0.12);
       overflow: hidden; position: relative;
+      border-radius: 2px;
     }
     .preloader-bar::after {
       content: ''; position: absolute; left: 0; top: 0; height: 100%;
       width: 0; background: #00ff00;
-      box-shadow: 0 0 16px #00ff00;
-      animation: loadBar 2.6s var(--ease) forwards;
+      box-shadow: 0 0 20px #00ff00, 0 0 40px rgba(0,255,0,0.4);
+      animation: loadBar 2.8s var(--ease) forwards;
     }
     @keyframes loadBar { to { width: 100%; } }
 
@@ -1490,30 +1458,25 @@
   <!-- Preloader -->
   <div class="preloader" id="preloader">
     <div class="preloader-scene">
-      <div class="preloader-word-3d" id="preloaderWord3d">
-        <span class="preloader-word-face" aria-label="AAD">AAD<span class="dot">.</span></span>
-      </div>
+      <h1 class="aad-3d" id="aad3d">AAD<span class="aad-dot">.</span></h1>
       <div class="preloader-glow" aria-hidden="true"></div>
     </div>
     <div class="preloader-bar"></div>
   </div>
   <script>
-    (function buildPreloader3D() {
-      const DEPTH = 36;
-      const wrap = document.getElementById('preloaderWord3d');
-      const face = wrap && wrap.querySelector('.preloader-word-face');
-      if (!wrap || !face) return;
-      const extrude = document.createElement('span');
-      extrude.className = 'word-extrude';
-      extrude.setAttribute('aria-hidden', 'true');
-      for (let d = DEPTH; d >= 1; d--) {
-        const layer = document.createElement('span');
-        layer.className = 'word-layer';
-        layer.textContent = 'AAD.';
-        layer.style.setProperty('--d', String(d));
-        extrude.appendChild(layer);
+    (function () {
+      var el = document.getElementById('aad3d');
+      if (!el) return;
+      var shadows = [];
+      for (var i = 1; i <= 50; i++) {
+        var pct = Math.max(3, Math.round(52 - i * 0.95));
+        shadows.push(i + 'px ' + i + 'px 0 hsl(120, 100%, ' + pct + '%)');
       }
-      wrap.insertBefore(extrude, face);
+      shadows.push('0 0 60px rgba(0,255,0,0.75)');
+      shadows.push('0 0 120px rgba(0,255,0,0.35)');
+      shadows.push('0 55px 70px rgba(0,0,0,0.95)');
+      el.style.textShadow = shadows.join(',');
+      el.style.animation = 'aad3dIn 1s cubic-bezier(.34,1.56,.64,1) backwards, aad3dFloat 2.2s ease-in-out 1s infinite alternate';
     })();
   </script>
 
@@ -2171,7 +2134,7 @@
   <script>
     // Preloader — keep visible long enough to see 3D logo
     window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('preloader').classList.add('done'), 2800);
+      setTimeout(() => document.getElementById('preloader').classList.add('done'), 3200);
     });
 
     // Nav scroll + active section
