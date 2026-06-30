@@ -86,7 +86,7 @@ html[lang="ar"] .hero-actions { justify-content: flex-end; }
   align-items: center;
   width: 100%;
   max-width: 1400px;
-  margin: 32px auto 0;
+  margin: 8px auto 0;
 }
 
 .cine-stage {
@@ -96,7 +96,8 @@ html[lang="ar"] .hero-actions { justify-content: flex-end; }
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 280px;
+  min-height: 240px;
+  margin-top: -32px;
   perspective: 1400px;
 }
 
@@ -116,8 +117,8 @@ html[lang="ar"] .hero-actions { justify-content: flex-end; }
 /* ── Spinning green rings (Monster hero) ── */
 .premium-orb {
   position: absolute;
-  top: 15%;
-  right: 10%;
+  top: 28%;
+  right: 22%;
   width: min(55vw, 520px);
   height: min(55vw, 520px);
   border-radius: 50%;
@@ -130,7 +131,7 @@ html[lang="ar"] .hero-actions { justify-content: flex-end; }
   position: absolute;
   border-radius: 50%;
   border: 1px solid;
-  top: 50%;
+  top: 38%;
   left: 58%;
   transform: translate(-50%, -50%);
   animation: premiumRingSpin 24s linear infinite;
