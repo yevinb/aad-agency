@@ -325,9 +325,9 @@ function renderOffers() {
       </div>
     </div>`;
   }).join('');
-  const servicesSection = document.getElementById('services');
-  if (window.activateMonsterZone && servicesSection) {
-    window.activateMonsterZone(servicesSection);
+  const slide2 = document.getElementById('slide-2');
+  if (window.activateMonsterZone && slide2) {
+    window.activateMonsterZone(slide2);
   }
   if (window.initAllMonsterCarousels) window.initAllMonsterCarousels(root);
 }
