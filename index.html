@@ -1305,27 +1305,18 @@
       50% { opacity: 1; transform: scaleY(1); }
     }
 
-    /* Slide 1 — compact hero */
-    .slide-1 .hero-compact { margin-bottom: 20px; }
+    /* Slide 1 — hero only */
+    .slide-1 .slide-inner { justify-content: center; }
+    .slide-1 .slide-body-scroll {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+    }
+    .slide-1 .hero-compact { margin-bottom: 0; }
     .slide-1 .hero-title { font-size: clamp(2rem, 5.5vw, 3.8rem) !important; }
     .slide-1 .hero-desc { font-size: 0.9rem; max-width: 520px; }
     .slide-1 .hero-actions { margin-top: 16px; }
-    .slide-1 .monster-sub { margin-bottom: 16px !important; font-size: 0.85rem; }
-    .slide-1 .monster-carousel-wrap { margin: 0 -24px; }
-    .slide-1 .monster-can .monster-can-body { min-height: 200px; }
-    .slide-1 .slide-body-scroll { padding-bottom: 8px; }
-    .slide-1 .funnel-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 12px; margin-top: 20px; flex-wrap: wrap;
-    }
-    .slide-1 .funnel-stat {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #00ff00;
-      text-shadow: 0 0 20px rgba(0,255,0,0.5);
-    }
-    .slide-1 .funnel-arrow { color: #00ff00; font-size: 1.2rem; opacity: 0.7; }
 
     /* Slide 2 */
     .slide-2 .monster-headline { font-size: clamp(1.4rem, 3.5vw, 2.4rem); }
@@ -1680,52 +1671,6 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#slide-2" class="btn-ghost" data-bi="hero_cta2"></a>
-        </div>
-      </div>
-
-      <div class="monster-header reveal" style="margin-top:24px">
-        <div class="section-label monster-label" data-bi="about_label">Who We Are</div>
-        <h2 class="monster-headline" data-bi-html="about_title">The agency Kuwait<br><em>has been waiting for.</em></h2>
-      </div>
-
-      <div class="monster-carousel-wrap">
-        <div class="monster-carousel" id="aboutCarousel">
-          <article class="monster-can bi-block" data-color="green" style="animation-delay:0.1s">
-            <div class="monster-can-glow"></div>
-            <div class="monster-can-body">
-              <div class="monster-can-icon">01</div>
-              <span class="monster-can-num">01</span>
-              <span data-bi="pillar1_t">First-Mover Edge</span>
-              <p class="monster-can-desc" data-bi="pillar1_d">We're pioneering a new standard of brand work in Kuwait.</p>
-            </div>
-          </article>
-          <article class="monster-can bi-block" data-color="cyan" style="animation-delay:0.2s">
-            <div class="monster-can-glow"></div>
-            <div class="monster-can-body">
-              <div class="monster-can-icon">02</div>
-              <span class="monster-can-num">02</span>
-              <span data-bi="pillar2_t">Deep Knowledge</span>
-              <p class="monster-can-desc" data-bi="pillar2_d">World-class frameworks for a market hungry for excellence.</p>
-            </div>
-          </article>
-          <article class="monster-can bi-block" data-color="magenta" style="animation-delay:0.3s">
-            <div class="monster-can-glow"></div>
-            <div class="monster-can-body">
-              <div class="monster-can-icon">03</div>
-              <span class="monster-can-num">03</span>
-              <span data-bi="pillar3_t">Infinite Pipeline</span>
-              <p class="monster-can-desc" data-bi="pillar3_d">Every sector in Kuwait is a potential partner.</p>
-            </div>
-          </article>
-          <article class="monster-can bi-block" data-color="orange" style="animation-delay:0.4s">
-            <div class="monster-can-glow"></div>
-            <div class="monster-can-body">
-              <div class="monster-can-icon">04</div>
-              <span class="monster-can-num">04</span>
-              <span data-bi="pillar4_t">Relentless Execution</span>
-              <p class="monster-can-desc" data-bi="pillar4_d">From concept to campaign to conversion — end to end.</p>
-            </div>
-          </article>
         </div>
       </div>
 
