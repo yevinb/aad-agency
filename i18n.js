@@ -15,8 +15,8 @@ const T = {
   hero_cta2: { en: 'View Our Work', ar: 'شاهد أعمالنا' },
   hero_title: {
     html: true,
-    en: 'We build <span class="gold">brands</span> that dominate other brands',
-    ar: 'نبني <span class="gold">علامات تجارية</span> تتفوق على العلامات الأخرى'
+    en: 'We build <span class="gold">brands</span> that dominate Kuwait',
+    ar: 'نبني <span class="gold">علامات تجارية</span> تسيطر على الكويت'
   },
   hero_scroll: { en: 'Scroll', ar: 'مرّر' },
   mq1: { en: 'Brand Strategy', ar: 'استراتيجية العلامة' },
