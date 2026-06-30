@@ -174,19 +174,8 @@ nav.scrolled {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.monster-zone[data-watermark]::before {
-  content: attr(data-watermark);
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -52%);
-  font-family: var(--display);
-  font-size: clamp(7rem, 18vw, 16rem);
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.03);
-  pointer-events: none;
-  z-index: 0;
-  letter-spacing: -0.04em;
-  line-height: 1;
+.slide.monster-zone[data-watermark]::before {
+  display: none;
 }
 
 .monster-zone > .container,
