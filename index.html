@@ -114,9 +114,10 @@
       font-family: var(--display); font-weight: 800; font-size: 1.35rem;
       letter-spacing: -.02em; color: var(--pearl); text-decoration: none;
       display: flex; align-items: baseline; gap: 6px;
+      flex-shrink: 0; white-space: nowrap;
     }
-    .nav-logo em {
-      font-style: normal; font-family: var(--serif);
+    .nav-logo-sub {
+      font-family: var(--serif);
       font-weight: 400; font-size: .85rem; color: var(--gold);
       letter-spacing: .08em; text-transform: uppercase;
     }
@@ -159,7 +160,7 @@
     .hero {
       min-height: 100vh; position: relative;
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 48px 80px;
+      padding: 120px 48px 80px;
       overflow: hidden;
     }
     .hero-bg {
@@ -202,17 +203,28 @@
     .hero-content { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; width: 100%; }
     .hero-badge {
       display: inline-flex; align-items: flex-start; gap: 10px;
-      flex-direction: row;
-      padding: 8px 16px; border: 1px solid var(--border);
+      padding: 12px 18px; border: 1px solid var(--border);
       background: rgba(255,255,255,.02); backdrop-filter: blur(8px);
-      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
-      color: var(--sand-dim); margin-bottom: 32px;
+      margin-bottom: 28px; max-width: 100%;
       opacity: 0; animation: fadeUp .8s .2s var(--ease) forwards;
     }
     .hero-badge .dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--gold); box-shadow: 0 0 12px var(--gold);
       animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0; margin-top: 5px;
+    }
+    .hero-badge-text {
+      display: flex; flex-direction: column; gap: 5px; min-width: 0;
+    }
+    .hero-badge-text .bi-en {
+      font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--sand-dim); line-height: 1.3;
+    }
+    .hero-badge-text .bi-ar {
+      font-size: .68rem; letter-spacing: 0; text-transform: none;
+      color: var(--pearl); direction: rtl; text-align: left;
+      align-self: flex-start; line-height: 1.4; opacity: .9;
     }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
 
@@ -713,9 +725,8 @@
       font-family: var(--arabic); font-weight: 400; color: var(--pearl);
     }
     .hero-desc .bi-ar, .section-desc .bi-ar, .cta-desc .bi-ar { font-size: 0.88em; margin-top: 10px; }
-    .hero-badge [data-bi] { display: flex; flex-direction: column; gap: 2px; }
-    .nav-links .bi-ar, .nav-cta .bi-ar { font-size: 0.6rem; letter-spacing: 0; text-transform: none; color: var(--pearl); }
-    .nav-logo .bi-ar { font-size: 0.55rem; letter-spacing: 0; }
+    .hero-badge [data-bi] { display: none; }
+    .nav-logo .bi-ar { display: none; }
     .marquee-item { flex-direction: column; align-items: flex-start; gap: 2px; }
     .marquee-item .bi-ar { font-size: 0.72em; letter-spacing: 0; text-transform: none; color: var(--pearl); font-family: var(--arabic); }
     .service-card h3 .bi-ar, .pillar h4 .bi-ar, .adv-card h4 .bi-ar, .step h4 .bi-ar { font-size: 0.78em; margin-top: 4px; }
@@ -731,7 +742,8 @@
     .btn-primary .bi-ar, .btn-ghost .bi-ar { font-size: 0.72em; margin-top: 2px; letter-spacing: 0; }
     .btn-primary .bi-ar { color: var(--void); }
     .btn-ghost .bi-ar { color: var(--pearl); }
-    .hero-badge .bi-ar { font-size: 0.85em; margin-top: 3px; letter-spacing: 0; text-transform: none; }
+    .hero-badge .bi-ar { font-size: 0.68rem; margin-top: 0; letter-spacing: 0; text-transform: none; }
+    .nav-links .bi-ar, .nav-cta .bi-ar { font-size: 0.6rem; letter-spacing: 0; text-transform: none; color: var(--pearl); }
     .service-tags span { display: inline-flex; flex-direction: column; align-items: flex-start; }
     .service-tags .bi-ar { font-size: 0.7em; margin-top: 1px; letter-spacing: 0; }
     .hero-scroll .bi-ar { font-size: 0.85em; letter-spacing: 0; writing-mode: vertical-rl; }
@@ -852,7 +864,7 @@
       .nav-links, .nav-cta { display: none; }
       .nav-toggle { display: block; }
       section { padding: 80px 24px; }
-      .hero { padding: 0 24px 60px; }
+      .hero { padding: 100px 24px 60px; }
       .hero-scroll { right: 24px; }
       .about-grid, .advantage-inner { grid-template-columns: 1fr; gap: 48px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
@@ -899,7 +911,7 @@
 
   <!-- Navigation -->
   <nav id="nav">
-    <a href="#" class="nav-logo">AAD <em data-bi="nav_agency">Agency</em></a>
+    <a href="#" class="nav-logo">AAD <span class="nav-logo-sub">Agency</span></a>
     <ul class="nav-links">
       <li><a href="#about" data-bi="nav_about">About</a></li>
       <li><a href="#services" data-bi="nav_services">Services</a></li>
@@ -920,7 +932,10 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        <span data-bi="hero_badge">Kuwait City — Est. 2026</span>
+        <div class="hero-badge-text">
+          <span class="bi-en">Kuwait City — Est. 2026</span>
+          <span class="bi-ar">مدينة الكويت — تأسست ٢٠٢٦</span>
+        </div>
       </div>
       <h1 class="hero-title" id="heroTitle">
         <span class="line"><span class="word bi-block"><span class="bi-en">We build</span><span class="bi-ar">نبني</span></span></span>
@@ -1294,7 +1309,7 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#" class="nav-logo">AAD <em data-bi="nav_agency">Agency</em></a>
+        <a href="#" class="nav-logo">AAD <span class="nav-logo-sub">Agency</span></a>
         <p data-bi="footer_desc">Kuwait's premier brand agency. We build identities, campaigns, and growth engines for businesses ready to lead the market.</p>
       </div>
       <div class="footer-col">
