@@ -24,25 +24,25 @@
   <link rel="stylesheet" href="cyber-theme.css"/>
   <style>
     :root {
-      --void: #000000;
-      --ink: #0a0a0a;
-      --surface: #111111;
-      --surface-2: #1a1a1a;
-      --surface-3: #222222;
-      --border: rgba(255,255,255,.08);
-      --border-light: rgba(255,255,255,.18);
-      --sand: #cccccc;
-      --sand-dim: #888888;
-      --gold: #ffffff;
-      --gold-bright: #ffffff;
-      --gold-glow: rgba(255,255,255,.12);
-      --pearl: #ffffff;
-      --text: #f5f5f5;
-      --text-2: #999999;
-      --text-3: #555555;
-      --accent: #666666;
-      --display: 'Syne', sans-serif;
-      --serif: 'Instrument Serif', Georgia, serif;
+      --void: #050505;
+      --ink: #080808;
+      --surface: #0c0c0c;
+      --surface-2: #111111;
+      --surface-3: #1a1a1a;
+      --border: rgba(255,255,255,.1);
+      --border-light: rgba(0, 255, 0, 0.35);
+      --sand: #b8b8b8;
+      --sand-dim: #666666;
+      --gold: #00ff00;
+      --gold-bright: #39ff14;
+      --gold-glow: rgba(0, 255, 0, 0.25);
+      --pearl: #f0fff0;
+      --text: #e8e8e8;
+      --text-2: #9a9a9a;
+      --text-3: #5a5a5a;
+      --accent: #00d4ff;
+      --display: 'Orbitron', 'Syne', sans-serif;
+      --serif: 'Orbitron', 'Syne', sans-serif;
       --body: 'DM Sans', sans-serif;
       --arabic: 'Noto Sans Arabic', sans-serif;
       --ease: cubic-bezier(.4, 0, .2, 1);
@@ -86,7 +86,8 @@
         transition-duration: 0.01ms !important;
       }
       .marquee { animation: none; }
-      .preloader { display: none; }
+      .preloader-word-3d { animation: none !important; transform: rotateX(32deg) rotateY(-22deg) !important; }
+      .preloader-word-face { animation: none !important; opacity: 1 !important; transform: translateZ(64px) !important; }
     }
 
     ::selection { background: var(--gold); color: var(--void); }
@@ -115,28 +116,104 @@
     }
     @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } }
 
-    /* PRELOADER */
+    /* PRELOADER — extruded 3D "AAD." */
     .preloader {
       position: fixed; inset: 0; z-index: 10001;
-      background: var(--void);
+      background: #000;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 24px;
-      transition: opacity .8s var(--ease), visibility .8s;
+      align-items: center; justify-content: center; gap: 40px;
+      transition: opacity .9s var(--ease), visibility .9s;
     }
     .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-    .preloader-logo {
-      font-family: var(--display); font-size: 3rem; font-weight: 800;
-      letter-spacing: -.02em; color: var(--pearl);
+
+    .preloader-scene {
+      perspective: 480px;
+      perspective-origin: 50% 40%;
     }
-    .preloader-logo span { color: var(--gold); }
+
+    .preloader-word-3d {
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(32deg) rotateY(-22deg);
+      animation: preloaderRock 2.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes preloaderRock {
+      from { transform: rotateX(28deg) rotateY(-28deg); }
+      to   { transform: rotateX(36deg) rotateY(-14deg); }
+    }
+
+    .word-extrude {
+      position: absolute;
+      left: 0; top: 0;
+      transform-style: preserve-3d;
+      pointer-events: none;
+    }
+
+    .word-layer {
+      position: absolute;
+      left: 0; top: 0;
+      font-family: 'Orbitron', var(--display);
+      font-size: clamp(5rem, 18vw, 10rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      white-space: nowrap;
+      color: hsl(120, 70%, calc(4% + var(--d) * 1.5%));
+      transform: translate3d(
+        calc(var(--d) * 0.7px),
+        calc(var(--d) * 1px),
+        calc(var(--d) * -2px)
+      );
+      user-select: none;
+    }
+
+    .preloader-word-face {
+      position: relative;
+      display: block;
+      font-family: 'Orbitron', var(--display);
+      font-size: clamp(5rem, 18vw, 10rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      color: #ffffff;
+      transform: translateZ(64px);
+      text-shadow:
+        0 0 20px rgba(0, 255, 0, 0.6),
+        0 0 50px rgba(0, 255, 0, 0.35),
+        0 0 100px rgba(0, 255, 0, 0.15);
+      -webkit-text-stroke: 2px rgba(0, 255, 0, 0.5);
+      animation: wordFaceIn 1s cubic-bezier(.34, 1.56, .64, 1) backwards;
+    }
+
+    .preloader-word-face .dot {
+      color: #00ff00;
+      -webkit-text-stroke: 2px rgba(0, 255, 0, 0.8);
+    }
+
+    @keyframes wordFaceIn {
+      from { opacity: 0; transform: translateZ(-180px) scale(0.3); }
+      to   { opacity: 1; transform: translateZ(64px) scale(1); }
+    }
+
+    .preloader-glow {
+      width: min(320px, 70vw); height: 60px;
+      margin-top: 8px;
+      background: radial-gradient(ellipse, rgba(0, 255, 0, 0.5) 0%, transparent 70%);
+      filter: blur(16px);
+      transform: rotateX(32deg);
+    }
+
     .preloader-bar {
-      width: 200px; height: 1px; background: var(--border);
+      width: min(240px, 60vw); height: 2px;
+      background: rgba(255,255,255,0.1);
       overflow: hidden; position: relative;
     }
     .preloader-bar::after {
       content: ''; position: absolute; left: 0; top: 0; height: 100%;
-      width: 0; background: var(--gold);
-      animation: loadBar 1.8s var(--ease) forwards;
+      width: 0; background: #00ff00;
+      box-shadow: 0 0 16px #00ff00;
+      animation: loadBar 2.6s var(--ease) forwards;
     }
     @keyframes loadBar { to { width: 100%; } }
 
@@ -1036,7 +1113,8 @@
 
     .monster-carousel::-webkit-scrollbar { display: none; }
 
-    .monster-can {
+    /* Carousel cans — Monster pop in every zone */
+    .monster-zone .monster-carousel .monster-can {
       flex: 0 0 clamp(200px, 22vw, 260px);
       scroll-snap-align: center;
       position: relative;
@@ -1051,15 +1129,112 @@
       transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .what-offer.monster-live .monster-can {
+    .monster-zone.monster-live .monster-carousel .monster-can,
+    .monster-subzone.monster-live .monster-carousel .monster-can {
       animation-play-state: running;
     }
 
-    .monster-can:active { cursor: grabbing; }
+    .monster-zone .monster-can.is-active,
+    .monster-zone .monster-can:hover {
+      transform: scale(1.05) translateY(-8px);
+    }
 
-    .monster-can.is-active {
+    .monster-zone .monster-can:active { cursor: grabbing; }
+
+    .monster-can-link {
+      position: absolute; inset: 0; z-index: 3;
+    }
+
+    .monster-can.monster-can-tall {
+      flex: 0 0 clamp(260px, 28vw, 340px);
+    }
+    .monster-can.monster-can-tall .monster-can-body {
+      min-height: 400px;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+    }
+    .monster-can.monster-can-stat .monster-can-icon {
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+    .monster-can.monster-can-stat .stat-suffix {
+      font-size: 0.55em;
+      vertical-align: super;
+    }
+
+    .what-offer .monster-can.is-active {
       transform: scale(1.08) translateY(-12px) !important;
     }
+
+    .monster-can-icon.monster-emoji {
+      font-family: inherit;
+      font-size: 1.75rem;
+      font-weight: 400;
+    }
+
+    .monster-can-desc {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+      margin: 10px 0 6px;
+      width: 100%;
+    }
+    .monster-can-desc .bi-ar { font-size: 0.9em; margin-top: 4px; }
+
+    .monster-can-list {
+      list-style: none;
+      width: 100%;
+      margin-top: 10px;
+      text-align: left;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      max-height: 160px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 255, 0, 0.3) transparent;
+    }
+    .monster-can-list li {
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.4;
+    }
+    .monster-can-list .bi-en { font-size: 0.68rem; text-transform: none; letter-spacing: 0.02em; }
+    .monster-can-list .bi-ar { font-size: 0.62rem; margin-top: 3px; }
+
+    .services-monster-header { grid-template-columns: 1fr; text-align: center; margin-bottom: 0; }
+    .monster-can-tools {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      justify-content: center; margin-top: 12px; width: 100%;
+    }
+    .monster-can-tools .tool-pill {
+      font-size: 0.6rem; padding: 4px 8px;
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .hero.monster-zone {
+      padding: 120px 48px 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero .monster-watermark { font-size: clamp(8rem, 22vw, 18rem); }
+    .hero-content { position: relative; z-index: 2; }
+    .cta-content { text-align: center; position: relative; z-index: 2; }
+    .cta-actions { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 32px; }
+    .monster-label { grid-column: 1 / -1; justify-self: center; margin-bottom: 12px; }
+    .monster-cat-header { margin-bottom: 8px; }
+    .monster-cat-dots { margin-bottom: 16px; }
+    .offer-category { margin-bottom: 72px; }
+    .offer-category:last-child { margin-bottom: 0; }
+
+    .monster-zone:not(.hero) { padding: 120px 0 !important; }
+    .monster-zone > .container,
+    .monster-zone > .monster-zone-inner { padding-left: 48px; padding-right: 48px; }
+    .monster-headline em { color: #00ff00; font-style: normal; text-shadow: 0 0 40px rgba(0, 255, 0, 0.5); }
 
     .monster-can-glow {
       position: absolute;
@@ -1074,8 +1249,10 @@
       pointer-events: none;
     }
 
-    .monster-can.is-active .monster-can-glow,
-    .monster-can:hover .monster-can-glow {
+    .what-offer .monster-can.is-active .monster-can-glow,
+    .what-offer .monster-can:hover .monster-can-glow,
+    .monster-zone .monster-can.is-active .monster-can-glow,
+    .monster-zone .monster-can:hover .monster-can-glow {
       opacity: 0.85;
       width: 180px; height: 180px;
     }
@@ -1111,8 +1288,10 @@
       transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
     }
 
-    .monster-can.is-active .monster-can-icon,
-    .monster-can:hover .monster-can-icon {
+    .what-offer .monster-can.is-active .monster-can-icon,
+    .what-offer .monster-can:hover .monster-can-icon,
+    .monster-zone .monster-can.is-active .monster-can-icon,
+    .monster-zone .monster-can:hover .monster-can-icon {
       transform: scale(1.12);
       box-shadow: 0 0 50px var(--can-color), 0 0 100px color-mix(in srgb, var(--can-color) 50%, transparent);
     }
@@ -1170,7 +1349,7 @@
     .monster-dot[data-color="white"]  { color: #e8e8e8; background: #e8e8e8; }
 
     .monster-dot:not(.active) { opacity: 0.35; }
-    .offer-cat-intro { font-size: .95rem; color: var(--text-2); margin: -16px 0 28px; }
+    .offer-cat-intro { margin: -8px auto 32px !important; max-width: 560px; }
     .offer-cat-intro .bi-ar { font-size: 0.88em; margin-top: 6px; }
     .offer-footer { font-size: .82rem; color: var(--text-3); margin-top: 12px; font-style: italic; line-height: 1.5; }
     .offer-footer .bi-ar { font-size: 0.9em; margin-top: 4px; font-style: normal; }
@@ -1178,7 +1357,7 @@
     .promise-stat:hover { border-color: rgba(255,255,255,.2); transform: translateY(-4px); }
     .promise-stat-num { font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--gold); }
     .promise-stat-label { font-size: .78rem; color: var(--text-2); margin-top: 8px; }
-    .offers-categories { display: flex; flex-direction: column; gap: 80px; margin-top: 64px; }
+    .offers-categories { display: flex; flex-direction: column; gap: 64px; margin-top: 48px; min-height: 200px; }
     .offer-category-title {
       font-family: var(--display); font-size: clamp(1.4rem, 3vw, 2rem);
       font-weight: 700; color: var(--pearl); margin-bottom: 32px;
@@ -1276,15 +1455,15 @@
       .monster-count { right: 24px; font-size: 3rem; }
       .monster-carousel-wrap { margin: 0 -24px; }
       .monster-carousel { padding: 40px 24px 20px; gap: 20px; }
-      .monster-can { flex: 0 0 200px; }
+      .monster-zone .monster-carousel .monster-can { flex: 0 0 200px; }
     }
     @media (max-width: 640px) {
       .cta { padding: 100px 24px; }
       .promise-banner, .what-offer { padding: 64px 24px; }
       footer { padding: 48px 24px 24px; }
       .promise-grid { grid-template-columns: 1fr; }
-      .monster-can { flex: 0 0 180px; }
-      .monster-can-body { min-height: 260px; }
+      .monster-zone .monster-carousel .monster-can { flex: 0 0 180px; }
+      .what-offer .monster-can-body { min-height: 260px; }
       .monster-count { display: none; }
       .promise-stats { flex-direction: column; }
       .promise-stat-arrow { transform: rotate(90deg); }
@@ -1310,9 +1489,33 @@
 
   <!-- Preloader -->
   <div class="preloader" id="preloader">
-    <div class="preloader-logo">AAD<span>.</span></div>
+    <div class="preloader-scene">
+      <div class="preloader-word-3d" id="preloaderWord3d">
+        <span class="preloader-word-face" aria-label="AAD">AAD<span class="dot">.</span></span>
+      </div>
+      <div class="preloader-glow" aria-hidden="true"></div>
+    </div>
     <div class="preloader-bar"></div>
   </div>
+  <script>
+    (function buildPreloader3D() {
+      const DEPTH = 36;
+      const wrap = document.getElementById('preloaderWord3d');
+      const face = wrap && wrap.querySelector('.preloader-word-face');
+      if (!wrap || !face) return;
+      const extrude = document.createElement('span');
+      extrude.className = 'word-extrude';
+      extrude.setAttribute('aria-hidden', 'true');
+      for (let d = DEPTH; d >= 1; d--) {
+        const layer = document.createElement('span');
+        layer.className = 'word-layer';
+        layer.textContent = 'AAD.';
+        layer.style.setProperty('--d', String(d));
+        extrude.appendChild(layer);
+      }
+      wrap.insertBefore(extrude, face);
+    })();
+  </script>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
@@ -1339,7 +1542,7 @@
 
   <!-- Hero -->
   <main id="main">
-  <section class="hero" id="hero">
+  <section class="hero monster-zone" id="hero" data-watermark="AAD">
     <div class="hero-bg">
       <div class="hero-grid"></div>
       <div class="hero-orb hero-orb-1"></div>
@@ -1391,49 +1594,62 @@
   </div>
 
   <!-- About -->
-  <section class="about monster-zone" id="about" data-watermark="AAD">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label" data-bi="about_label">Who We Are</div>
-        <h2 class="section-title cyber-headline" data-bi-html="about_title">The agency Kuwait<br><em>has been waiting for.</em></h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-visual reveal">
-          <div class="about-frame"></div>
-          <div class="about-visual-inner">
-            <div class="about-stat-big">&infin;</div>
-            <div class="about-stat-label" data-bi="about_stat">Brands waiting to be built in Kuwait</div>
-          </div>
+  <section class="about monster-zone" id="about" data-watermark="∞">
+    <div class="monster-zone-inner">
+      <div class="monster-header reveal">
+        <div class="monster-dots" aria-label="About navigation">
+          <button type="button" class="monster-dot active" data-color="green" data-index="0" aria-label="Pillar 1"></button>
+          <button type="button" class="monster-dot" data-color="cyan" data-index="1" aria-label="Pillar 2"></button>
+          <button type="button" class="monster-dot" data-color="magenta" data-index="2" aria-label="Pillar 3"></button>
+          <button type="button" class="monster-dot" data-color="orange" data-index="3" aria-label="Pillar 4"></button>
         </div>
-        <div class="about-text reveal">
-          <p data-bi-html="about_p1">
-            Kuwait is overflowing with untapped brand potential. Thousands of businesses operate without a clear identity, strategy, or voice. <strong>That's our opportunity — and your advantage.</strong>
-          </p>
-          <p data-bi="about_p2">
-            The AAD Agency was founded on a simple belief: Kuwait deserves an agency that thinks globally but executes locally. We bring the knowledge, systems, and creative firepower that the market has never seen — and we deploy it for brands ready to lead.
-          </p>
-          <div class="about-pillars">
-            <div class="pillar data-card">
-              <div class="pillar-num">01</div>
-              <h4 data-bi="pillar1_t">First-Mover Edge</h4>
-              <p data-bi="pillar1_d">We're pioneering a new standard of brand work in Kuwait. No legacy baggage, pure ambition.</p>
+        <div class="section-label monster-label" data-bi="about_label">Who We Are</div>
+        <h2 class="monster-headline" data-bi-html="about_title">The agency Kuwait<br><em>has been waiting for.</em></h2>
+        <span class="monster-count" aria-hidden="true">04</span>
+      </div>
+      <p class="monster-sub reveal" data-bi-html="about_p1">Kuwait is overflowing with untapped brand potential. Thousands of businesses operate without a clear identity, strategy, or voice. <strong>That's our opportunity — and your advantage.</strong></p>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="aboutCarousel">
+          <article class="monster-can bi-block" data-color="green" style="animation-delay:0.1s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">01</div>
+              <span class="monster-can-num">01</span>
+              <span class="bi-en" data-bi="pillar1_t">First-Mover Edge</span>
+              <span class="bi-ar">ميزة السباق</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="pillar1_d">We're pioneering a new standard of brand work in Kuwait. No legacy baggage, pure ambition.</span><span class="bi-ar">نرسم معياراً جديداً للعلامات في الكويت. بلا تراث عالق، طموح خالص.</span></p>
             </div>
-            <div class="pillar data-card">
-              <div class="pillar-num">02</div>
-              <h4 data-bi="pillar2_t">Deep Knowledge</h4>
-              <p data-bi="pillar2_d">World-class frameworks applied to a market hungry for excellence and differentiation.</p>
+          </article>
+          <article class="monster-can bi-block" data-color="cyan" style="animation-delay:0.2s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">02</div>
+              <span class="monster-can-num">02</span>
+              <span class="bi-en" data-bi="pillar2_t">Deep Knowledge</span>
+              <span class="bi-ar">معرفة عميقة</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="pillar2_d">World-class frameworks applied to a market hungry for excellence and differentiation.</span><span class="bi-ar">أطر عالمية تُطبّق على سوق جائع للتميز والتمايز.</span></p>
             </div>
-            <div class="pillar data-card">
-              <div class="pillar-num">03</div>
-              <h4 data-bi="pillar3_t">Infinite Pipeline</h4>
-              <p data-bi="pillar3_d">Every mall, café, clinic, and startup in Kuwait is a potential partner. The market is ours to define.</p>
+          </article>
+          <article class="monster-can bi-block" data-color="magenta" style="animation-delay:0.3s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">03</div>
+              <span class="monster-can-num">03</span>
+              <span class="bi-en" data-bi="pillar3_t">Infinite Pipeline</span>
+              <span class="bi-ar">خط إنتاج لا ينتهي</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="pillar3_d">Every mall, café, clinic, and startup in Kuwait is a potential partner. The market is ours to define.</span><span class="bi-ar">كل مول ومقهى وعيادة وشركة ناشئة في الكويت شريك محتمل. السوق لنا لنُعرّفه.</span></p>
             </div>
-            <div class="pillar data-card">
-              <div class="pillar-num">04</div>
-              <h4 data-bi="pillar4_t">Relentless Execution</h4>
-              <p data-bi="pillar4_d">Strategy without execution is noise. We deliver end-to-end — from concept to campaign to conversion.</p>
+          </article>
+          <article class="monster-can bi-block" data-color="orange" style="animation-delay:0.4s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">04</div>
+              <span class="monster-can-num">04</span>
+              <span class="bi-en" data-bi="pillar4_t">Relentless Execution</span>
+              <span class="bi-ar">تنفيذ بلا توقف</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="pillar4_d">Strategy without execution is noise. We deliver end-to-end — from concept to campaign to conversion.</span><span class="bi-ar">الاستراتيجية بلا تنفيذ ضجيج. نُسلّم من البداية للنهاية — من الفكرة إلى الحملة إلى التحويل.</span></p>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </div>
@@ -1441,81 +1657,95 @@
 
   <!-- Promise / More Leads More Sales -->
   <section class="promise-banner monster-zone" id="promise" data-watermark="100">
-    <div class="container">
-      <div class="reveal">
-        <h2 class="promise-title cyber-headline bi-block">
+    <div class="monster-zone-inner">
+      <div class="monster-header reveal">
+        <div class="monster-dots" aria-label="Promise navigation">
+          <button type="button" class="monster-dot active" data-color="green" data-index="0" aria-label="More leads"></button>
+          <button type="button" class="monster-dot" data-color="cyan" data-index="1" aria-label="More sales"></button>
+          <button type="button" class="monster-dot" data-color="magenta" data-index="2" aria-label="100 visitors"></button>
+          <button type="button" class="monster-dot" data-color="orange" data-index="3" aria-label="10 leads"></button>
+          <button type="button" class="monster-dot" data-color="lime" data-index="4" aria-label="3 sales"></button>
+        </div>
+        <h2 class="monster-headline bi-block">
           <span class="bi-en">More leads. More sales.</span>
           <span class="bi-ar">المزيد من العملاء المحتملين. المزيد من المبيعات.</span>
         </h2>
-        <p class="promise-desc bi-block">
-          <span class="bi-en">The only metrics that matter. We build systems that turn attention into enquiries — and enquiries into revenue.</span>
-          <span class="bi-ar">المقاييس الوحيدة التي تهم. نبني أنظمة تحوّل الاهتمام إلى استفسارات — والاستفسارات إلى إيرادات.</span>
-        </p>
+        <span class="monster-count" aria-hidden="true">100</span>
       </div>
-
-      <div class="promise-grid reveal">
-        <div class="promise-block data-card">
-          <h3 class="promise-block-title bi-block">
-            <span class="bi-en">More leads</span>
-            <span class="bi-ar">المزيد من العملاء المحتملين</span>
-          </h3>
-          <p class="promise-block-desc bi-block">
-            <span class="bi-en">Every form fill, DM, call, and booking is a potential customer waiting to hear from you.</span>
-            <span class="bi-ar">كل نموذج ورسالة ومكالمة وحجز هو عميل محتمل ينتظر تواصلك.</span>
-          </p>
-          <ul class="promise-list">
-            <li class="bi-block"><span class="bi-en">Contact forms & landing pages</span><span class="bi-ar">نماذج التواصل وصفحات الهبوط</span></li>
-            <li class="bi-block"><span class="bi-en">WhatsApp & Instagram enquiries</span><span class="bi-ar">استفسارات واتساب وإنستغرام</span></li>
-            <li class="bi-block"><span class="bi-en">Consultation & quote requests</span><span class="bi-ar">طلبات الاستشارة وعروض الأسعار</span></li>
-            <li class="bi-block"><span class="bi-en">Email list sign-ups</span><span class="bi-ar">اشتراكات القائمة البريدية</span></li>
-          </ul>
-        </div>
-
-        <div class="promise-block data-card">
-          <h3 class="promise-block-title bi-block">
-            <span class="bi-en">More sales</span>
-            <span class="bi-ar">المزيد من المبيعات</span>
-          </h3>
-          <p class="promise-block-desc bi-block">
-            <span class="bi-en">We don't stop at traffic. We optimize the full path from first click to signed deal.</span>
-            <span class="bi-ar">لا نتوقف عند الزيارات. نُحسّن المسار الكامل من أول نقرة إلى الصفقة الموقعة.</span>
-          </p>
-          <ul class="promise-list">
-            <li class="bi-block"><span class="bi-en">Conversion-focused website design</span><span class="bi-ar">تصميم مواقع يركز على التحويل</span></li>
-            <li class="bi-block"><span class="bi-en">Follow-up automation</span><span class="bi-ar">أتمتة المتابعة</span></li>
-            <li class="bi-block"><span class="bi-en">Retargeting & nurture campaigns</span><span class="bi-ar">حملات إعادة الاستهداف والرعاية</span></li>
-            <li class="bi-block"><span class="bi-en">Clear calls-to-action everywhere</span><span class="bi-ar">دعوات واضحة للعمل في كل مكان</span></li>
-          </ul>
+      <p class="monster-sub reveal bi-block">
+        <span class="bi-en">The only metrics that matter. We build systems that turn attention into enquiries — and enquiries into revenue.</span>
+        <span class="bi-ar">المقاييس الوحيدة التي تهم. نبني أنظمة تحوّل الاهتمام إلى استفسارات — والاستفسارات إلى إيرادات.</span>
+      </p>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="promiseCarousel">
+          <article class="monster-can monster-can-tall bi-block" data-color="green" style="animation-delay:0.1s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">↑</div>
+              <span class="monster-can-num">LEADS</span>
+              <span class="bi-en">More leads</span>
+              <span class="bi-ar">المزيد من العملاء المحتملين</span>
+              <ul class="monster-can-list">
+                <li class="bi-block"><span class="bi-en">Contact forms & landing pages</span><span class="bi-ar">نماذج التواصل وصفحات الهبوط</span></li>
+                <li class="bi-block"><span class="bi-en">WhatsApp & Instagram enquiries</span><span class="bi-ar">استفسارات واتساب وإنستغرام</span></li>
+                <li class="bi-block"><span class="bi-en">Consultation & quote requests</span><span class="bi-ar">طلبات الاستشارة وعروض الأسعار</span></li>
+                <li class="bi-block"><span class="bi-en">Email list sign-ups</span><span class="bi-ar">اشتراكات القائمة البريدية</span></li>
+              </ul>
+            </div>
+          </article>
+          <article class="monster-can monster-can-tall bi-block" data-color="cyan" style="animation-delay:0.2s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">$</div>
+              <span class="monster-can-num">SALES</span>
+              <span class="bi-en">More sales</span>
+              <span class="bi-ar">المزيد من المبيعات</span>
+              <ul class="monster-can-list">
+                <li class="bi-block"><span class="bi-en">Conversion-focused website design</span><span class="bi-ar">تصميم مواقع يركز على التحويل</span></li>
+                <li class="bi-block"><span class="bi-en">Follow-up automation</span><span class="bi-ar">أتمتة المتابعة</span></li>
+                <li class="bi-block"><span class="bi-en">Retargeting & nurture campaigns</span><span class="bi-ar">حملات إعادة الاستهداف والرعاية</span></li>
+                <li class="bi-block"><span class="bi-en">Clear calls-to-action everywhere</span><span class="bi-ar">دعوات واضحة للعمل في كل مكان</span></li>
+              </ul>
+            </div>
+          </article>
+          <article class="monster-can monster-can-stat bi-block" data-color="magenta" style="animation-delay:0.3s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">100</div>
+              <span class="monster-can-num">STEP 1</span>
+              <span class="bi-en">Website visitors</span>
+              <span class="bi-ar">زوار الموقع</span>
+            </div>
+          </article>
+          <article class="monster-can monster-can-stat bi-block" data-color="orange" style="animation-delay:0.4s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">10</div>
+              <span class="monster-can-num">STEP 2</span>
+              <span class="bi-en">Leads</span>
+              <span class="bi-ar">عملاء محتملون</span>
+            </div>
+          </article>
+          <article class="monster-can monster-can-stat bi-block" data-color="lime" style="animation-delay:0.5s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">3</div>
+              <span class="monster-can-num">STEP 3</span>
+              <span class="bi-en">Sales</span>
+              <span class="bi-ar">مبيعات</span>
+            </div>
+          </article>
         </div>
       </div>
-
-      <p class="promise-why reveal bi-block">
+      <p class="monster-sub reveal bi-block" style="margin-top:40px">
         <span class="bi-en"><strong>Your funnel, simplified:</strong> visitors become leads, leads become customers. We engineer every step.</span>
         <span class="bi-ar"><strong>مسارك المبسّط:</strong> الزوار يصبحون عملاء محتملين، والعملاء المحتملون يصبحون زبائن. نُهندس كل خطوة.</span>
       </p>
-
-      <div class="promise-stats funnel-track reveal">
-        <div class="promise-stat data-card bi-block">
-          <div class="promise-stat-num">100</div>
-          <div class="promise-stat-label"><span class="bi-en">Website visitors</span><span class="bi-ar">زوار الموقع</span></div>
-        </div>
-        <div class="promise-stat-arrow">→</div>
-        <div class="promise-stat data-card bi-block">
-          <div class="promise-stat-num">10</div>
-          <div class="promise-stat-label"><span class="bi-en">Leads</span><span class="bi-ar">عملاء محتملون</span></div>
-        </div>
-        <div class="promise-stat-arrow">→</div>
-        <div class="promise-stat data-card bi-block">
-          <div class="promise-stat-num">3</div>
-          <div class="promise-stat-label"><span class="bi-en">Sales</span><span class="bi-ar">مبيعات</span></div>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- Our Offers — Monster Energy carousel -->
-  <section class="what-offer monster-zone" id="what-offer">
-    <span class="monster-watermark" aria-hidden="true">08</span>
+  <section class="what-offer monster-zone" id="what-offer" data-watermark="08">
     <div class="monster-zone-inner">
       <div class="monster-header">
         <div class="monster-dots" id="monsterDots" aria-label="Offer navigation">
@@ -1618,47 +1848,62 @@
     </div>
   </section>
 
-  <!-- Offers / Services -->
+  <!-- Offers / Services — Monster detail carousels -->
   <section class="services monster-zone" id="services" data-watermark="SVC">
-    <div class="container">
-      <div class="services-header reveal">
-        <div>
-          <div class="section-label" data-bi="offers_label">Services</div>
-          <h2 class="section-title cyber-headline" data-bi-html="offers_title">Everything we<br><em>deliver for brands.</em></h2>
-        </div>
-        <p class="section-desc" data-bi="offers_desc">From AI automation to branding, marketing, and web design — the full stack your business needs to win in Kuwait.</p>
+    <div class="monster-zone-inner">
+      <div class="monster-header services-monster-header reveal">
+        <div class="section-label monster-label" data-bi="offers_label">Services</div>
+        <h2 class="monster-headline" data-bi-html="offers_title">Everything we<br><em>deliver for brands.</em></h2>
       </div>
+      <p class="monster-sub reveal" data-bi="offers_desc">From AI automation to branding, marketing, and web design — the full stack your business needs to win in Kuwait.</p>
       <div class="offers-categories" id="offersRoot"></div>
     </div>
   </section>
 
   <!-- Advantage -->
   <section class="advantage monster-zone" data-watermark="KW">
-    <div class="container advantage-inner">
-      <blockquote class="advantage-quote reveal" data-bi="adv_quote">
-        Kuwait has infinite brands and almost zero agencies doing this right. We're not competing — we're creating the category.
-      </blockquote>
-      <div class="advantage-cards">
-        <div class="adv-card data-card reveal">
-          <div class="adv-icon">KW</div>
-          <div>
-            <h4 data-bi="adv1_t">Local Intelligence</h4>
-            <p data-bi="adv1_d">We understand Kuwaiti consumer behavior, cultural nuances, and the channels that actually convert here.</p>
-          </div>
+    <div class="monster-zone-inner">
+      <div class="monster-header reveal">
+        <div class="monster-dots" aria-label="Advantage navigation">
+          <button type="button" class="monster-dot active" data-color="green" data-index="0" aria-label="Local"></button>
+          <button type="button" class="monster-dot" data-color="cyan" data-index="1" aria-label="Global"></button>
+          <button type="button" class="monster-dot" data-color="magenta" data-index="2" aria-label="Opportunity"></button>
         </div>
-        <div class="adv-card data-card reveal">
-          <div class="adv-icon">GL</div>
-          <div>
-            <h4 data-bi="adv2_t">Global Standards</h4>
-            <p data-bi="adv2_d">Agency-grade processes and creative benchmarks from London, Dubai, and New York — executed in Kuwait City.</p>
-          </div>
-        </div>
-        <div class="adv-card data-card reveal">
-          <div class="adv-icon">∞</div>
-          <div>
-            <h4 data-bi="adv3_t">Unlimited Opportunity</h4>
-            <p data-bi="adv3_d">Restaurants, retail, healthcare, tech, fashion — every sector in Kuwait needs what we offer. The pipeline never ends.</p>
-          </div>
+        <h2 class="monster-headline" data-bi="adv_quote">Kuwait has infinite brands and almost zero agencies doing this right. We're not competing — we're creating the category.</h2>
+        <span class="monster-count" aria-hidden="true">KW</span>
+      </div>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="advantageCarousel">
+          <article class="monster-can bi-block" data-color="green" style="animation-delay:0.1s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">KW</div>
+              <span class="monster-can-num">01</span>
+              <span class="bi-en" data-bi="adv1_t">Local Intelligence</span>
+              <span class="bi-ar">ذكاء محلي</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="adv1_d">We understand Kuwaiti consumer behavior, cultural nuances, and the channels that actually convert here.</span><span class="bi-ar">نفهم سلوك المستهلك الكويتي والفروق الثقافية والقنوات التي تُحوّل فعلاً هنا.</span></p>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="cyan" style="animation-delay:0.2s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">GL</div>
+              <span class="monster-can-num">02</span>
+              <span class="bi-en" data-bi="adv2_t">Global Standards</span>
+              <span class="bi-ar">معايير عالمية</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="adv2_d">Agency-grade processes and creative benchmarks from London, Dubai, and New York — executed in Kuwait City.</span><span class="bi-ar">عمليات بمستوى الوكالات ومعايير إبداعية من لندن ودبي ونيويورك — تُنفّذ في الكويت.</span></p>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="magenta" style="animation-delay:0.3s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">∞</div>
+              <span class="monster-can-num">03</span>
+              <span class="bi-en" data-bi="adv3_t">Unlimited Opportunity</span>
+              <span class="bi-ar">فرصة لا محدودة</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="adv3_d">Restaurants, retail, healthcare, tech, fashion — every sector in Kuwait needs what we offer. The pipeline never ends.</span><span class="bi-ar">مطاعم وتجزئة ورعاية صحية وتقنية وأزياء — كل قطاع في الكويت يحتاج ما نقدمه. الخط لا ينتهي.</span></p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -1666,53 +1911,119 @@
 
   <!-- Stats -->
   <section class="stats monster-zone" data-watermark="500">
-    <div class="stats-grid">
-      <div class="stat-item data-card reveal">
-        <div class="stat-num" data-target="500">0<span>+</span></div>
-        <div class="stat-label" data-bi="stat1">Brands in Our Pipeline</div>
+    <div class="monster-zone-inner">
+      <div class="monster-header reveal">
+        <div class="monster-dots" aria-label="Stats navigation">
+          <button type="button" class="monster-dot active" data-color="green" data-index="0" aria-label="Stat 1"></button>
+          <button type="button" class="monster-dot" data-color="cyan" data-index="1" aria-label="Stat 2"></button>
+          <button type="button" class="monster-dot" data-color="magenta" data-index="2" aria-label="Stat 3"></button>
+          <button type="button" class="monster-dot" data-color="orange" data-index="3" aria-label="Stat 4"></button>
+        </div>
+        <h2 class="monster-headline bi-block">
+          <span class="bi-en">Numbers that <em>hit different</em></span>
+          <span class="bi-ar">أرقام <em>تفرق</em></span>
+        </h2>
+        <span class="monster-count" aria-hidden="true">500</span>
       </div>
-      <div class="stat-item data-card reveal">
-        <div class="stat-num" data-target="6">0</div>
-        <div class="stat-label" data-bi="stat2">Core Service Lines</div>
-      </div>
-      <div class="stat-item data-card reveal">
-        <div class="stat-num" data-target="100">0<span>%</span></div>
-        <div class="stat-label" data-bi="stat3">Kuwait-Focused</div>
-      </div>
-      <div class="stat-item data-card reveal">
-        <div class="stat-num">#1</div>
-        <div class="stat-label" data-bi="stat4">Our Ambition</div>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="statsCarousel">
+          <article class="monster-can monster-can-stat bi-block" data-color="green" style="animation-delay:0.1s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon"><span class="stat-num" data-target="500">0</span><span class="stat-suffix">+</span></div>
+              <span class="monster-can-num">PIPELINE</span>
+              <span class="bi-en" data-bi="stat1">Brands in Our Pipeline</span>
+              <span class="bi-ar">علامات في خط الإنتاج</span>
+            </div>
+          </article>
+          <article class="monster-can monster-can-stat bi-block" data-color="cyan" style="animation-delay:0.2s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon"><span class="stat-num" data-target="6">0</span></div>
+              <span class="monster-can-num">SERVICES</span>
+              <span class="bi-en" data-bi="stat2">Core Service Lines</span>
+              <span class="bi-ar">خطوط خدمة أساسية</span>
+            </div>
+          </article>
+          <article class="monster-can monster-can-stat bi-block" data-color="magenta" style="animation-delay:0.3s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon"><span class="stat-num" data-target="100">0</span><span class="stat-suffix">%</span></div>
+              <span class="monster-can-num">FOCUS</span>
+              <span class="bi-en" data-bi="stat3">Kuwait-Focused</span>
+              <span class="bi-ar">تركيز كويتي</span>
+            </div>
+          </article>
+          <article class="monster-can monster-can-stat bi-block" data-color="orange" style="animation-delay:0.4s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">#1</div>
+              <span class="monster-can-num">GOAL</span>
+              <span class="bi-en" data-bi="stat4">Our Ambition</span>
+              <span class="bi-ar">طموحنا</span>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Process -->
   <section class="process monster-zone" id="process" data-watermark="04">
-    <div class="container">
-      <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto;">
-        <div class="section-label" style="justify-content:center;" data-bi="process_label">How We Work</div>
-        <h2 class="section-title cyber-headline" data-bi-html="process_title">From brief to<br><em>brand dominance.</em></h2>
+    <div class="monster-zone-inner">
+      <div class="monster-header reveal">
+        <div class="monster-dots" aria-label="Process navigation">
+          <button type="button" class="monster-dot active" data-color="green" data-index="0" aria-label="Step 1"></button>
+          <button type="button" class="monster-dot" data-color="cyan" data-index="1" aria-label="Step 2"></button>
+          <button type="button" class="monster-dot" data-color="magenta" data-index="2" aria-label="Step 3"></button>
+          <button type="button" class="monster-dot" data-color="orange" data-index="3" aria-label="Step 4"></button>
+        </div>
+        <div class="section-label monster-label" data-bi="process_label">How We Work</div>
+        <h2 class="monster-headline" data-bi-html="process_title">From brief to<br><em>brand dominance.</em></h2>
+        <span class="monster-count" aria-hidden="true">04</span>
       </div>
-      <div class="process-steps">
-        <div class="step data-card reveal">
-          <div class="step-circle">01</div>
-          <h4 data-bi="step1_t">Discover</h4>
-          <p data-bi="step1_d">Deep dive into your brand, market, competitors, and untapped opportunities in Kuwait.</p>
-        </div>
-        <div class="step data-card reveal">
-          <div class="step-circle">02</div>
-          <h4 data-bi="step2_t">Define</h4>
-          <p data-bi="step2_d">Strategy, positioning, and creative direction that separates you from every competitor.</p>
-        </div>
-        <div class="step data-card reveal">
-          <div class="step-circle">03</div>
-          <h4 data-bi="step3_t">Design</h4>
-          <p data-bi="step3_d">World-class creative execution — identity, content, campaigns, and digital assets.</p>
-        </div>
-        <div class="step data-card reveal">
-          <div class="step-circle">04</div>
-          <h4 data-bi="step4_t">Dominate</h4>
-          <p data-bi="step4_d">Launch, optimize, and scale. We measure everything and iterate until you lead.</p>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="processCarousel">
+          <article class="monster-can bi-block" data-color="green" style="animation-delay:0.1s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">01</div>
+              <span class="monster-can-num">01</span>
+              <span class="bi-en" data-bi="step1_t">Discover</span>
+              <span class="bi-ar">اكتشف</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="step1_d">Deep dive into your brand, market, competitors, and untapped opportunities in Kuwait.</span><span class="bi-ar">غوص عميق في علامتك والسوق والمنافسين والفرص غير المستغلة في الكويت.</span></p>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="cyan" style="animation-delay:0.2s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">02</div>
+              <span class="monster-can-num">02</span>
+              <span class="bi-en" data-bi="step2_t">Define</span>
+              <span class="bi-ar">حدّد</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="step2_d">Strategy, positioning, and creative direction that separates you from every competitor.</span><span class="bi-ar">استراتيجية وتحديد موقع واتجاه إبداعي يُميّزك عن كل منافس.</span></p>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="magenta" style="animation-delay:0.3s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">03</div>
+              <span class="monster-can-num">03</span>
+              <span class="bi-en" data-bi="step3_t">Design</span>
+              <span class="bi-ar">صمّم</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="step3_d">World-class creative execution — identity, content, campaigns, and digital assets.</span><span class="bi-ar">تنفيذ إبداعي عالمي — هوية ومحتوى وحملات وأصول رقمية.</span></p>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="orange" style="animation-delay:0.4s">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">04</div>
+              <span class="monster-can-num">04</span>
+              <span class="bi-en" data-bi="step4_t">Dominate</span>
+              <span class="bi-ar">سيطر</span>
+              <p class="monster-can-desc bi-block"><span class="bi-en" data-bi="step4_d">Launch, optimize, and scale. We measure everything and iterate until you lead.</span><span class="bi-ar">أطلق وحسّن ووسّع. نقيس كل شيء ونُكرّر حتى تقود.</span></p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -1720,58 +2031,61 @@
 
   <!-- Work -->
   <section class="work monster-zone" id="work" data-watermark="NEXT">
-    <div class="container">
-      <div class="services-header reveal">
-        <div>
-          <div class="section-label" data-bi="work_label">Selected Work</div>
-          <h2 class="section-title cyber-headline" data-bi-html="work_title">Brands we're<br><em>building next.</em></h2>
+    <div class="monster-zone-inner">
+      <div class="monster-header reveal">
+        <div class="monster-dots" aria-label="Work navigation">
+          <button type="button" class="monster-dot active" data-color="green" data-index="0" aria-label="Project 1"></button>
+          <button type="button" class="monster-dot" data-color="cyan" data-index="1" aria-label="Project 2"></button>
+          <button type="button" class="monster-dot" data-color="magenta" data-index="2" aria-label="Project 3"></button>
+          <button type="button" class="monster-dot" data-color="orange" data-index="3" aria-label="Project 4"></button>
         </div>
-        <p class="section-desc" data-bi="work_desc">Your brand could be here. We're selectively partnering with ambitious Kuwaiti businesses ready to lead.</p>
+        <div class="section-label monster-label" data-bi="work_label">Selected Work</div>
+        <h2 class="monster-headline" data-bi-html="work_title">Brands we're<br><em>building next.</em></h2>
+        <span class="monster-count" aria-hidden="true">04</span>
       </div>
-      <div class="work-grid">
-        <div class="work-card data-card reveal">
-          <a href="#contact" class="work-card-link" aria-label="Project Noor — Start a project"></a>
-          <div class="work-card-bg"></div>
-          <div class="work-card-overlay">
-            <div class="work-tag" data-bi="work1_tag">F&B / Lifestyle</div>
-            <h3>Project Noor</h3>
-          </div>
-          <div class="work-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </div>
-        </div>
-        <div class="work-card data-card reveal">
-          <a href="#contact" class="work-card-link" aria-label="Vital Kuwait — Start a project"></a>
-          <div class="work-card-bg"></div>
-          <div class="work-card-overlay">
-            <div class="work-tag" data-bi="work2_tag">Healthcare / Wellness</div>
-            <h3>Vital Kuwait</h3>
-          </div>
-          <div class="work-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </div>
-        </div>
-        <div class="work-card data-card reveal">
-          <a href="#contact" class="work-card-link" aria-label="Sahara Collective — Start a project"></a>
-          <div class="work-card-bg"></div>
-          <div class="work-card-overlay">
-            <div class="work-tag" data-bi="work3_tag">Fashion / Retail</div>
-            <h3>Sahara Collective</h3>
-          </div>
-          <div class="work-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </div>
-        </div>
-        <div class="work-card data-card reveal">
-          <a href="#contact" class="work-card-link" aria-label="NextGen KW — Start a project"></a>
-          <div class="work-card-bg"></div>
-          <div class="work-card-overlay">
-            <div class="work-tag" data-bi="work4_tag">Tech / Startup</div>
-            <h3>NextGen KW</h3>
-          </div>
-          <div class="work-arrow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </div>
+      <p class="monster-sub reveal" data-bi="work_desc">Your brand could be here. We're selectively partnering with ambitious Kuwaiti businesses ready to lead.</p>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="workCarousel">
+          <article class="monster-can bi-block" data-color="green" style="animation-delay:0.1s">
+            <a href="#contact" class="monster-can-link" aria-label="Project Noor — Start a project"></a>
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">N</div>
+              <span class="monster-can-num" data-bi="work1_tag">F&B / Lifestyle</span>
+              <span class="bi-en">Project Noor</span>
+              <span class="bi-ar">مشروع نور</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="cyan" style="animation-delay:0.2s">
+            <a href="#contact" class="monster-can-link" aria-label="Vital Kuwait — Start a project"></a>
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">V</div>
+              <span class="monster-can-num" data-bi="work2_tag">Healthcare / Wellness</span>
+              <span class="bi-en">Vital Kuwait</span>
+              <span class="bi-ar">فايتال الكويت</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="magenta" style="animation-delay:0.3s">
+            <a href="#contact" class="monster-can-link" aria-label="Sahara Collective — Start a project"></a>
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">S</div>
+              <span class="monster-can-num" data-bi="work3_tag">Fashion / Retail</span>
+              <span class="bi-en">Sahara Collective</span>
+              <span class="bi-ar">مجموعة صحارى</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="orange" style="animation-delay:0.4s">
+            <a href="#contact" class="monster-can-link" aria-label="NextGen KW — Start a project"></a>
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">X</div>
+              <span class="monster-can-num" data-bi="work4_tag">Tech / Startup</span>
+              <span class="bi-en">NextGen KW</span>
+              <span class="bi-ar">نكست جين الكويت</span>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -1780,10 +2094,13 @@
   <!-- CTA -->
   <section class="cta monster-zone" id="contact" data-watermark="GO">
     <div class="cta-bg"></div>
-    <div class="cta-content reveal">
-      <div class="section-label" style="justify-content:center;" data-bi="cta_label">Let's Talk</div>
-      <h2 class="cta-title cyber-headline" data-bi-html="cta_title">Ready to own<br><em>Kuwait?</em></h2>
-      <p class="cta-desc" data-bi="cta_desc">Whether you're launching, rebranding, or scaling — The AAD Agency is your partner in building a brand that wins.</p>
+    <div class="monster-zone-inner cta-content reveal">
+      <div class="monster-header" style="margin-bottom:32px">
+        <div class="section-label monster-label" data-bi="cta_label">Let's Talk</div>
+        <h2 class="monster-headline" data-bi-html="cta_title">Ready to own<br><em>Kuwait?</em></h2>
+        <span class="monster-count" aria-hidden="true">GO</span>
+      </div>
+      <p class="monster-sub" data-bi="cta_desc">Whether you're launching, rebranding, or scaling — The AAD Agency is your partner in building a brand that wins.</p>
       <div class="cta-actions">
         <a href="https://wa.me/96597219411" class="cta-wa-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp +965 9721 9411">
           <span class="cta-wa-icon">
@@ -1852,9 +2169,9 @@
   </footer>
 
   <script>
-    // Preloader
+    // Preloader — keep visible long enough to see 3D logo
     window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('preloader').classList.add('done'), 1200);
+      setTimeout(() => document.getElementById('preloader').classList.add('done'), 2800);
     });
 
     // Nav scroll + active section
@@ -1894,7 +2211,7 @@
     }
     animateRing();
 
-    document.querySelectorAll('a, button, .work-card, .service-card, .offer-card').forEach(el => {
+    document.querySelectorAll('a, button, .monster-can, .work-card, .service-card, .offer-card').forEach(el => {
       el.addEventListener('mouseenter', () => {
         dot.style.width = '16px'; dot.style.height = '16px';
         ring.style.width = '60px'; ring.style.height = '60px';
@@ -1920,20 +2237,79 @@
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
     });
 
-    // Monster zones — site-wide pop animations (fixes invisible content)
-    function activateMonsterZone(zone) {
-      if (zone.classList.contains('monster-live')) return;
-      zone.classList.add('monster-live');
-      zone.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-      let i = 0;
-      zone.querySelectorAll('.data-card, .monster-can, .monster-service-can').forEach(card => {
-        if (!card.style.animationDelay) {
-          card.style.animationDelay = `${Math.min(i * 0.07, 0.9)}s`;
-        }
-        i++;
+    // Monster zones — site-wide pop animations
+    window.activateMonsterZone = function activateMonsterZone(zone) {
+      if (!zone) return;
+      if (!zone.classList.contains('monster-live')) {
+        zone.classList.add('monster-live');
+        zone.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        let i = 0;
+        zone.querySelectorAll('.monster-can').forEach(card => {
+          if (!card.style.animationDelay) {
+            card.style.animationDelay = `${Math.min(i * 0.07, 0.9)}s`;
+          }
+          i++;
+        });
+      }
+      zone.querySelectorAll('.monster-subzone').forEach(sub => {
+        if (!sub.classList.contains('monster-live')) activateMonsterZone(sub);
       });
-      zone.querySelectorAll('.monster-subzone').forEach(sub => activateMonsterZone(sub));
-    }
+    };
+
+    window.initMonsterCarousel = function initMonsterCarousel(carousel) {
+      if (!carousel || carousel.dataset.monsterCarouselBound) return;
+      carousel.dataset.monsterCarouselBound = '1';
+      const parent = carousel.closest('.monster-zone-inner, .offer-category, .monster-zone');
+      const header = parent?.querySelector('.monster-header, .monster-cat-header');
+      const dotsEl = header?.querySelector('.monster-dots') || parent?.querySelector('.monster-dots');
+      const cans = [...carousel.querySelectorAll('.monster-can')];
+      const dots = dotsEl ? [...dotsEl.querySelectorAll('.monster-dot')] : [];
+      if (!cans.length) return;
+
+      function setActive(index) {
+        cans.forEach((c, i) => c.classList.toggle('is-active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      function scrollToIndex(index) {
+        const can = cans[index];
+        if (!can) return;
+        const left = can.offsetLeft - (carousel.clientWidth - can.offsetWidth) / 2;
+        carousel.scrollTo({ left, behavior: 'smooth' });
+        setActive(index);
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => scrollToIndex(+dot.dataset.index ?? i));
+      });
+      cans.forEach((can, i) => {
+        if (!can.querySelector('.monster-can-link')) {
+          can.addEventListener('click', () => scrollToIndex(i));
+        }
+      });
+
+      let ticking = false;
+      carousel.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const center = carousel.scrollLeft + carousel.clientWidth / 2;
+          let closest = 0;
+          let minDist = Infinity;
+          cans.forEach((can, i) => {
+            const dist = Math.abs(center - (can.offsetLeft + can.offsetWidth / 2));
+            if (dist < minDist) { minDist = dist; closest = i; }
+          });
+          setActive(closest);
+          ticking = false;
+        });
+      }, { passive: true });
+      setActive(0);
+    };
+
+    window.initAllMonsterCarousels = function initAllMonsterCarousels(root = document) {
+      root.querySelectorAll('.monster-carousel').forEach(initMonsterCarousel);
+    };
 
     window.initMonsterZones = function initMonsterZones(root = document) {
       root.querySelectorAll('.monster-zone').forEach(zone => {
@@ -1948,10 +2324,11 @@
       });
     };
     initMonsterZones();
+    initAllMonsterCarousels();
 
     // Safety: force-show any cards stuck invisible
     setTimeout(() => {
-      document.querySelectorAll('.data-card, .monster-can, .monster-service-can').forEach(el => {
+      document.querySelectorAll('.monster-can').forEach(el => {
         if (parseFloat(getComputedStyle(el).opacity) < 0.1) {
           el.style.opacity = '1';
           el.style.transform = 'none';
@@ -1959,49 +2336,6 @@
         }
       });
     }, 3000);
-
-    // Our Offers carousel (top section)
-    const monsterCarousel = document.getElementById('monsterCarousel');
-    const monsterDots = document.getElementById('monsterDots');
-    const monsterCans = monsterCarousel ? [...monsterCarousel.querySelectorAll('.monster-can')] : [];
-
-    function setActiveMonsterCan(index) {
-      monsterCans.forEach((can, i) => can.classList.toggle('is-active', i === index));
-      monsterDots?.querySelectorAll('.monster-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-    }
-
-    function scrollToMonsterCan(index) {
-      const can = monsterCans[index];
-      if (!can || !monsterCarousel) return;
-      const left = can.offsetLeft - (monsterCarousel.clientWidth - can.offsetWidth) / 2;
-      monsterCarousel.scrollTo({ left, behavior: 'smooth' });
-      setActiveMonsterCan(index);
-    }
-
-    if (monsterCarousel && monsterCans.length) {
-      monsterDots?.querySelectorAll('.monster-dot').forEach(dot => {
-        dot.addEventListener('click', () => scrollToMonsterCan(+dot.dataset.index));
-      });
-      monsterCans.forEach((can, i) => can.addEventListener('click', () => scrollToMonsterCan(i)));
-
-      let scrollTicking = false;
-      monsterCarousel.addEventListener('scroll', () => {
-        if (scrollTicking) return;
-        scrollTicking = true;
-        requestAnimationFrame(() => {
-          const center = monsterCarousel.scrollLeft + monsterCarousel.clientWidth / 2;
-          let closest = 0, minDist = Infinity;
-          monsterCans.forEach((can, i) => {
-            const dist = Math.abs(center - (can.offsetLeft + can.offsetWidth / 2));
-            if (dist < minDist) { minDist = dist; closest = i; }
-          });
-          setActiveMonsterCan(closest);
-          scrollTicking = false;
-        });
-      }, { passive: true });
-    }
 
     // Scroll reveal (non-card elements outside monster zones)
     const revealEls = document.querySelectorAll('.reveal:not(.data-card):not(.monster-zone .reveal)');
@@ -2015,21 +2349,19 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => observer.observe(el));
 
-    // Counter animation
+    // Counter animation (stat cans)
     const statNums = document.querySelectorAll('.stat-num[data-target]');
     const countObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         const el = entry.target;
-        const target = parseInt(el.dataset.target);
-        const suffix = el.querySelector('span');
-        const suffixText = suffix ? suffix.outerHTML : '';
+        const target = parseInt(el.dataset.target, 10);
         const start = performance.now();
         const duration = 1400;
         function tick(now) {
           const p = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - p, 3);
-          el.innerHTML = Math.round(target * eased) + suffixText;
+          el.textContent = Math.round(target * eased);
           if (p < 1) requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);

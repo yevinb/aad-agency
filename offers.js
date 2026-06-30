@@ -277,18 +277,27 @@ const offersData = [
 const MONSTER_COLORS = ['green', 'cyan', 'magenta', 'orange', 'lime', 'purple', 'blue', 'white'];
 let cardColorIndex = 0;
 
-function renderServiceCan(offer, delay) {
+function renderServiceCan(offer, delay, num) {
   const color = MONSTER_COLORS[cardColorIndex++ % MONSTER_COLORS.length];
-  let html = `<article class="monster-can monster-service-can bi-block" data-color="${color}" style="animation-delay:${delay}s">
+  const numStr = String(num).padStart(2, '0');
+  let html = `<article class="monster-can monster-can-tall bi-block" data-color="${color}" style="animation-delay:${delay}s">
     <div class="monster-can-glow"></div>
-    <div class="monster-can-body monster-service-body">
-      <div class="monster-can-icon monster-emoji-icon">${offer.icon}</div>
-      <h4 class="monster-service-title bi-block">${bi(offer.title.en, offer.title.ar)}</h4>`;
-  if (offer.desc) html += `<p class="monster-service-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
-  if (offer.items?.length) html += `<ul class="monster-service-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
-  if (offer.footer) html += `<p class="monster-service-desc bi-block" style="margin-top:10px;font-style:italic">${bi(offer.footer.en, offer.footer.ar)}</p>`;
+    <div class="monster-can-body">
+      <div class="monster-can-icon monster-emoji">${offer.icon}</div>
+      <span class="monster-can-num">${numStr}</span>
+      <span class="bi-en">${offer.title.en}</span>
+      <span class="bi-ar">${offer.title.ar}</span>`;
+  if (offer.desc) {
+    html += `<p class="monster-can-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
+  }
+  if (offer.items?.length) {
+    html += `<ul class="monster-can-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
+  }
+  if (offer.footer) {
+    html += `<p class="monster-can-desc bi-block" style="font-style:italic;color:var(--gold)">${bi(offer.footer.en, offer.footer.ar)}</p>`;
+  }
   if (offer.tools?.length) {
-    html += `<div class="tools-row" style="margin-top:12px">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
+    html += `<div class="monster-can-tools">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
   }
   return html + '</div></article>';
 }
@@ -299,17 +308,28 @@ function renderOffers() {
   cardColorIndex = 0;
   let delay = 0;
   root.innerHTML = offersData.map(cat => {
-    const cards = cat.offers.map(o => renderServiceCan(o, (delay += 0.06).toFixed(2))).join('');
+    const cards = cat.offers.map((o, i) => renderServiceCan(o, (delay += 0.06).toFixed(2), i + 1)).join('');
+    const dots = cat.offers.map((_, i) => {
+      const color = MONSTER_COLORS[i % MONSTER_COLORS.length];
+      return `<button type="button" class="monster-dot${i === 0 ? ' active' : ''}" data-color="${color}" data-index="${i}" aria-label="Service ${i + 1}"></button>`;
+    }).join('');
     return `
     <div class="offer-category monster-subzone" id="offer-${cat.id}">
-      <h3 class="offer-category-title monster-headline bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
-      ${cat.intro ? `<p class="offer-cat-intro bi-block">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
+      <div class="monster-cat-header">
+        <div class="monster-dots monster-cat-dots" aria-label="${cat.title.en} navigation">${dots}</div>
+        <h3 class="monster-headline bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
+      </div>
+      ${cat.intro ? `<p class="monster-sub offer-cat-intro bi-block">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
       <div class="monster-carousel-wrap monster-service-wrap">
         <div class="monster-carousel monster-service-carousel">${cards}</div>
       </div>
     </div>`;
   }).join('');
-  if (window.initMonsterZones) window.initMonsterZones(root);
+  const servicesSection = document.getElementById('services');
+  if (window.activateMonsterZone && servicesSection) {
+    window.activateMonsterZone(servicesSection);
+  }
+  if (window.initAllMonsterCarousels) window.initAllMonsterCarousels(root);
 }
 
 document.addEventListener('DOMContentLoaded', renderOffers);

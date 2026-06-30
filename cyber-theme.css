@@ -51,9 +51,7 @@ body {
 .cursor-dot { background: var(--gold); box-shadow: 0 0 12px var(--gold); mix-blend-mode: normal; }
 .cursor-ring { border-color: rgba(0, 255, 0, 0.5); box-shadow: 0 0 20px rgba(0, 255, 0, 0.15); }
 
-/* Preloader */
-.preloader-logo { text-transform: uppercase; letter-spacing: 0.2em; text-shadow: 0 0 30px var(--gold-glow); }
-.preloader-logo span { color: var(--gold); text-shadow: 0 0 20px var(--gold); }
+/* Preloader — 3D AAD. */
 
 /* Nav */
 nav.scrolled {
@@ -69,6 +67,7 @@ nav.scrolled {
 .nav-cta:hover { box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(0, 255, 0, 0.1); }
 
 /* Cyber headlines */
+.monster-headline,
 .cyber-headline,
 .hero-title,
 .section-title,
@@ -209,71 +208,28 @@ nav.scrolled {
   animation-play-state: paused;
 }
 
-.monster-zone.monster-live .data-card,
-.monster-subzone.monster-live .data-card,
+.monster-zone.monster-live .monster-carousel .monster-can,
+.monster-subzone.monster-live .monster-carousel .monster-can,
 .monster-subzone.monster-live .monster-can,
-.monster-subzone.monster-live .monster-service-can,
 .what-offer.monster-live .monster-can {
   animation-play-state: running;
 }
 
 .data-card:hover,
-.monster-service-can:hover {
+.monster-can:hover {
   border-color: rgba(0, 255, 0, 0.4) !important;
   box-shadow: 0 0 30px rgba(0, 255, 0, 0.2), 0 0 60px rgba(0, 255, 0, 0.08) !important;
 }
 
-/* Service detail carousels (offers.js) */
-.monster-service-wrap { margin: 0 -24px; }
-.monster-service-carousel { padding: 32px 24px 24px; gap: 24px; }
-.monster-service-can {
-  flex: 0 0 clamp(260px, 30vw, 320px) !important;
-  scroll-snap-align: start;
-  cursor: default;
+/* Service detail carousels (offers.js) — Monster can style */
+.monster-service-wrap { margin: 0 -48px; }
+.monster-service-carousel { padding: 32px 48px 24px; gap: 28px; }
+.services.monster-zone { padding: 100px 0; }
+.services .monster-headline em {
+  color: #00ff00;
+  text-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+  font-style: normal;
 }
-.monster-service-body {
-  min-height: 320px !important;
-  align-items: flex-start !important;
-  text-align: left !important;
-  padding: 28px 22px !important;
-}
-.monster-emoji-icon {
-  font-size: 1.6rem !important;
-  width: 56px !important;
-  height: 56px !important;
-}
-.monster-service-title .bi-en,
-.monster-service-title {
-  font-family: var(--display) !important;
-  font-size: 0.78rem !important;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.monster-service-desc {
-  font-size: 0.82rem;
-  color: var(--text-2);
-  line-height: 1.6;
-  margin: 10px 0;
-}
-.monster-service-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
-.monster-service-list {
-  list-style: none;
-  width: 100%;
-  margin-top: 8px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-.monster-service-list li {
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  font-size: 0.78rem;
-  color: var(--text-2);
-  line-height: 1.45;
-}
-.monster-service-list .bi-ar { font-size: 0.85em; margin-top: 3px; }
-.monster-more { font-size: 0.72rem; color: var(--gold); margin-top: 8px; }
-.offer-category { margin-bottom: 64px; }
-.offer-category:last-child { margin-bottom: 0; }
-.services.monster-zone { padding-bottom: 100px; }
 
 /* About, promise, advantage — pure black panels */
 .about, .promise-banner, .advantage, .stats, .process, .work, .cta {
@@ -446,7 +402,7 @@ main { position: relative; z-index: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .data-card, .monster-can, .monster-service-can {
+  .data-card, .monster-can {
     opacity: 1 !important; transform: none !important; animation: none !important;
   }
 }
