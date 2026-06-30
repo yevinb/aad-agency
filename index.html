@@ -856,15 +856,17 @@
     .footer-ig-link .bi-ar { font-size: 0.78em; margin-top: 2px; display: block; }
 
     /* BILINGUAL — Arabic under every English line */
-    .bi-en { display: block; }
+    .bi-en { display: block !important; }
     .bi-ar {
-      display: block;
-      font-family: var(--arabic);
-      color: var(--pearl);
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+      color: #c8ffc8;
       direction: rtl;
-      text-align: right;
-      font-weight: 300;
-      line-height: 1.5;
+      text-align: center;
+      font-weight: 400;
+      line-height: 1.55;
     }
     .bi-block .bi-ar { margin-top: 6px; font-size: 0.82em; }
     .section-label .bi-ar { font-size: 0.9em; margin-top: 4px; letter-spacing: 0; text-transform: none; }
@@ -1612,15 +1614,29 @@
     </div>
 
     <div class="fp-hero-inner">
-      <div class="fp-badge">
-        <span class="fp-badge-dot" aria-hidden="true"></span>
-        <span data-bi="hero_badge">Kuwait City — Est. 2026</span>
+      <div class="fp-badge bi-block">
+        <div class="fp-badge-row">
+          <span class="fp-badge-dot" aria-hidden="true"></span>
+          <span data-bi="hero_badge">
+            <span class="bi-en">Kuwait City — Est. 2026</span>
+            <span class="bi-ar">مدينة الكويت — تأسست ٢٠٢٦</span>
+          </span>
+        </div>
       </div>
 
       <h1 class="fp-headline" id="heroTitle">
-        <span class="line"><span class="word"><span class="bi-en">We build</span><span class="bi-ar">نبني</span></span></span>
-        <span class="line"><span class="word"><span class="bi-en"><span class="gold">brands</span> that</span><span class="bi-ar"><span class="gold">علامات تجارية</span></span></span></span>
-        <span class="line"><span class="word"><span class="bi-en">dominate Kuwait</span><span class="bi-ar">تسيطر على الكويت</span></span></span>
+        <span class="fp-line">
+          <span class="bi-en">We build</span>
+          <span class="bi-ar">نبني</span>
+        </span>
+        <span class="fp-line">
+          <span class="bi-en"><span class="gold">brands</span> that</span>
+          <span class="bi-ar"><span class="gold">علامات تجارية</span></span>
+        </span>
+        <span class="fp-line">
+          <span class="bi-en">dominate Kuwait</span>
+          <span class="bi-ar">تسيطر على الكويت</span>
+        </span>
       </h1>
 
       <div class="fp-stage" id="fpStage">
@@ -1643,28 +1659,46 @@
         </div>
       </div>
 
-      <p class="fp-desc" data-bi="hero_desc"></p>
+      <p class="fp-desc bi-block" data-bi="hero_desc">
+        <span class="bi-en">The AAD Agency is Kuwait's next-generation brand powerhouse. We combine world-class strategy, creative excellence, and deep market intelligence to transform local brands into market leaders.</span>
+        <span class="bi-ar">وكالة AAD هي قوة العلامات التجارية الجديدة في الكويت. نجمع بين الاستراتيجية العالمية والإبداع المتميز والذكاء العميق للسوق لتحويل العلامات المحلية إلى قادة السوق.</span>
+      </p>
 
       <div class="fp-actions">
         <a href="#slide-3" class="btn-primary fp-btn-glow">
-          <span data-bi="hero_cta1"></span>
+          <span class="bi-block" data-bi="hero_cta1">
+            <span class="bi-en">Work With Us</span>
+            <span class="bi-ar">اعمل معنا</span>
+          </span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#slide-2" class="btn-ghost" data-bi="hero_cta2"></a>
+        <a href="#slide-2" class="btn-ghost bi-block" data-bi="hero_cta2">
+          <span class="bi-en">View Our Work</span>
+          <span class="bi-ar">شاهد أعمالنا</span>
+        </a>
       </div>
 
       <div class="fp-stats">
         <div class="fp-stat">
           <span class="fp-stat-num" data-count="8">8</span>
-          <span class="fp-stat-label" data-bi="premium_stat1">Core Services</span>
+          <span class="fp-stat-label bi-block" data-bi="premium_stat1">
+            <span class="bi-en">Core Services</span>
+            <span class="bi-ar">خدمات أساسية</span>
+          </span>
         </div>
         <div class="fp-stat">
           <span class="fp-stat-num" data-count="50">50</span>
-          <span class="fp-stat-label" data-bi="premium_stat2">Projects Delivered</span>
+          <span class="fp-stat-label bi-block" data-bi="premium_stat2">
+            <span class="bi-en">Projects Delivered</span>
+            <span class="bi-ar">مشاريع منجزة</span>
+          </span>
         </div>
         <div class="fp-stat">
           <span class="fp-stat-num" data-count="100" data-suffix="+">100+</span>
-          <span class="fp-stat-label" data-bi="premium_stat3">Brand Campaigns</span>
+          <span class="fp-stat-label bi-block" data-bi="premium_stat3">
+            <span class="bi-en">Brand Campaigns</span>
+            <span class="bi-ar">حملات علامات</span>
+          </span>
         </div>
       </div>
     </div>
@@ -2127,9 +2161,9 @@
     });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="i18n.js"></script>
   <script src="premium.js"></script>
   <script src="offers.js"></script>
-  <script src="i18n.js"></script>
 
   <a href="https://wa.me/96597219411" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +965 9721 9411">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>

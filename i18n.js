@@ -156,4 +156,13 @@ function applyBilingual() {
   });
 }
 
-applyBilingual();
+function bootI18n() {
+  applyBilingual();
+  document.addEventListener('offers-rendered', applyBilingual);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootI18n);
+} else {
+  bootI18n();
+}

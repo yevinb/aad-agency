@@ -312,6 +312,7 @@ function renderOffers() {
   }).join('');
   if (window.initMonsterZones) window.initMonsterZones(root);
   if (window.initAllMonsterCarousels) window.initAllMonsterCarousels(root);
+  document.dispatchEvent(new CustomEvent('offers-rendered'));
 }
 
 document.addEventListener('DOMContentLoaded', renderOffers);
