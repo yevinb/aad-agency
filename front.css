@@ -34,9 +34,19 @@
 }
 .mobile-lang.lang-toggle { display: none; }
 
-html[lang="en"] .bi-ar { display: none !important; }
-html[lang="ar"] .bi-en { display: none !important; }
 html[lang="ar"] { direction: rtl; }
+
+/* Bilingual stack — always show Arabic under English */
+.bi-en { display: block; }
+.bi-ar {
+  display: block;
+  font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+  direction: rtl;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 300;
+  line-height: 1.45;
+}
+.bi-block .bi-ar { margin-top: 6px; font-size: 0.82em; }
 
 /* ── FULL-SCREEN HERO ── */
 .fp-hero.slide {
@@ -199,8 +209,107 @@ body.fp-ready .fp-stats { transition-delay: 0.65s; }
 }
 
 .fp-headline .word {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.fp-headline .bi-en {
+  display: block;
+}
+
+.fp-headline .bi-ar {
+  display: block;
+  font-size: 0.34em;
+  margin-top: 6px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+  font-weight: 400;
+  color: rgba(0, 255, 0, 0.7);
+  direction: rtl;
+}
+
+.fp-headline .bi-ar .gold {
+  color: rgba(0, 255, 0, 0.85) !important;
+  text-shadow: none;
+}
+
+.fp-badge .bi-ar,
+.fp-desc .bi-ar {
+  display: block;
+  font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+  direction: rtl;
+  font-size: 0.82em;
+  margin-top: 6px;
+  color: rgba(0, 255, 0, 0.65);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+}
+
+.fp-desc .bi-ar {
+  font-size: 0.88em;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fp-stat-label .bi-ar {
+  display: block;
+  font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+  font-size: 0.95em;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0;
+  text-transform: none;
+  direction: rtl;
+}
+
+.fp-actions .btn-primary [data-bi],
+.fp-actions .btn-ghost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.fp-actions .bi-ar {
+  font-size: 0.72em;
+  margin-top: 3px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+  direction: rtl;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.fp-actions .btn-primary:hover .bi-ar {
+  color: #000;
+  opacity: 0.85;
+}
+
+.fp-marquee .marquee-item {
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.fp-marquee .marquee-item .bi-ar {
+  font-size: 0.72em;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(0, 255, 0, 0.5);
+  font-family: var(--arabic), 'Noto Sans Arabic', sans-serif;
+  direction: rtl;
+}
+
+/* Hide lang toggle — site is bilingual stacked */
+.lang-toggle { display: none !important; }
 
 body.fp-ready .fp-headline .word {
   animation: fpLineUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) backwards;
@@ -593,8 +702,6 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 @media (max-width: 1024px) {
-  #langToggle { display: none; }
-  .mobile-lang.lang-toggle { display: flex; margin: 20px auto 0; }
   .fp-stage {
     width: min(85vw, 400px);
     height: min(60vw, 320px);

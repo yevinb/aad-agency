@@ -35,26 +35,6 @@
     }
   };
 
-  function initLangToggle() {
-    var saved = localStorage.getItem('aad-lang');
-    if (saved === 'ar' || saved === 'en') setLang(saved);
-
-    document.querySelectorAll('.lang-toggle button[data-lang]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        setLang(btn.dataset.lang);
-      });
-    });
-  }
-
-  function setLang(lang) {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    localStorage.setItem('aad-lang', lang);
-    document.querySelectorAll('.lang-toggle button[data-lang]').forEach(function (btn) {
-      btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-  }
-
   function initGlassStats() {
     var nums = document.querySelectorAll('.fp-stat-num[data-count], .glass-stat-num[data-count]');
     if (!nums.length) return;
@@ -220,7 +200,6 @@
 
   function boot() {
     initLenis();
-    initLangToggle();
     initGlassStats();
     initHero3D();
     initHeroParallax();

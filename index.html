@@ -880,8 +880,6 @@
       font-family: var(--arabic); font-weight: 400; color: var(--pearl);
     }
     .hero-desc .bi-ar, .section-desc .bi-ar, .cta-desc .bi-ar { font-size: 0.88em; margin-top: 10px; }
-    html[lang="en"] .bi-ar { display: none !important; }
-    html[lang="ar"] .bi-en { display: none !important; }
     html[lang="ar"] { direction: rtl; }
     .nav-logo .bi-ar { display: none; }
     .marquee-item { flex-direction: column; align-items: flex-start; gap: 2px; }
@@ -1368,7 +1366,35 @@
       text-transform: none;
     }
 
-    .monster-can[data-color="green"]  { --can-color: #00ff00; }
+    .monster-can-num .bi-ar {
+      display: block;
+      font-size: 0.95em;
+      margin-top: 4px;
+      letter-spacing: 0;
+      text-transform: none;
+      font-family: var(--arabic);
+      color: rgba(255, 255, 255, 0.6);
+      direction: rtl;
+    }
+
+    .slide-footer .bi-ar {
+      display: block;
+      font-size: 0.85em;
+      margin-top: 4px;
+      font-family: var(--arabic);
+      direction: rtl;
+      color: var(--text-3);
+    }
+
+    .cta-wa-text .bi-ar {
+      display: block;
+      font-size: 0.78em;
+      margin-top: 3px;
+      font-family: var(--arabic);
+      direction: rtl;
+      opacity: 0.8;
+    }
+
     .monster-can[data-color="cyan"]   { --can-color: #00d4ff; }
     .monster-can[data-color="magenta"]{ --can-color: #ff00aa; }
     .monster-can[data-color="orange"] { --can-color: #ff6b00; }
@@ -1558,10 +1584,6 @@
     <a href="#slide-2" class="mobile-link" data-bi="nav_services">Services</a>
     <a href="#slide-3" class="mobile-link" data-bi="nav_work">Work</a>
     <a href="#contact" class="mobile-link" data-bi="nav_contact">Contact</a>
-    <div class="lang-toggle mobile-lang" role="group" aria-label="Language">
-      <button type="button" data-lang="en" class="active">EN</button>
-      <button type="button" data-lang="ar">AR</button>
-    </div>
     <a href="https://wa.me/96597219411" class="mobile-wa" target="_blank" rel="noopener noreferrer" data-bi="whatsapp_cta">WhatsApp</a>
   </div>
 
@@ -1573,10 +1595,6 @@
       <li><a href="#slide-2" data-bi="nav_services">Services</a></li>
       <li><a href="#slide-3" data-bi="nav_work">Work</a></li>
     </ul>
-    <div class="lang-toggle" id="langToggle" role="group" aria-label="Language">
-      <button type="button" data-lang="en" class="active">EN</button>
-      <button type="button" data-lang="ar">AR</button>
-    </div>
     <a href="#slide-3" class="nav-cta" data-bi="nav_cta">Start a Project</a>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
   </nav>
