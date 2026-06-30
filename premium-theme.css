@@ -34,27 +34,64 @@
 html[lang="en"] .bi-ar { display: none !important; }
 html[lang="ar"] .bi-en { display: none !important; }
 html[lang="ar"] { direction: rtl; }
-html[lang="ar"] .cine-copy,
+html[lang="ar"] .hero-compact,
 html[lang="ar"] .cine-glass,
 html[lang="ar"] .monster-service-body { text-align: right; }
-html[lang="ar"] .cine-actions { justify-content: flex-end; }
+html[lang="ar"] .cine-actions,
+html[lang="ar"] .hero-actions { justify-content: flex-end; }
 
-/* ── Cinematic full-screen hero (perfume / NVIDIA reference) ── */
+/* ── Hero — original left headline + right visual ── */
 .cine-hero {
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
-  display: grid !important;
-  align-items: stretch !important;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "stage glass"
-    "copy glass";
-  gap: 0;
+  display: flex !important;
+  align-items: center !important;
   padding: 100px 48px 64px !important;
   overflow: hidden;
   background: #000 !important;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hero-compact.cine-copy {
+  grid-area: auto;
+  max-width: 560px;
+  padding-top: 0;
+}
+
+.hero-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.cine-stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 280px;
+  perspective: 1400px;
+}
+
+.cine-glass {
+  width: 100%;
+  max-width: 440px;
+  align-self: center;
 }
 
 .cine-bg {
@@ -131,15 +168,17 @@ html[lang="ar"] .cine-actions { justify-content: flex-end; }
   filter: blur(20px);
 }
 
-.cine-stage {
-  grid-area: stage;
+.cine-copy {
   position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 50vh;
-  perspective: 1400px;
+  z-index: 2;
+}
+
+.cine-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0, 255, 0, 0.8);
+  margin-bottom: 16px;
 }
 
 .cine-mark-wrap {
@@ -190,20 +229,18 @@ html[lang="ar"] .cine-actions { justify-content: flex-end; }
   to { transform: rotateX(10deg) scaleY(1.05) translateY(-16px); }
 }
 
-.cine-copy {
-  grid-area: copy;
-  position: relative;
-  z-index: 2;
-  max-width: 560px;
-  padding-top: 24px;
+.hero-compact .hero-title {
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  margin-bottom: 20px;
 }
 
-.cine-eyebrow {
-  font-size: 0.68rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(0, 255, 0, 0.8);
-  margin-bottom: 16px;
+.hero-compact .hero-desc {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-2);
+  font-weight: 300;
+  margin-bottom: 28px;
+  max-width: 480px;
 }
 
 .cine-headline {
@@ -240,11 +277,8 @@ html[lang="ar"] .cine-actions { justify-content: flex-end; }
 }
 
 .cine-glass {
-  grid-area: glass;
-  align-self: center;
   position: relative;
   z-index: 2;
-  width: min(320px, 28vw);
   padding: 24px;
   border-radius: 16px;
   background: rgba(0, 0, 0, 0.72);
@@ -455,17 +489,20 @@ html.lenis, html.lenis body { height: auto; }
 .mobile-lang.lang-toggle { display: none; }
 
 @media (max-width: 1024px) {
-  .cine-hero {
+  .hero-grid {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "stage"
-      "glass"
-      "copy";
-    padding: 100px 24px 48px !important;
+    gap: 40px;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .cine-stage {
+    min-height: 220px;
   }
 
   .cine-glass {
-    width: 100%;
     max-width: 420px;
     margin: 0 auto;
   }
