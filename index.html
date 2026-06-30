@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="The AAD Agency — Kuwait's premier brand strategy and creative agency. We build brands that dominate the Gulf market."/>
+  <title>The AAD Agency — Kuwait's Premier Brand Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Noto+Sans+Arabic:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #000000;
+      --ink: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --surface-3: #222222;
+      --border: rgba(255,255,255,.08);
+      --border-light: rgba(255,255,255,.18);
+      --sand: #cccccc;
+      --sand-dim: #888888;
+      --gold: #ffffff;
+      --gold-bright: #ffffff;
+      --gold-glow: rgba(255,255,255,.12);
+      --pearl: #ffffff;
+      --text: #f5f5f5;
+      --text-2: #999999;
+      --text-3: #555555;
+      --accent: #666666;
+      --display: 'Syne', sans-serif;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --body: 'DM Sans', sans-serif;
+      --arabic: 'Noto Sans Arabic', sans-serif;
+      --ease: cubic-bezier(.4, 0, .2, 1);
+      --spring: cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--body);
+      background: var(--void);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: default;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--gold); color: var(--void); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--void); }
+    ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .cursor-dot {
+      position: fixed; width: 8px; height: 8px; background: var(--gold);
+      border-radius: 50%; pointer-events: none; z-index: 10000;
+      transform: translate(-50%, -50%); mix-blend-mode: difference;
+      transition: width .3s var(--ease), height .3s var(--ease);
+    }
+    .cursor-ring {
+      position: fixed; width: 40px; height: 40px;
+      border: 1px solid rgba(255,255,255,.35); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .4s var(--ease), height .4s var(--ease), border-color .3s;
+    }
+    @media (max-width: 768px) { .cursor-dot, .cursor-ring { display: none; } }
+
+    /* PRELOADER */
+    .preloader {
+      position: fixed; inset: 0; z-index: 10001;
+      background: var(--void);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 24px;
+      transition: opacity .8s var(--ease), visibility .8s;
+    }
+    .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader-logo {
+      font-family: var(--display); font-size: 3rem; font-weight: 800;
+      letter-spacing: -.02em; color: var(--pearl);
+    }
+    .preloader-logo span { color: var(--gold); }
+    .preloader-bar {
+      width: 200px; height: 1px; background: var(--border);
+      overflow: hidden; position: relative;
+    }
+    .preloader-bar::after {
+      content: ''; position: absolute; left: 0; top: 0; height: 100%;
+      width: 0; background: var(--gold);
+      animation: loadBar 1.8s var(--ease) forwards;
+    }
+    @keyframes loadBar { to { width: 100%; } }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .4s, padding .4s, backdrop-filter .4s;
+    }
+    nav.scrolled {
+      background: rgba(0,0,0,.88);
+      backdrop-filter: blur(24px) saturate(1.4);
+      padding: 14px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display); font-weight: 800; font-size: 1.35rem;
+      letter-spacing: -.02em; color: var(--pearl); text-decoration: none;
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .nav-logo em {
+      font-style: normal; font-family: var(--serif);
+      font-weight: 400; font-size: .85rem; color: var(--gold);
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
+      font-size: .82rem; font-weight: 400; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--text-2);
+      text-decoration: none; transition: color .3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width .3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--pearl); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
+      padding: 10px 24px; background: transparent;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-family: var(--body); font-size: .78rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: background .3s, color .3s, box-shadow .3s;
+    }
+    .nav-cta:hover {
+      background: var(--gold); color: var(--void);
+      box-shadow: 0 0 40px var(--gold-glow);
+    }
+    .nav-toggle {
+      display: none; background: none; border: none;
+      color: var(--pearl); font-size: 1.5rem; cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; position: relative;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 48px 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(255,255,255,.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(255,255,255,.03) 0%, transparent 50%),
+        linear-gradient(180deg, var(--void) 0%, var(--ink) 40%, var(--void) 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: .04;
+      background-image:
+        linear-gradient(var(--border-light) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+      animation: float 12s ease-in-out infinite;
+    }
+    .hero-orb-1 {
+      width: 500px; height: 500px; top: -10%; right: -5%;
+      background: rgba(255,255,255,.06);
+    }
+    .hero-orb-2 {
+      width: 350px; height: 350px; bottom: 10%; left: -8%;
+      background: rgba(255,255,255,.04);
+      animation-delay: -4s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -30px) scale(1.05); }
+      66% { transform: translate(-15px, 20px) scale(.95); }
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; width: 100%; }
+    .hero-badge {
+      display: inline-flex; align-items: flex-start; gap: 10px;
+      flex-direction: row;
+      padding: 8px 16px; border: 1px solid var(--border);
+      background: rgba(255,255,255,.02); backdrop-filter: blur(8px);
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--sand-dim); margin-bottom: 32px;
+      opacity: 0; animation: fadeUp .8s .2s var(--ease) forwards;
+    }
+    .hero-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 12px var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+    .hero-title {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(3.5rem, 10vw, 9rem);
+      line-height: .92; letter-spacing: -.04em;
+      color: var(--pearl); margin-bottom: 8px;
+    }
+    .hero-title .line { display: block; overflow: hidden; }
+    .hero-title .word {
+      display: inline-block;
+      opacity: 0; transform: translateY(110%);
+      animation: revealWord .9s var(--ease) forwards;
+    }
+    .hero-title .line:nth-child(1) .word { animation-delay: .4s; }
+    .hero-title .line:nth-child(2) .word { animation-delay: .55s; }
+    .hero-title .line:nth-child(3) .word { animation-delay: .7s; }
+    .hero-title .gold { color: var(--gold); font-style: italic; font-family: var(--serif); font-weight: 400; }
+    @keyframes revealWord { to { opacity: 1; transform: translateY(0); } }
+
+    .hero-arabic { display: none; }
+
+    .hero-bottom {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .hero-desc {
+      max-width: 480px; font-size: 1.05rem; line-height: 1.7;
+      color: var(--text-2); font-weight: 300;
+      opacity: 0; animation: fadeUp .8s 1.1s var(--ease) forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .8s 1.2s var(--ease) forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+      padding: 16px 32px; background: var(--gold); color: var(--void);
+      font-family: var(--body); font-size: .82rem; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform .3s var(--spring), box-shadow .3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,255,255,.15);
+    }
+    .btn-primary svg { transition: transform .3s var(--ease); }
+    .btn-primary:hover svg { transform: translateX(4px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      flex-direction: column; align-items: flex-start;
+      padding: 16px 32px; background: transparent;
+      border: 1px solid var(--border-light); color: var(--text);
+      font-family: var(--body); font-size: .82rem; font-weight: 400;
+      letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: border-color .3s, background .3s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); background: rgba(255,255,255,.05); }
+
+    .hero-scroll {
+      position: absolute; bottom: 40px; right: 48px; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--text-3); writing-mode: vertical-rl;
+      opacity: 0; animation: fadeUp .8s 1.5s var(--ease) forwards;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(.5); opacity: .5; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0; overflow: hidden;
+      background: var(--ink);
+    }
+    .marquee {
+      display: flex; animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: 32px;
+      padding: 0 32px; white-space: nowrap;
+      font-family: var(--display); font-size: 1.1rem; font-weight: 600;
+      letter-spacing: .04em; text-transform: uppercase; color: var(--text-3);
+    }
+    .marquee-item .sep {
+      width: 6px; height: 6px; background: var(--gold);
+      transform: rotate(45deg); flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SECTIONS */
+    section { padding: 120px 48px; position: relative; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .section-label {
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before {
+      content: ''; width: 32px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1; letter-spacing: -.03em;
+      color: var(--pearl); margin-bottom: 24px;
+    }
+    .section-title em {
+      font-family: var(--serif); font-style: italic;
+      font-weight: 400; color: var(--gold);
+    }
+    .section-desc {
+      font-size: 1.05rem; line-height: 1.75; color: var(--text-2);
+      max-width: 560px; font-weight: 300;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ABOUT */
+    .about { background: var(--void); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; margin-top: 60px;
+    }
+    .about-visual {
+      position: relative; aspect-ratio: 4/5;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .about-visual-inner {
+      position: absolute; inset: 24px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(255,255,255,.04) 0%, transparent 50%),
+        var(--surface-2);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 40px;
+    }
+    .about-stat-big {
+      font-family: var(--display); font-size: 5rem; font-weight: 800;
+      line-height: 1; color: var(--gold); letter-spacing: -.04em;
+    }
+    .about-stat-label {
+      font-size: .85rem; color: var(--text-2); margin-top: 8px;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .about-frame {
+      position: absolute; top: -20px; right: -20px;
+      width: 120px; height: 120px;
+      border: 1px solid var(--gold); opacity: .3;
+    }
+    .about-text p {
+      font-size: 1.05rem; line-height: 1.85; color: var(--text-2);
+      margin-bottom: 24px; font-weight: 300;
+    }
+    .about-text p strong { color: var(--pearl); font-weight: 500; }
+    .about-pillars {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;
+    }
+    .pillar {
+      padding: 24px; border: 1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      transition: border-color .3s, background .3s;
+    }
+    .pillar:hover { border-color: var(--gold); background: rgba(255,255,255,.04); }
+    .pillar-num {
+      font-family: var(--display); font-size: .75rem;
+      color: var(--gold); letter-spacing: .1em; margin-bottom: 12px;
+    }
+    .pillar h4 {
+      font-family: var(--display); font-size: 1rem; font-weight: 600;
+      color: var(--pearl); margin-bottom: 8px;
+    }
+    .pillar p { font-size: .85rem; color: var(--text-2); line-height: 1.6; }
+
+    /* SERVICES */
+    .services { background: var(--ink); }
+    .services-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; gap: 40px; flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border);
+    }
+    .service-card {
+      background: var(--ink); padding: 48px 36px;
+      position: relative; overflow: hidden;
+      transition: background .4s;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px; background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s var(--ease);
+    }
+    .service-card:hover { background: var(--surface); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 48px; height: 48px; margin-bottom: 28px;
+      color: var(--gold);
+    }
+    .service-num {
+      position: absolute; top: 24px; right: 24px;
+      font-family: var(--display); font-size: 3rem; font-weight: 800;
+      color: rgba(255,255,255,.03); line-height: 1;
+    }
+    .service-card h3 {
+      font-family: var(--display); font-size: 1.25rem; font-weight: 700;
+      color: var(--pearl); margin-bottom: 16px; letter-spacing: -.01em;
+    }
+    .service-card p {
+      font-size: .9rem; line-height: 1.7; color: var(--text-2); font-weight: 300;
+    }
+    .service-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
+    }
+    .service-tags span {
+      font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid var(--border);
+      color: var(--text-3);
+    }
+
+    /* ADVANTAGE */
+    .advantage {
+      background: var(--void);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .advantage-inner {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .advantage-quote {
+      font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.35; color: var(--pearl); font-style: italic;
+      position: relative; padding-left: 40px;
+    }
+    .advantage-quote::before {
+      content: '"'; position: absolute; left: 0; top: -20px;
+      font-size: 6rem; color: var(--gold); opacity: .2;
+      font-family: var(--serif); line-height: 1;
+    }
+    .advantage-cards { display: flex; flex-direction: column; gap: 16px; }
+    .adv-card {
+      display: flex; align-items: flex-start; gap: 20px;
+      padding: 28px; border: 1px solid var(--border);
+      background: var(--surface);
+      transition: transform .3s var(--ease), border-color .3s;
+    }
+    .adv-card:hover { transform: translateX(8px); border-color: rgba(255,255,255,.3); }
+    .adv-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-family: var(--display); font-weight: 700; font-size: .85rem;
+    }
+    .adv-card h4 {
+      font-family: var(--display); font-size: 1rem; font-weight: 600;
+      color: var(--pearl); margin-bottom: 6px;
+    }
+    .adv-card p { font-size: .88rem; color: var(--text-2); line-height: 1.6; }
+
+    /* STATS */
+    .stats {
+      padding: 80px 48px;
+      background: linear-gradient(180deg, var(--ink) 0%, var(--void) 100%);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      max-width: 1400px; margin: 0 auto;
+    }
+    .stat-item {
+      background: var(--ink); padding: 48px 32px; text-align: center;
+    }
+    .stat-num {
+      font-family: var(--display); font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800; color: var(--gold); letter-spacing: -.03em;
+      line-height: 1;
+    }
+    .stat-num span { font-size: .5em; color: var(--sand-dim); }
+    .stat-label {
+      font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text-2); margin-top: 12px;
+    }
+
+    /* PROCESS */
+    .process { background: var(--void); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px; margin-top: 64px; position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute; top: 28px; left: 10%; right: 10%;
+      height: 1px; background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+    }
+    .step { text-align: center; position: relative; }
+    .step-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1px solid var(--gold); background: var(--void);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-family: var(--display);
+      font-weight: 700; color: var(--gold); font-size: .9rem;
+      position: relative; z-index: 1;
+      transition: background .3s, color .3s;
+    }
+    .step:hover .step-circle { background: var(--gold); color: var(--void); }
+    .step h4 {
+      font-family: var(--display); font-size: 1rem; font-weight: 600;
+      color: var(--pearl); margin-bottom: 10px;
+    }
+    .step p { font-size: .85rem; color: var(--text-2); line-height: 1.6; }
+
+    /* WORK */
+    .work { background: var(--ink); }
+    .work-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 24px; margin-top: 64px;
+    }
+    .work-card {
+      position: relative; aspect-ratio: 16/10;
+      overflow: hidden; cursor: pointer;
+      border: 1px solid var(--border);
+    }
+    .work-card-bg {
+      position: absolute; inset: 0;
+      transition: transform .6s var(--ease);
+    }
+    .work-card:nth-child(1) .work-card-bg {
+      background: linear-gradient(135deg, #0a0a0a 0%, #2a2a2a 50%, #0a0a0a 100%);
+    }
+    .work-card:nth-child(2) .work-card-bg {
+      background: linear-gradient(135deg, #080808 0%, #222222 50%, #080808 100%);
+    }
+    .work-card:nth-child(3) .work-card-bg {
+      background: linear-gradient(135deg, #0c0c0c 0%, #333333 50%, #0c0c0c 100%);
+    }
+    .work-card:nth-child(4) .work-card-bg {
+      background: linear-gradient(135deg, #050505 0%, #1e1e1e 50%, #050505 100%);
+    }
+    .work-card:hover .work-card-bg { transform: scale(1.05); }
+    .work-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(6,6,8,.9) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 36px; transition: background .4s;
+    }
+    .work-card:hover .work-card-overlay {
+      background: linear-gradient(to top, rgba(6,6,8,.95) 0%, rgba(6,6,8,.3) 100%);
+    }
+    .work-tag {
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .work-card h3 {
+      font-family: var(--display); font-size: 1.5rem; font-weight: 700;
+      color: var(--pearl); letter-spacing: -.02em;
+    }
+    .work-arrow {
+      position: absolute; top: 24px; right: 24px;
+      width: 44px; height: 44px; border: 1px solid var(--border-light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--pearl); opacity: 0; transform: translate(-8px, 8px);
+      transition: opacity .3s, transform .3s var(--ease), border-color .3s;
+    }
+    .work-card:hover .work-arrow {
+      opacity: 1; transform: translate(0, 0); border-color: var(--gold);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 140px 48px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 100%, rgba(255,255,255,.06) 0%, transparent 60%),
+        var(--void);
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta-title {
+      font-family: var(--display); font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800; letter-spacing: -.04em; color: var(--pearl);
+      line-height: 1; margin-bottom: 24px;
+    }
+    .cta-title em { font-family: var(--serif); font-style: italic; color: var(--gold); font-weight: 400; }
+    .cta-desc {
+      font-size: 1.1rem; color: var(--text-2); max-width: 520px;
+      margin: 0 auto 48px; line-height: 1.7; font-weight: 300;
+    }
+    .cta-form {
+      display: flex; gap: 12px; max-width: 520px; margin: 0 auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .cta-input {
+      flex: 1; min-width: 240px; padding: 16px 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--pearl); font-family: var(--body); font-size: .95rem;
+      outline: none; transition: border-color .3s;
+    }
+    .cta-input::placeholder { color: var(--text-3); }
+    .cta-input:focus { border-color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      padding: 64px 48px 32px;
+      border-top: 1px solid var(--border);
+      background: var(--ink);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; max-width: 1400px; margin: 0 auto 48px;
+    }
+    .footer-brand p {
+      font-size: .9rem; color: var(--text-2); line-height: 1.7;
+      margin-top: 16px; max-width: 280px; font-weight: 300;
+    }
+    .footer-col h5 {
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a {
+      font-size: .88rem; color: var(--text-2);
+      text-decoration: none; transition: color .3s;
+    }
+    .footer-col a:hover { color: var(--pearl); }
+    .footer-bottom {
+      max-width: 1400px; margin: 0 auto;
+      padding-top: 32px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom p { font-size: .78rem; color: var(--text-3); }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a {
+      width: 40px; height: 40px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2); text-decoration: none;
+      font-size: .75rem; font-weight: 600; letter-spacing: .05em;
+      transition: border-color .3s, color .3s, background .3s;
+    }
+    .footer-social a:hover {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(255,255,255,.05);
+    }
+
+    /* BILINGUAL — Arabic under every English line */
+    .bi-en { display: block; }
+    .bi-ar {
+      display: block;
+      font-family: var(--arabic);
+      color: var(--pearl);
+      direction: rtl;
+      text-align: right;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .bi-block .bi-ar { margin-top: 6px; font-size: 0.82em; }
+    .section-label .bi-ar { font-size: 0.9em; margin-top: 4px; letter-spacing: 0; text-transform: none; }
+    .section-title .bi-ar,
+    .cta-title .bi-ar {
+      font-size: 0.42em; margin-top: 14px; letter-spacing: 0;
+      font-family: var(--arabic); font-style: normal; font-weight: 400;
+    }
+    .section-title .bi-ar em, .cta-title .bi-ar em { font-style: normal; color: var(--pearl); }
+    .hero-title .bi-en { font-size: 1em; line-height: 1; }
+    .hero-title .line .bi-ar {
+      font-size: 0.2em; margin-top: 10px; letter-spacing: 0;
+      font-family: var(--arabic); font-weight: 400; color: var(--pearl);
+    }
+    .hero-desc .bi-ar, .section-desc .bi-ar, .cta-desc .bi-ar { font-size: 0.88em; margin-top: 10px; }
+    .hero-badge [data-bi] { display: flex; flex-direction: column; gap: 2px; }
+    .nav-links .bi-ar, .nav-cta .bi-ar { font-size: 0.6rem; letter-spacing: 0; text-transform: none; color: var(--pearl); }
+    .nav-logo .bi-ar { font-size: 0.55rem; letter-spacing: 0; }
+    .marquee-item { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .marquee-item .bi-ar { font-size: 0.72em; letter-spacing: 0; text-transform: none; color: var(--pearl); font-family: var(--arabic); }
+    .service-card h3 .bi-ar, .pillar h4 .bi-ar, .adv-card h4 .bi-ar, .step h4 .bi-ar { font-size: 0.78em; margin-top: 4px; }
+    .service-card p .bi-ar, .pillar p .bi-ar, .adv-card p .bi-ar, .step p .bi-ar { font-size: 0.88em; margin-top: 6px; }
+    .advantage-quote .bi-ar { font-size: 0.55em; margin-top: 16px; font-style: normal; font-family: var(--arabic); }
+    .stat-label .bi-ar { font-size: 0.78em; margin-top: 6px; letter-spacing: 0; text-transform: none; }
+    .work-tag .bi-ar { font-size: 0.85em; margin-top: 2px; letter-spacing: 0; }
+    .about-stat-label .bi-ar { font-size: 0.82em; margin-top: 6px; letter-spacing: 0; text-transform: none; }
+    .footer-col h5 .bi-ar, .footer-brand p .bi-ar { font-size: 0.82em; margin-top: 4px; letter-spacing: 0; text-transform: none; }
+    .footer-col a .bi-ar { font-size: 0.78em; margin-top: 2px; display: block; }
+    .footer-bottom p .bi-ar { font-size: 0.85em; margin-top: 4px; }
+    .btn-primary > [data-bi] { display: flex; flex-direction: column; align-items: flex-start; }
+    .btn-primary .bi-ar, .btn-ghost .bi-ar { font-size: 0.72em; margin-top: 2px; letter-spacing: 0; }
+    .btn-primary .bi-ar { color: var(--void); }
+    .btn-ghost .bi-ar { color: var(--pearl); }
+    .hero-badge .bi-ar { font-size: 0.85em; margin-top: 3px; letter-spacing: 0; text-transform: none; }
+    .service-tags span { display: inline-flex; flex-direction: column; align-items: flex-start; }
+    .service-tags .bi-ar { font-size: 0.7em; margin-top: 1px; letter-spacing: 0; }
+    .hero-scroll .bi-ar { font-size: 0.85em; letter-spacing: 0; writing-mode: vertical-rl; }
+    .mobile-menu a { text-align: center; }
+    .mobile-menu .bi-ar { font-size: 0.45em; margin-top: 6px; display: block; font-family: var(--arabic); color: var(--pearl); }
+
+    /* OFFERS */
+    .promise-banner {
+      padding: 80px 48px; text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .promise-title {
+      font-family: var(--display); font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800; letter-spacing: -.03em; color: var(--pearl);
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .promise-desc { max-width: 720px; margin: 0 auto 40px; color: var(--text-2); line-height: 1.75; font-size: 1rem; }
+    .promise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1000px; margin: 0 auto 40px; text-align: left; }
+    .promise-block { padding: 32px; border: 1px solid var(--border); background: var(--ink); }
+    .promise-block-title { font-family: var(--display); font-size: 1.3rem; font-weight: 700; color: var(--pearl); margin-bottom: 16px; }
+    .promise-block-title .bi-ar { font-size: 0.7em; margin-top: 6px; }
+    .promise-block-desc { font-size: .92rem; color: var(--text-2); line-height: 1.65; margin-bottom: 16px; }
+    .promise-block-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
+    .promise-list { list-style: none; margin-bottom: 16px; }
+    .promise-list li { padding: 8px 0; border-top: 1px solid var(--border); font-size: .88rem; color: var(--text-2); }
+    .promise-list li:first-child { border-top: none; }
+    .promise-list .bi-ar { font-size: 0.85em; margin-top: 4px; }
+    .promise-note { font-size: .85rem; color: var(--text-3); font-style: italic; line-height: 1.6; }
+    .promise-note .bi-ar { font-size: 0.9em; margin-top: 6px; font-style: normal; }
+    .promise-why { max-width: 800px; margin: 0 auto 40px; font-size: .95rem; color: var(--text-2); line-height: 1.7; }
+    .promise-why strong { color: var(--pearl); }
+    .promise-why .bi-ar { font-size: 0.88em; margin-top: 8px; }
+    .promise-stats { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+    .promise-stat-arrow { font-size: 1.5rem; color: var(--gold); }
+    .what-offer { padding: 80px 48px; background: var(--ink); border-top: 1px solid var(--border); }
+    .what-offer-title { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--pearl); margin-bottom: 12px; text-align: center; }
+    .what-offer-title .bi-ar { font-size: 0.55em; margin-top: 8px; }
+    .what-offer-desc { text-align: center; color: var(--text-2); margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .what-offer-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
+    .what-offer-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 700px; margin: 0 auto; }
+    .what-offer-item { padding: 16px 20px; border: 1px solid var(--border); background: var(--surface); font-size: .9rem; color: var(--text); }
+    .what-offer-item .bi-ar { font-size: 0.85em; margin-top: 4px; color: var(--pearl); }
+    .offer-cat-intro { font-size: .95rem; color: var(--text-2); margin: -16px 0 28px; }
+    .offer-cat-intro .bi-ar { font-size: 0.88em; margin-top: 6px; }
+    .offer-footer { font-size: .82rem; color: var(--text-3); margin-top: 12px; font-style: italic; line-height: 1.5; }
+    .offer-footer .bi-ar { font-size: 0.9em; margin-top: 4px; font-style: normal; }
+    .promise-stat { padding: 24px; border: 1px solid var(--border); background: var(--ink); }
+    .promise-stat-num { font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--gold); }
+    .promise-stat-label { font-size: .78rem; color: var(--text-2); margin-top: 8px; }
+    .offers-categories { display: flex; flex-direction: column; gap: 80px; margin-top: 64px; }
+    .offer-category-title {
+      font-family: var(--display); font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700; color: var(--pearl); margin-bottom: 32px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .offer-category-title .bi-ar { font-size: 0.55em; margin-top: 8px; }
+    .offers-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px; background: var(--border);
+    }
+    .offer-card {
+      background: var(--ink); padding: 32px 28px;
+      transition: background .3s;
+    }
+    .offer-card:hover { background: var(--surface); }
+    .offer-icon { font-size: 1.8rem; margin-bottom: 16px; line-height: 1; }
+    .offer-card h4 {
+      font-family: var(--display); font-size: 1.05rem; font-weight: 700;
+      color: var(--pearl); margin-bottom: 12px;
+    }
+    .offer-card h4 .bi-ar { font-size: 0.78em; margin-top: 4px; }
+    .offer-desc { font-size: .88rem; line-height: 1.65; color: var(--text-2); margin-bottom: 12px; font-weight: 300; }
+    .offer-desc .bi-ar { font-size: 0.88em; margin-top: 6px; }
+    .offer-list { list-style: none; margin-top: 8px; }
+    .offer-list li {
+      padding: 10px 0; border-top: 1px solid var(--border);
+      font-size: .85rem; color: var(--text-2); line-height: 1.5;
+    }
+    .offer-list li:first-child { border-top: none; padding-top: 0; }
+    .offer-list .bi-ar { font-size: 0.82em; margin-top: 4px; }
+    .tools-label { font-size: .78rem; color: var(--text-3); margin-top: 16px; margin-bottom: 10px; letter-spacing: .06em; text-transform: uppercase; }
+    .tools-label .bi-ar { text-transform: none; letter-spacing: 0; font-size: 0.9em; margin-top: 3px; }
+    .tools-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tool-pill {
+      padding: 5px 12px; border: 1px solid var(--border);
+      font-size: .72rem; color: var(--text-2); letter-spacing: .04em;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(6,6,8,.97); backdrop-filter: blur(20px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+      opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s;
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-menu a {
+      font-family: var(--display); font-size: 2rem; font-weight: 700;
+      color: var(--pearl); text-decoration: none;
+      letter-spacing: -.02em; transition: color .3s;
+    }
+    .mobile-menu a:hover { color: var(--pearl); }
+    .mobile-close {
+      position: absolute; top: 24px; right: 24px;
+      background: none; border: none; color: var(--pearl);
+      font-size: 1.5rem; cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      nav { padding: 16px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: block; }
+      section { padding: 80px 24px; }
+      .hero { padding: 0 24px 60px; }
+      .hero-scroll { right: 24px; }
+      .about-grid, .advantage-inner { grid-template-columns: 1fr; gap: 48px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .process-steps::before { display: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .promise-grid, .what-offer-list { grid-template-columns: 1fr; }
+      .promise-stats { flex-direction: column; }
+      .promise-stat-arrow { transform: rotate(90deg); }
+      .offers-grid { grid-template-columns: 1fr; }
+      .work-grid, .about-pillars { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .cta-form { flex-direction: column; }
+      .cta-input { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-logo">AAD<span>.</span></div>
+    <div class="preloader-bar"></div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+    <a href="#about" class="mobile-link" data-bi="nav_about">About</a>
+    <a href="#services" class="mobile-link" data-bi="nav_services">Services</a>
+    <a href="#work" class="mobile-link" data-bi="nav_work">Work</a>
+    <a href="#contact" class="mobile-link" data-bi="nav_contact">Contact</a>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">AAD <em data-bi="nav_agency">Agency</em></a>
+    <ul class="nav-links">
+      <li><a href="#about" data-bi="nav_about">About</a></li>
+      <li><a href="#services" data-bi="nav_services">Services</a></li>
+      <li><a href="#work" data-bi="nav_work">Work</a></li>
+      <li><a href="#process" data-bi="nav_process">Process</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta" data-bi="nav_cta">Start a Project</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span data-bi="hero_badge">Kuwait City — Est. 2026</span>
+      </div>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="line"><span class="word bi-block"><span class="bi-en">We build</span><span class="bi-ar">نبني</span></span></span>
+        <span class="line"><span class="word bi-block"><span class="bi-en"><span class="gold">brands</span> that</span><span class="bi-ar"><span class="gold">علامات تجارية</span></span></span></span>
+        <span class="line"><span class="word bi-block"><span class="bi-en">dominate other brands</span><span class="bi-ar">تسيطر على العلامات الأخرى</span></span></span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-desc bi-block" data-bi="hero_desc"></p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">
+            <span data-bi="hero_cta1"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#work" class="btn-ghost" data-bi="hero_cta2"></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span data-bi="hero_scroll"></span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee" id="marquee">
+      <div class="marquee-item" data-bi="mq1">Brand Strategy <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq2">Creative Direction <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq3">Digital Marketing <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq4">Social Media <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq5">Content Production <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq6">Identity Design <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq7">Campaign Management <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq8">Growth Strategy <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq1">Brand Strategy <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq2">Creative Direction <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq3">Digital Marketing <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq4">Social Media <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq5">Content Production <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq6">Identity Design <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq7">Campaign Management <span class="sep"></span></div>
+      <div class="marquee-item" data-bi="mq8">Growth Strategy <span class="sep"></span></div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label" data-bi="about_label">Who We Are</div>
+        <h2 class="section-title" data-bi-html="about_title">The agency Kuwait<br><em>has been waiting for.</em></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-frame"></div>
+          <div class="about-visual-inner">
+            <div class="about-stat-big">&infin;</div>
+            <div class="about-stat-label" data-bi="about_stat">Brands waiting to be built in Kuwait</div>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p data-bi-html="about_p1">
+            Kuwait is overflowing with untapped brand potential. Thousands of businesses operate without a clear identity, strategy, or voice. <strong>That's our opportunity — and your advantage.</strong>
+          </p>
+          <p data-bi="about_p2">
+            The AAD Agency was founded on a simple belief: Kuwait deserves an agency that thinks globally but executes locally. We bring the knowledge, systems, and creative firepower that the market has never seen — and we deploy it for brands ready to lead.
+          </p>
+          <div class="about-pillars">
+            <div class="pillar">
+              <div class="pillar-num">01</div>
+              <h4 data-bi="pillar1_t">First-Mover Edge</h4>
+              <p data-bi="pillar1_d">We're pioneering a new standard of brand work in Kuwait. No legacy baggage, pure ambition.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar-num">02</div>
+              <h4 data-bi="pillar2_t">Deep Knowledge</h4>
+              <p data-bi="pillar2_d">World-class frameworks applied to a market hungry for excellence and differentiation.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar-num">03</div>
+              <h4 data-bi="pillar3_t">Infinite Pipeline</h4>
+              <p data-bi="pillar3_d">Every mall, café, clinic, and startup in Kuwait is a potential partner. The market is ours to define.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar-num">04</div>
+              <h4 data-bi="pillar4_t">Relentless Execution</h4>
+              <p data-bi="pillar4_d">Strategy without execution is noise. We deliver end-to-end — from concept to campaign to conversion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promise / More Leads More Sales -->
+  <section class="promise-banner" id="promise">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="promise-title bi-block">
+          <span class="bi-en">More leads. More sales.</span>
+          <span class="bi-ar">المزيد من العملاء المحتملين. المزيد من المبيعات.</span>
+        </h2>
+        <p class="promise-desc bi-block">
+          <span class="bi-en">"More leads. More sales." is a marketing promise that tells businesses the outcome they'll get.</span>
+          <span class="bi-ar">"المزيد من العملاء المحتملين. المزيد من المبيعات." وعد تسويقي يخبر الشركات بالنتيجة التي ستحصل عليها.</span>
+        </p>
+      </div>
+
+      <div class="promise-grid reveal">
+        <div class="promise-block">
+          <h3 class="promise-block-title bi-block">
+            <span class="bi-en">📩 More leads</span>
+            <span class="bi-ar">📩 المزيد من العملاء المحتملين</span>
+          </h3>
+          <p class="promise-block-desc bi-block">
+            <span class="bi-en">A lead is someone who has shown interest in a business.</span>
+            <span class="bi-ar">العميل المحتمل هو شخص أبدى اهتماماً بالشركة.</span>
+          </p>
+          <ul class="promise-list">
+            <li class="bi-block"><span class="bi-en">Someone fills out a contact form</span><span class="bi-ar">شخص يعبئ نموذج تواصل</span></li>
+            <li class="bi-block"><span class="bi-en">Someone books a consultation</span><span class="bi-ar">شخص يحجز استشارة</span></li>
+            <li class="bi-block"><span class="bi-en">Someone requests a quote</span><span class="bi-ar">شخص يطلب عرض سعر</span></li>
+            <li class="bi-block"><span class="bi-en">Someone subscribes to an email list</span><span class="bi-ar">شخص يشترك في القائمة البريدية</span></li>
+            <li class="bi-block"><span class="bi-en">Someone sends a DM asking about services</span><span class="bi-ar">شخص يرسل رسالة يسأل عن الخدمات</span></li>
+          </ul>
+          <p class="promise-note bi-block">
+            <span class="bi-en">Not every lead becomes a customer, but every customer usually starts as a lead.</span>
+            <span class="bi-ar">ليس كل عميل محتمل يصبح زبوناً، لكن كل زبون يبدأ عادة كعميل محتمل.</span>
+          </p>
+        </div>
+
+        <div class="promise-block">
+          <h3 class="promise-block-title bi-block">
+            <span class="bi-en">💰 More sales</span>
+            <span class="bi-ar">💰 المزيد من المبيعات</span>
+          </h3>
+          <p class="promise-block-desc bi-block">
+            <span class="bi-en">A sale happens when a lead actually buys a product or service.</span>
+            <span class="bi-ar">تحدث المبيعة عندما يشتري العميل المحتمل منتجاً أو خدمة فعلياً.</span>
+          </p>
+          <p class="promise-block-desc bi-block">
+            <span class="bi-en">Example:</span>
+            <span class="bi-ar">مثال:</span>
+          </p>
+          <ul class="promise-list">
+            <li class="bi-block"><span class="bi-en">100 people visit a website</span><span class="bi-ar">١٠٠ شخص يزورون الموقع</span></li>
+            <li class="bi-block"><span class="bi-en">10 people fill out the contact form (10 leads)</span><span class="bi-ar">١٠ أشخاص يعبئون النموذج (١٠ عملاء محتملين)</span></li>
+            <li class="bi-block"><span class="bi-en">3 of those hire the business (3 sales)</span><span class="bi-ar">٣ منهم يتعاملون مع الشركة (٣ مبيعات)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="promise-why reveal bi-block">
+        <span class="bi-en"><strong>Why agencies use this phrase:</strong> Businesses don't usually care about the website itself — they care about what the website helps them achieve.</span>
+        <span class="bi-ar"><strong>لماذا تستخدم الوكالات هذا العبارة:</strong> الشركات لا تهتم بالموقع بحد ذاته — بل بما يحققه لهم.</span>
+      </p>
+
+      <div class="promise-stats reveal">
+        <div class="promise-stat bi-block">
+          <div class="promise-stat-num">100</div>
+          <div class="promise-stat-label"><span class="bi-en">Website visitors</span><span class="bi-ar">زوار الموقع</span></div>
+        </div>
+        <div class="promise-stat-arrow">→</div>
+        <div class="promise-stat bi-block">
+          <div class="promise-stat-num">10</div>
+          <div class="promise-stat-label"><span class="bi-en">Leads</span><span class="bi-ar">عملاء محتملون</span></div>
+        </div>
+        <div class="promise-stat-arrow">→</div>
+        <div class="promise-stat bi-block">
+          <div class="promise-stat-num">3</div>
+          <div class="promise-stat-label"><span class="bi-en">Sales</span><span class="bi-ar">مبيعات</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Can Offer -->
+  <section class="what-offer" id="what-offer">
+    <div class="container reveal">
+      <h3 class="what-offer-title bi-block">
+        <span class="bi-en">Our Offers</span>
+        <span class="bi-ar">عروضنا</span>
+      </h3>
+      <p class="what-offer-desc bi-block">
+        <span class="bi-en">Everything we deliver for brands in Kuwait — from websites to AI automation.</span>
+        <span class="bi-ar">كل ما نقدمه للعلامات في الكويت — من المواقع إلى أتمتة الذكاء الاصطناعي.</span>
+      </p>
+      <div class="what-offer-list">
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Custom Website Design</span><span class="bi-ar">✅ تصميم مواقع مخصصة</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Website Development</span><span class="bi-ar">✅ تطوير المواقع</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Branding & Identity</span><span class="bi-ar">✅ العلامة التجارية والهوية</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Digital Marketing</span><span class="bi-ar">✅ التسويق الرقمي</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ AI & Automation</span><span class="bi-ar">✅ الذكاء الاصطناعي والأتمتة</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Social Media Management</span><span class="bi-ar">✅ إدارة وسائل التواصل</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Paid Advertising</span><span class="bi-ar">✅ الإعلانات المدفوعة</span></div>
+        <div class="what-offer-item bi-block"><span class="bi-en">✅ Content Creation</span><span class="bi-ar">✅ إنشاء المحتوى</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offers / Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <div>
+          <div class="section-label" data-bi="offers_label">Services</div>
+          <h2 class="section-title" data-bi-html="offers_title">Everything we<br><em>deliver for brands.</em></h2>
+        </div>
+        <p class="section-desc" data-bi="offers_desc">From AI automation to branding, marketing, and web design — the full stack your business needs to win in Kuwait.</p>
+      </div>
+      <div class="offers-categories" id="offersRoot"></div>
+    </div>
+  </section>
+
+  <!-- Advantage -->
+  <section class="advantage">
+    <div class="container advantage-inner">
+      <blockquote class="advantage-quote reveal" data-bi="adv_quote">
+        Kuwait has infinite brands and almost zero agencies doing this right. We're not competing — we're creating the category.
+      </blockquote>
+      <div class="advantage-cards">
+        <div class="adv-card reveal">
+          <div class="adv-icon">KW</div>
+          <div>
+            <h4 data-bi="adv1_t">Local Intelligence</h4>
+            <p data-bi="adv1_d">We understand Kuwaiti consumer behavior, cultural nuances, and the channels that actually convert here.</p>
+          </div>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">GL</div>
+          <div>
+            <h4 data-bi="adv2_t">Global Standards</h4>
+            <p data-bi="adv2_d">Agency-grade processes and creative benchmarks from London, Dubai, and New York — executed in Kuwait City.</p>
+          </div>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">∞</div>
+          <div>
+            <h4 data-bi="adv3_t">Unlimited Opportunity</h4>
+            <p data-bi="adv3_d">Restaurants, retail, healthcare, tech, fashion — every sector in Kuwait needs what we offer. The pipeline never ends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="500">0<span>+</span></div>
+        <div class="stat-label" data-bi="stat1">Brands in Our Pipeline</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="6">0</div>
+        <div class="stat-label" data-bi="stat2">Core Service Lines</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="100">0<span>%</span></div>
+        <div class="stat-label" data-bi="stat3">Kuwait-Focused</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">#1</div>
+        <div class="stat-label" data-bi="stat4">Our Ambition</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto;">
+        <div class="section-label" style="justify-content:center;" data-bi="process_label">How We Work</div>
+        <h2 class="section-title" data-bi-html="process_title">From brief to<br><em>brand dominance.</em></h2>
+      </div>
+      <div class="process-steps">
+        <div class="step reveal">
+          <div class="step-circle">01</div>
+          <h4 data-bi="step1_t">Discover</h4>
+          <p data-bi="step1_d">Deep dive into your brand, market, competitors, and untapped opportunities in Kuwait.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-circle">02</div>
+          <h4 data-bi="step2_t">Define</h4>
+          <p data-bi="step2_d">Strategy, positioning, and creative direction that separates you from every competitor.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-circle">03</div>
+          <h4 data-bi="step3_t">Design</h4>
+          <p data-bi="step3_d">World-class creative execution — identity, content, campaigns, and digital assets.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-circle">04</div>
+          <h4 data-bi="step4_t">Dominate</h4>
+          <p data-bi="step4_d">Launch, optimize, and scale. We measure everything and iterate until you lead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="work" id="work">
+    <div class="container">
+      <div class="services-header reveal">
+        <div>
+          <div class="section-label" data-bi="work_label">Selected Work</div>
+          <h2 class="section-title" data-bi-html="work_title">Brands we're<br><em>building next.</em></h2>
+        </div>
+        <p class="section-desc" data-bi="work_desc">Your brand could be here. We're selectively partnering with ambitious Kuwaiti businesses ready to lead.</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-card reveal">
+          <div class="work-card-bg"></div>
+          <div class="work-card-overlay">
+            <div class="work-tag" data-bi="work1_tag">F&B / Lifestyle</div>
+            <h3>Project Noor</h3>
+          </div>
+          <div class="work-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+        </div>
+        <div class="work-card reveal">
+          <div class="work-card-bg"></div>
+          <div class="work-card-overlay">
+            <div class="work-tag" data-bi="work2_tag">Healthcare / Wellness</div>
+            <h3>Vital Kuwait</h3>
+          </div>
+          <div class="work-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+        </div>
+        <div class="work-card reveal">
+          <div class="work-card-bg"></div>
+          <div class="work-card-overlay">
+            <div class="work-tag" data-bi="work3_tag">Fashion / Retail</div>
+            <h3>Sahara Collective</h3>
+          </div>
+          <div class="work-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+        </div>
+        <div class="work-card reveal">
+          <div class="work-card-bg"></div>
+          <div class="work-card-overlay">
+            <div class="work-tag" data-bi="work4_tag">Tech / Startup</div>
+            <h3>NextGen KW</h3>
+          </div>
+          <div class="work-arrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta-bg"></div>
+    <div class="cta-content reveal">
+      <div class="section-label" style="justify-content:center;" data-bi="cta_label">Let's Talk</div>
+      <h2 class="cta-title" data-bi-html="cta_title">Ready to own<br><em>Kuwait?</em></h2>
+      <p class="cta-desc" data-bi="cta_desc">Whether you're launching, rebranding, or scaling — The AAD Agency is your partner in building a brand that wins.</p>
+      <form class="cta-form" id="ctaForm">
+        <input type="email" class="cta-input" id="ctaEmail" data-bi-placeholder="cta_placeholder" placeholder="your@email.com" required aria-label="Email address"/>
+        <button type="submit" class="btn-primary" data-bi="cta_btn">Get Started</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">AAD <em data-bi="nav_agency">Agency</em></a>
+        <p data-bi="footer_desc">Kuwait's premier brand agency. We build identities, campaigns, and growth engines for businesses ready to lead the market.</p>
+      </div>
+      <div class="footer-col">
+        <h5 data-bi="footer_nav">Navigate</h5>
+        <ul>
+          <li><a href="#about" data-bi="nav_about">About</a></li>
+          <li><a href="#services" data-bi="nav_services">Services</a></li>
+          <li><a href="#work" data-bi="nav_work">Work</a></li>
+          <li><a href="#process" data-bi="nav_process">Process</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-bi="footer_services">Services</h5>
+        <ul>
+          <li><a href="#services" data-bi="svc1_t">Brand Strategy</a></li>
+          <li><a href="#services" data-bi="footer_id">Identity Design</a></li>
+          <li><a href="#services" data-bi="svc3_t">Digital Marketing</a></li>
+          <li><a href="#services" data-bi="svc5_t">Content Production</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-bi="footer_contact">Contact</h5>
+        <ul>
+          <li><a href="mailto:hello@aadagency.kw">hello@aadagency.kw</a></li>
+          <li><a href="#" data-bi="footer_location">Kuwait City, Kuwait</a></li>
+          <li><a href="#contact" data-bi="nav_cta">Start a Project</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-bi="footer_copy">&copy; 2026 The AAD Agency. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="LinkedIn">IN</a>
+        <a href="#" aria-label="Twitter">X</a>
+        <a href="#" aria-label="TikTok">TK</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('preloader').classList.add('done'), 2000);
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Custom cursor
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .work-card, .service-card, .offer-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        dot.style.width = '16px'; dot.style.height = '16px';
+        ring.style.width = '60px'; ring.style.height = '60px';
+        ring.style.borderColor = 'rgba(255,255,255,.7)';
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.style.width = '8px'; dot.style.height = '8px';
+        ring.style.width = '40px'; ring.style.height = '40px';
+        ring.style.borderColor = 'rgba(255,255,255,.35)';
+      });
+    });
+
+    // Mobile menu
+    const mobileMenu = document.getElementById('mobileMenu');
+    document.getElementById('navToggle').addEventListener('click', () => mobileMenu.classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click', () => mobileMenu.classList.remove('open'));
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80 % 400);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Counter animation
+    const statNums = document.querySelectorAll('.stat-num[data-target]');
+    const countObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.querySelector('span');
+        const suffixText = suffix ? suffix.outerHTML : '';
+        let current = 0;
+        const step = Math.ceil(target / 60);
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.innerHTML = current + suffixText;
+        }, 25);
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    statNums.forEach(el => countObserver.observe(el));
+
+    // Smooth anchor scroll offset for fixed nav
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(id);
+        if (target) {
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+  <script src="offers.js"></script>
+  <script src="i18n.js"></script>
+</body>
+</html>
