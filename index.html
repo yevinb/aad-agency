@@ -888,136 +888,288 @@
     .promise-why .bi-ar { font-size: 0.88em; margin-top: 8px; }
     .promise-stats { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
     .promise-stat-arrow { font-size: 1.5rem; color: var(--gold); }
+    /* ─── OUR OFFERS — Monster Energy carousel ─── */
     .what-offer {
-      padding: 100px 48px;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 255, 0, 0.04) 0%, transparent 60%), var(--ink);
-      border-top: 1px solid rgba(0, 255, 0, 0.12);
+      padding: 120px 0 100px;
+      background: #000000;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .what-offer::before {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
-    }
-    .what-offer .container { position: relative; z-index: 1; }
-    .what-offer-title {
+
+    .monster-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -52%);
       font-family: 'Orbitron', var(--display);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800; color: var(--pearl);
-      margin-bottom: 16px; text-align: center;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      text-shadow: 0 0 30px rgba(0, 255, 0, 0.25);
+      font-size: clamp(12rem, 28vw, 22rem);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.03);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
     }
-    .what-offer-title .bi-ar { font-size: 0.45em; margin-top: 10px; letter-spacing: 0; text-transform: none; }
-    .what-offer-desc {
-      text-align: center; color: var(--text-2);
-      margin-bottom: 56px; max-width: 640px;
-      margin-left: auto; margin-right: auto;
-      font-size: 1.02rem; line-height: 1.7;
+
+    .monster-zone-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
     }
-    .what-offer-desc .bi-ar { font-size: 0.88em; margin-top: 8px; }
+
+    .monster-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 8px 24px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+
+    .monster-dots {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .monster-dot {
+      width: 28px; height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none; padding: 0; cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .monster-dot.active,
+    .monster-dot:hover {
+      box-shadow: 0 0 12px currentColor;
+      transform: scaleY(1.4);
+    }
+
+    .monster-headline {
+      font-family: 'Orbitron', var(--display);
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-align: center;
+      grid-column: 1 / -1;
+      text-shadow: 0 0 40px rgba(0, 255, 0, 0.15);
+    }
+
+    .monster-headline .bi-ar {
+      display: block;
+      font-size: 0.38em;
+      letter-spacing: 0;
+      text-transform: none;
+      margin-top: 10px;
+      font-family: var(--arabic);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .monster-count {
+      position: absolute;
+      top: 0; right: 48px;
+      font-family: 'Orbitron', var(--display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      color: #00ff00;
+      text-shadow: 0 0 40px rgba(0, 255, 0, 0.6), 0 0 80px rgba(0, 255, 0, 0.3);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .monster-sub {
+      text-align: center;
+      color: var(--text-2);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .monster-sub .bi-ar {
+      display: block;
+      font-size: 0.88em;
+      margin-top: 8px;
+      font-family: var(--arabic);
+      color: rgba(255, 255, 255, 0.65);
+    }
 
     @keyframes monsterPop {
-      0%   { opacity: 0; transform: scale(0.4); }
-      100% { opacity: 1; transform: scale(1); }
+      0%   { opacity: 0; transform: scale(0.4) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    .monster-offers-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .monster-offer-card {
+    .monster-carousel-wrap {
       position: relative;
-      padding: 28px 24px 24px;
-      min-height: 140px;
+      margin: 0 -48px;
+      padding: 20px 0 40px;
+    }
+
+    .monster-carousel-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 120px;
+      background: linear-gradient(90deg, transparent, #000);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .monster-carousel {
+      display: flex;
+      gap: 28px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 40px 48px 20px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .monster-carousel::-webkit-scrollbar { display: none; }
+
+    .monster-can {
+      flex: 0 0 clamp(200px, 22vw, 260px);
+      scroll-snap-align: center;
+      position: relative;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 6px;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.15), 0 20px 50px rgba(0, 0, 0, 0.4);
-      overflow: hidden;
+      align-items: center;
+      cursor: grab;
       opacity: 0;
       transform: scale(0.4);
-      animation: monsterPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation: monsterPop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
       animation-play-state: paused;
-      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .what-offer.monster-live .monster-offer-card {
+    .what-offer.monster-live .monster-can {
       animation-play-state: running;
     }
 
-    .monster-offer-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, #00ff00, transparent);
-      opacity: 0.7;
+    .monster-can:active { cursor: grabbing; }
+
+    .monster-can.is-active {
+      transform: scale(1.08) translateY(-12px) !important;
     }
 
-    .monster-offer-card::after {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(circle at 20% 0%, rgba(0, 255, 0, 0.08) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.35s ease;
+    .monster-can-glow {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: var(--can-color, #00ff00);
+      filter: blur(50px);
+      opacity: 0.55;
+      transition: opacity 0.4s, width 0.4s, height 0.4s;
+      pointer-events: none;
     }
 
-    .monster-offer-card:hover {
-      border-color: rgba(0, 255, 0, 0.45);
-      box-shadow: 0 0 30px rgba(0, 255, 0, 0.25), 0 0 60px rgba(0, 255, 0, 0.1), 0 24px 60px rgba(0, 0, 0, 0.5);
+    .monster-can.is-active .monster-can-glow,
+    .monster-can:hover .monster-can-glow {
+      opacity: 0.85;
+      width: 180px; height: 180px;
     }
 
-    .monster-offer-card:hover::after { opacity: 1; }
+    .monster-can-body {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 32px 20px 28px;
+      text-align: center;
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8));
+    }
 
-    .monster-offer-index {
+    .monster-can-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Orbitron', var(--display);
-      font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.2em; color: #00ff00;
-      text-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
-      margin-bottom: 16px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #000;
+      background: var(--can-color, #00ff00);
+      box-shadow: 0 0 30px var(--can-color, #00ff00), 0 0 60px color-mix(in srgb, var(--can-color, #00ff00) 40%, transparent);
+      margin-bottom: auto;
+      margin-top: 24px;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
     }
 
-    .monster-offer-card .bi-en {
+    .monster-can.is-active .monster-can-icon,
+    .monster-can:hover .monster-can-icon {
+      transform: scale(1.12);
+      box-shadow: 0 0 50px var(--can-color), 0 0 100px color-mix(in srgb, var(--can-color) 50%, transparent);
+    }
+
+    .monster-can-num {
+      font-family: 'Orbitron', var(--display);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--can-color, #00ff00);
+      text-shadow: 0 0 10px var(--can-color);
+      margin-bottom: 12px;
+    }
+
+    .monster-can .bi-en {
       display: block;
       font-family: 'Orbitron', var(--display);
-      font-size: 0.82rem; font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--pearl);
-      line-height: 1.35;
+      color: #fff;
+      line-height: 1.4;
     }
 
-    .monster-offer-card .bi-ar {
+    .monster-can .bi-ar {
       display: block;
       font-family: var(--arabic);
-      font-size: 0.78rem; font-weight: 400;
-      color: rgba(255, 255, 255, 0.85);
-      direction: rtl; text-align: right;
-      margin-top: 8px; line-height: 1.5;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.75);
+      direction: rtl;
+      margin-top: 8px;
+      line-height: 1.45;
       letter-spacing: 0;
       text-transform: none;
     }
 
-    .monster-offer-corner {
-      position: absolute; bottom: 12px; right: 12px;
-      width: 8px; height: 8px;
-      border-right: 1px solid rgba(0, 255, 0, 0.5);
-      border-bottom: 1px solid rgba(0, 255, 0, 0.5);
-      opacity: 0.6;
-    }
+    .monster-can[data-color="green"]  { --can-color: #00ff00; }
+    .monster-can[data-color="cyan"]   { --can-color: #00d4ff; }
+    .monster-can[data-color="magenta"]{ --can-color: #ff00aa; }
+    .monster-can[data-color="orange"] { --can-color: #ff6b00; }
+    .monster-can[data-color="lime"]   { --can-color: #39ff14; }
+    .monster-can[data-color="purple"] { --can-color: #b040ff; }
+    .monster-can[data-color="blue"]   { --can-color: #448aff; }
+    .monster-can[data-color="white"]  { --can-color: #e8e8e8; }
+
+    .monster-dot[data-color="green"]  { color: #00ff00; background: #00ff00; }
+    .monster-dot[data-color="cyan"]   { color: #00d4ff; background: #00d4ff; }
+    .monster-dot[data-color="magenta"]{ color: #ff00aa; background: #ff00aa; }
+    .monster-dot[data-color="orange"] { color: #ff6b00; background: #ff6b00; }
+    .monster-dot[data-color="lime"]   { color: #39ff14; background: #39ff14; }
+    .monster-dot[data-color="purple"] { color: #b040ff; background: #b040ff; }
+    .monster-dot[data-color="blue"]   { color: #448aff; background: #448aff; }
+    .monster-dot[data-color="white"]  { color: #e8e8e8; background: #e8e8e8; }
+
+    .monster-dot:not(.active) { opacity: 0.35; }
     .offer-cat-intro { font-size: .95rem; color: var(--text-2); margin: -16px 0 28px; }
     .offer-cat-intro .bi-ar { font-size: 0.88em; margin-top: 6px; }
     .offer-footer { font-size: .82rem; color: var(--text-3); margin-top: 12px; font-style: italic; line-height: 1.5; }
@@ -1120,14 +1272,20 @@
       .process-steps::before { display: none; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .monster-offers-grid { grid-template-columns: repeat(2, 1fr); }
+      .monster-zone-inner { padding: 0 24px; }
+      .monster-count { right: 24px; font-size: 3rem; }
+      .monster-carousel-wrap { margin: 0 -24px; }
+      .monster-carousel { padding: 40px 24px 20px; gap: 20px; }
+      .monster-can { flex: 0 0 200px; }
     }
     @media (max-width: 640px) {
       .cta { padding: 100px 24px; }
       .promise-banner, .what-offer { padding: 64px 24px; }
       footer { padding: 48px 24px 24px; }
       .promise-grid { grid-template-columns: 1fr; }
-      .monster-offers-grid { grid-template-columns: 1fr; }
+      .monster-can { flex: 0 0 180px; }
+      .monster-can-body { min-height: 260px; }
+      .monster-count { display: none; }
       .promise-stats { flex-direction: column; }
       .promise-stat-arrow { transform: rotate(90deg); }
       .offers-grid { grid-template-columns: 1fr; }
@@ -1355,67 +1513,107 @@
     </div>
   </section>
 
-  <!-- Our Offers — Monster Energy UI -->
+  <!-- Our Offers — Monster Energy carousel -->
   <section class="what-offer" id="what-offer">
-    <div class="container">
-      <h3 class="what-offer-title cyber-headline bi-block reveal">
-        <span class="bi-en">Our Offers</span>
-        <span class="bi-ar">عروضنا</span>
-      </h3>
-      <p class="what-offer-desc bi-block reveal">
+    <span class="monster-watermark" aria-hidden="true">08</span>
+    <div class="monster-zone-inner">
+      <div class="monster-header">
+        <div class="monster-dots" id="monsterDots" aria-label="Offer navigation">
+          <button class="monster-dot active" data-color="green" data-index="0" aria-label="Offer 1"></button>
+          <button class="monster-dot" data-color="cyan" data-index="1" aria-label="Offer 2"></button>
+          <button class="monster-dot" data-color="magenta" data-index="2" aria-label="Offer 3"></button>
+          <button class="monster-dot" data-color="orange" data-index="3" aria-label="Offer 4"></button>
+          <button class="monster-dot" data-color="lime" data-index="4" aria-label="Offer 5"></button>
+          <button class="monster-dot" data-color="purple" data-index="5" aria-label="Offer 6"></button>
+          <button class="monster-dot" data-color="blue" data-index="6" aria-label="Offer 7"></button>
+          <button class="monster-dot" data-color="white" data-index="7" aria-label="Offer 8"></button>
+        </div>
+        <h3 class="monster-headline bi-block reveal">
+          <span class="bi-en">Choose Your Power</span>
+          <span class="bi-ar">اختر قوتك</span>
+        </h3>
+        <span class="monster-count" aria-hidden="true">08</span>
+      </div>
+      <p class="monster-sub bi-block reveal">
         <span class="bi-en">Everything we deliver for brands in Kuwait — from websites to AI automation.</span>
         <span class="bi-ar">كل ما نقدمه للعلامات في الكويت — من المواقع إلى أتمتة الذكاء الاصطناعي.</span>
       </p>
 
-      <div class="monster-offers-grid">
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.1s;">
-          <span class="monster-offer-index">01</span>
-          <span class="bi-en">Custom Website Design</span>
-          <span class="bi-ar">تصميم مواقع مخصصة</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.2s;">
-          <span class="monster-offer-index">02</span>
-          <span class="bi-en">Website Development</span>
-          <span class="bi-ar">تطوير المواقع</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.3s;">
-          <span class="monster-offer-index">03</span>
-          <span class="bi-en">Branding & Identity</span>
-          <span class="bi-ar">العلامة التجارية والهوية</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.4s;">
-          <span class="monster-offer-index">04</span>
-          <span class="bi-en">Digital Marketing</span>
-          <span class="bi-ar">التسويق الرقمي</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.5s;">
-          <span class="monster-offer-index">05</span>
-          <span class="bi-en">AI & Automation</span>
-          <span class="bi-ar">الذكاء الاصطناعي والأتمتة</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.6s;">
-          <span class="monster-offer-index">06</span>
-          <span class="bi-en">Social Media Management</span>
-          <span class="bi-ar">إدارة وسائل التواصل</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.7s;">
-          <span class="monster-offer-index">07</span>
-          <span class="bi-en">Paid Advertising</span>
-          <span class="bi-ar">الإعلانات المدفوعة</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
-        <article class="monster-offer-card bi-block" style="animation-delay: 0.8s;">
-          <span class="monster-offer-index">08</span>
-          <span class="bi-en">Content Creation</span>
-          <span class="bi-ar">إنشاء المحتوى</span>
-          <span class="monster-offer-corner" aria-hidden="true"></span>
-        </article>
+      <div class="monster-carousel-wrap">
+        <div class="monster-carousel" id="monsterCarousel">
+          <article class="monster-can bi-block" data-color="green" style="animation-delay: 0.1s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">01</div>
+              <span class="monster-can-num">01</span>
+              <span class="bi-en">Custom Website Design</span>
+              <span class="bi-ar">تصميم مواقع مخصصة</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="cyan" style="animation-delay: 0.2s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">02</div>
+              <span class="monster-can-num">02</span>
+              <span class="bi-en">Website Development</span>
+              <span class="bi-ar">تطوير المواقع</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="magenta" style="animation-delay: 0.3s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">03</div>
+              <span class="monster-can-num">03</span>
+              <span class="bi-en">Branding & Identity</span>
+              <span class="bi-ar">العلامة التجارية والهوية</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="orange" style="animation-delay: 0.4s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">04</div>
+              <span class="monster-can-num">04</span>
+              <span class="bi-en">Digital Marketing</span>
+              <span class="bi-ar">التسويق الرقمي</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="lime" style="animation-delay: 0.5s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">05</div>
+              <span class="monster-can-num">05</span>
+              <span class="bi-en">AI & Automation</span>
+              <span class="bi-ar">الذكاء الاصطناعي والأتمتة</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="purple" style="animation-delay: 0.6s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">06</div>
+              <span class="monster-can-num">06</span>
+              <span class="bi-en">Social Media Management</span>
+              <span class="bi-ar">إدارة وسائل التواصل</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="blue" style="animation-delay: 0.7s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">07</div>
+              <span class="monster-can-num">07</span>
+              <span class="bi-en">Paid Advertising</span>
+              <span class="bi-ar">الإعلانات المدفوعة</span>
+            </div>
+          </article>
+          <article class="monster-can bi-block" data-color="white" style="animation-delay: 0.8s;">
+            <div class="monster-can-glow"></div>
+            <div class="monster-can-body">
+              <div class="monster-can-icon">08</div>
+              <span class="monster-can-num">08</span>
+              <span class="bi-en">Content Creation</span>
+              <span class="bi-ar">إنشاء المحتوى</span>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -1738,16 +1936,59 @@
     };
     initDataCards();
 
-    // Monster Offers — trigger pop animation on scroll
+    // Monster Offers carousel
     const monsterOffers = document.getElementById('what-offer');
+    const monsterCarousel = document.getElementById('monsterCarousel');
+    const monsterDots = document.getElementById('monsterDots');
+    const monsterCans = monsterCarousel ? [...monsterCarousel.querySelectorAll('.monster-can')] : [];
+
+    function setActiveMonsterCan(index) {
+      monsterCans.forEach((can, i) => can.classList.toggle('is-active', i === index));
+      monsterDots?.querySelectorAll('.monster-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    function scrollToMonsterCan(index) {
+      const can = monsterCans[index];
+      if (!can || !monsterCarousel) return;
+      const left = can.offsetLeft - (monsterCarousel.clientWidth - can.offsetWidth) / 2;
+      monsterCarousel.scrollTo({ left, behavior: 'smooth' });
+      setActiveMonsterCan(index);
+    }
+
     if (monsterOffers) {
       const monsterObs = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
           monsterOffers.classList.add('monster-live');
+          setActiveMonsterCan(0);
           monsterObs.unobserve(monsterOffers);
         }
-      }, { threshold: 0.15 });
+      }, { threshold: 0.2 });
       monsterObs.observe(monsterOffers);
+    }
+
+    if (monsterCarousel && monsterCans.length) {
+      monsterDots?.querySelectorAll('.monster-dot').forEach(dot => {
+        dot.addEventListener('click', () => scrollToMonsterCan(+dot.dataset.index));
+      });
+      monsterCans.forEach((can, i) => can.addEventListener('click', () => scrollToMonsterCan(i)));
+
+      let scrollTicking = false;
+      monsterCarousel.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          const center = monsterCarousel.scrollLeft + monsterCarousel.clientWidth / 2;
+          let closest = 0, minDist = Infinity;
+          monsterCans.forEach((can, i) => {
+            const dist = Math.abs(center - (can.offsetLeft + can.offsetWidth / 2));
+            if (dist < minDist) { minDist = dist; closest = i; }
+          });
+          setActiveMonsterCan(closest);
+          scrollTicking = false;
+        });
+      }, { passive: true });
     }
 
     // Scroll reveal (non-card elements)

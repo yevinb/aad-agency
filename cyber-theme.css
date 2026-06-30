@@ -358,7 +358,8 @@ main { position: relative; z-index: 1; }
   .data-card { transform: none; opacity: 1; }
   .data-card.pop-in { transform: none; }
   .hero-title .word { transform: none; opacity: 1; animation: none; }
-  .monster-offer-card {
+  .monster-offer-card,
+  .monster-can {
     opacity: 1; transform: none;
     animation: none;
   }
