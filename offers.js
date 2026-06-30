@@ -1,6 +1,9 @@
 function bi(en, ar) {
   return `<span class="bi-en">${en}</span><span class="bi-ar">${ar}</span>`;
 }
+function biLi(en, ar) {
+  return `<li class="bi-block">${bi(en, ar)}</li>`;
+}
 
 const offersData = [
   {
@@ -68,10 +71,10 @@ const offersData = [
       {
         icon: '⚡',
         title: { en: 'Workflow Automation', ar: 'أتمتة سير العمل' },
-        desc: { en: 'Connect different apps so they work together automatically.', ar: 'ربط التطبيقات المختلفة لتعمل معاً تلقائياً.' },
+        desc: { en: 'Connect different apps so they work together automatically. For example:', ar: 'ربط التطبيقات المختلفة لتعمل معاً تلقائياً. على سبيل المثال:' },
         items: [
-          { en: 'Website form → CRM → Email → Slack', ar: 'نموذج الموقع ← CRM ← بريد ← Slack' },
-          { en: 'Booking → Calendar → Reminder → CRM', ar: 'حجز ← تقويم ← تذكير ← CRM' }
+          { en: 'Website form → CRM → Email → Slack notification', ar: 'نموذج الموقع ← CRM ← بريد ← إشعار Slack' },
+          { en: 'Customer books a call → Calendar invite → Reminder email → CRM update', ar: 'حجز مكالمة ← دعوة تقويم ← تذكير ← تحديث CRM' }
         ],
         tools: ['Make', 'Zapier', 'n8n', 'OpenAI', 'Claude', 'HubSpot', 'GoHighLevel']
       }
@@ -101,7 +104,7 @@ const offersData = [
           { en: 'Mission and vision', ar: 'الرسالة والرؤية' },
           { en: 'Target audience', ar: 'الجمهور المستهدف' },
           { en: 'Brand positioning', ar: 'تحديد موقع العلامة' },
-          { en: 'Unique selling proposition (USP)', ar: 'العرض البيعي الفريد' },
+          { en: 'Unique selling proposition (USP)', ar: 'العرض البيعي الفريد (USP)' },
           { en: 'Core values', ar: 'القيم الأساسية' }
         ]
       },
@@ -114,7 +117,8 @@ const offersData = [
           { en: 'Friendly', ar: 'ودود' },
           { en: 'Luxury', ar: 'فاخر' },
           { en: 'Modern', ar: 'عصري' },
-          { en: 'Playful', ar: 'مرح' }
+          { en: 'Playful', ar: 'مرح' },
+          { en: 'Minimalist', ar: 'بسيط' }
         ]
       }
     ]
@@ -126,28 +130,140 @@ const offersData = [
       {
         icon: '📱',
         title: { en: 'Social Media Marketing', ar: 'التسويق عبر وسائل التواصل' },
-        desc: { en: 'Create and manage content on Instagram, TikTok, LinkedIn, and Facebook to grow an audience and generate leads.', ar: 'إنشاء وإدارة المحتوى على Instagram وTikTok وLinkedIn وFacebook لتنمية الجمهور وجذب العملاء.' }
+        desc: { en: 'Create and manage content on platforms like Instagram, TikTok, LinkedIn, and Facebook to grow an audience and generate leads.', ar: 'إنشاء وإدارة المحتوى على Instagram وTikTok وLinkedIn وFacebook لتنمية الجمهور وجذب العملاء المحتملين.' }
       },
       {
         icon: '📧',
         title: { en: 'Email Marketing', ar: 'التسويق عبر البريد الإلكتروني' },
-        desc: { en: 'Newsletters, promotional emails, and automated sequences that turn subscribers into customers.', ar: 'نشرات إخبارية ورسائل ترويجية وسلاسل آلية تحوّل المشتركين إلى عملاء.' }
+        desc: { en: 'Send newsletters, promotions, welcome sequences, and follow-up emails to turn subscribers into customers.', ar: 'إرسال نشرات إخبارية وعروض وسلاسل ترحيب ومتابعة لتحويل المشتركين إلى عملاء.' }
       },
       {
         icon: '💰',
         title: { en: 'Paid Advertising', ar: 'الإعلانات المدفوعة' },
-        desc: { en: 'Run ads on Google, Meta, TikTok, and LinkedIn. The goal is to generate leads or sales.', ar: 'تشغيل إعلانات على Google وMeta وTikTok وLinkedIn لجذب عملاء أو تحقيق مبيعات.' }
+        desc: { en: 'Run ads on platforms such as Google Ads, Meta (Facebook & Instagram), TikTok Ads, and LinkedIn Ads. The goal is to generate leads or sales.', ar: 'تشغيل إعلانات على Google وMeta وTikTok وLinkedIn. الهدف هو جذب عملاء محتملين أو تحقيق مبيعات.' },
+        items: [
+          { en: 'Google Ads', ar: 'Google Ads' },
+          { en: 'Meta (Facebook & Instagram)', ar: 'Meta (Facebook و Instagram)' },
+          { en: 'TikTok Ads', ar: 'TikTok Ads' },
+          { en: 'LinkedIn Ads', ar: 'LinkedIn Ads' }
+        ]
+      },
+      {
+        icon: '✍️',
+        title: { en: 'Content Marketing', ar: 'تسويق المحتوى' },
+        desc: { en: 'Create valuable content that attracts potential customers, such as:', ar: 'إنشاء محتوى قيّم يجذب العملاء المحتملين، مثل:' },
+        items: [
+          { en: 'Blog posts', ar: 'مقالات المدونة' },
+          { en: 'Videos', ar: 'فيديوهات' },
+          { en: 'Reels', ar: 'Reels' },
+          { en: 'Case studies', ar: 'دراسات حالة' },
+          { en: 'Guides', ar: 'أدلة' }
+        ]
+      },
+      {
+        icon: '📈',
+        title: { en: 'Conversion Rate Optimization (CRO)', ar: 'تحسين معدل التحويل (CRO)' },
+        desc: { en: 'Improve a website so more visitors become customers by:', ar: 'تحسين الموقع ليتحول المزيد من الزوار إلى عملاء عبر:' },
+        items: [
+          { en: 'Better layouts', ar: 'تصاميم أفضل' },
+          { en: 'Clearer calls to action', ar: 'دعوات لاتخاذ إجراء أوضح' },
+          { en: 'Faster loading speeds', ar: 'سرعات تحميل أسرع' },
+          { en: 'A/B testing', ar: 'اختبار A/B' }
+        ]
+      },
+      {
+        icon: '🤖',
+        title: { en: 'Marketing Automation', ar: 'أتمتة التسويق' },
+        desc: { en: 'Automate marketing tasks, including:', ar: 'أتمتة مهام التسويق، بما في ذلك:' },
+        items: [
+          { en: 'Welcome email sequences', ar: 'سلاسل رسائل ترحيبية' },
+          { en: 'Lead nurturing', ar: 'رعاية العملاء المحتملين' },
+          { en: 'CRM workflows', ar: 'سير عمل CRM' },
+          { en: 'AI chatbots', ar: 'روبوتات ذكية' },
+          { en: 'Follow-up reminders', ar: 'تذكيرات المتابعة' }
+        ]
       }
     ]
   },
   {
     id: 'web',
-    title: { en: 'Web Design', ar: 'تصميم المواقع' },
+    title: { en: 'Web Design & Development', ar: 'تصميم وتطوير المواقع' },
+    intro: { en: 'Full-stack web design & development:', ar: 'تصميم وتطوير مواقع متكامل:' },
     offers: [
       {
-        icon: '🖥️',
+        icon: '🎨',
+        title: { en: 'Visual Design', ar: 'التصميم البصري' },
+        items: [
+          { en: 'Colors', ar: 'الألوان' },
+          { en: 'Fonts', ar: 'الخطوط' },
+          { en: 'Images', ar: 'الصور' },
+          { en: 'Icons', ar: 'الأيقونات' },
+          { en: 'Layout', ar: 'التخطيط' },
+          { en: 'Buttons', ar: 'الأزرار' }
+        ]
+      },
+      {
+        icon: '📱',
+        title: { en: 'Responsive Design', ar: 'التصميم المتجاوب' },
+        desc: { en: 'Making sure the website looks great on:', ar: 'ضمان أن الموقع يبدو رائعاً على:' },
+        items: [
+          { en: 'Desktop', ar: 'الكمبيوتر' },
+          { en: 'Tablet', ar: 'التابلت' },
+          { en: 'Mobile', ar: 'الجوال' }
+        ]
+      },
+      {
+        icon: '🧭',
+        title: { en: 'User Experience (UX)', ar: 'تجربة المستخدم (UX)' },
+        desc: { en: 'Making the site easy to use:', ar: 'جعل الموقع سهل الاستخدام:' },
+        items: [
+          { en: 'Clear navigation', ar: 'تنقل واضح' },
+          { en: 'Fast loading', ar: 'تحميل سريع' },
+          { en: 'Logical page structure', ar: 'هيكل صفحات منطقي' },
+          { en: 'Easy-to-find information', ar: 'معلومات سهلة الوصول' }
+        ]
+      },
+      {
+        icon: '🖱️',
+        title: { en: 'User Interface (UI)', ar: 'واجهة المستخدم (UI)' },
+        desc: { en: 'The interactive parts people use:', ar: 'الأجزاء التفاعلية التي يستخدمها الناس:' },
+        items: [
+          { en: 'Buttons', ar: 'الأزرار' },
+          { en: 'Forms', ar: 'النماذج' },
+          { en: 'Menus', ar: 'القوائم' },
+          { en: 'Animations', ar: 'الحركات والتأثيرات' }
+        ]
+      },
+      {
+        icon: '🎯',
+        title: { en: 'Conversion-Focused Design', ar: 'تصميم يركز على التحويل' },
+        desc: { en: 'Designing pages that encourage visitors to take action, such as:', ar: 'تصميم صفحات تشجع الزوار على اتخاذ إجراء، مثل:' },
+        items: [
+          { en: 'Book a call', ar: 'حجز مكالمة' },
+          { en: 'Buy a product', ar: 'شراء منتج' },
+          { en: 'Fill out a contact form', ar: 'تعبئة نموذج تواصل' },
+          { en: 'Subscribe to a newsletter', ar: 'الاشتراك في النشرة البريدية' }
+        ]
+      },
+      {
+        icon: '🔧',
+        title: { en: 'Example: Plumber Website', ar: 'مثال: موقع سباك' },
+        desc: { en: 'A plumber needs a website. A good web design would include:', ar: 'يحتاج السباك موقعاً. تصميم جيد يشمل:' },
+        items: [
+          { en: 'A professional homepage', ar: 'صفحة رئيسية احترافية' },
+          { en: 'Clear "Call Now" and "Get a Quote" buttons', ar: 'أزرار "اتصل الآن" و"احصل على عرض سعر" واضحة' },
+          { en: 'Service pages', ar: 'صفحات الخدمات' },
+          { en: 'Customer reviews', ar: 'آراء العملاء' },
+          { en: 'Contact form', ar: 'نموذج تواصل' },
+          { en: 'Mobile-friendly layout', ar: 'تصميم متوافق مع الجوال' },
+          { en: 'Fast loading speed', ar: 'سرعة تحميل عالية' }
+        ],
+        footer: { en: 'The developer then builds that design so it works in a browser.', ar: 'ثم يبني المطور التصميم ليعمل في المتصفح.' }
+      },
+      {
+        icon: '💻',
         title: { en: 'Custom Website Design', ar: 'تصميم مواقع مخصصة' },
-        desc: { en: 'We design how your website looks — layout, colors, typography, and user experience.', ar: 'نصمم شكل موقعك — التخطيط والألوان والخطوط وتجربة المستخدم.' }
+        desc: { en: 'Professional, mobile-friendly websites built to convert — from homepage to contact form.', ar: 'مواقع احترافية متجاوبة مُصممة للتحويل — من الصفحة الرئيسية إلى نموذج التواصل.' }
       },
       {
         icon: '⚙️',
@@ -158,37 +274,44 @@ const offersData = [
   }
 ];
 
-function renderClassicService(offer) {
-  let html = `<div class="classic-service">
-    <div class="classic-service-head">
-      <span class="classic-emoji">${offer.icon}</span>
-      <h4 class="classic-service-title">${bi(offer.title.en, offer.title.ar)}</h4>
-    </div>`;
-  if (offer.desc) {
-    html += `<p class="classic-desc">${bi(offer.desc.en, offer.desc.ar)}</p>`;
-  }
-  if (offer.items?.length) {
-    html += `<ul class="classic-list">${offer.items.map(i =>
-      `<li><span class="bi-en">${i.en}</span><span class="bi-ar">${i.ar}</span></li>`
-    ).join('')}</ul>`;
-  }
+const MONSTER_COLORS = ['green', 'cyan', 'magenta', 'orange', 'lime', 'purple', 'blue', 'white'];
+
+let cardColorIndex = 0;
+
+function renderServiceCan(offer, delay) {
+  const color = MONSTER_COLORS[cardColorIndex++ % MONSTER_COLORS.length];
+  let html = `<article class="monster-can monster-service-can bi-block" data-color="${color}" style="animation-delay:${delay}s">
+    <div class="monster-can-glow"></div>
+    <div class="monster-can-body monster-service-body">
+      <div class="monster-can-icon monster-emoji-icon">${offer.icon}</div>
+      <h4 class="monster-service-title bi-block">${bi(offer.title.en, offer.title.ar)}</h4>`;
+  if (offer.desc) html += `<p class="monster-service-desc bi-block">${bi(offer.desc.en, offer.desc.ar)}</p>`;
+  if (offer.items?.length) html += `<ul class="monster-service-list">${offer.items.map(i => biLi(i.en, i.ar)).join('')}</ul>`;
+  if (offer.footer) html += `<p class="monster-service-desc bi-block" style="margin-top:10px;font-style:italic">${bi(offer.footer.en, offer.footer.ar)}</p>`;
   if (offer.tools?.length) {
-    html += `<div class="classic-tools">${offer.tools.map(t =>
-      `<span class="classic-tool">${t}</span>`
-    ).join('')}</div>`;
+    html += `<div class="tools-row" style="margin-top:12px">${offer.tools.map(t => `<span class="tool-pill">${t}</span>`).join('')}</div>`;
   }
-  return html + '</div>';
+  return html + '</div></article>';
 }
 
 function renderOffers() {
   const root = document.getElementById('offersRoot');
   if (!root) return;
-  root.innerHTML = offersData.map(cat => `
-    <div class="classic-category" id="offer-${cat.id}">
-      <h3 class="classic-cat-title">${bi(cat.title.en, cat.title.ar)}</h3>
-      ${cat.intro ? `<p class="classic-cat-intro">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
-      ${cat.offers.map(renderClassicService).join('')}
-    </div>`).join('');
+  cardColorIndex = 0;
+  let delay = 0;
+  root.innerHTML = offersData.map(cat => {
+    const cards = cat.offers.map(o => renderServiceCan(o, (delay += 0.06).toFixed(2))).join('');
+    return `
+    <div class="offer-category monster-subzone" id="offer-${cat.id}">
+      <h3 class="offer-category-title monster-headline bi-block">${bi(cat.title.en, cat.title.ar)}</h3>
+      ${cat.intro ? `<p class="offer-cat-intro bi-block monster-sub">${bi(cat.intro.en, cat.intro.ar)}</p>` : ''}
+      <div class="monster-carousel-wrap monster-service-wrap">
+        <div class="monster-carousel monster-service-carousel">${cards}</div>
+      </div>
+    </div>`;
+  }).join('');
+  if (window.initMonsterZones) window.initMonsterZones(root);
+  if (window.initAllMonsterCarousels) window.initAllMonsterCarousels(root);
 }
 
 document.addEventListener('DOMContentLoaded', renderOffers);

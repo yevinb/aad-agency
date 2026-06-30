@@ -200,6 +200,7 @@ nav.scrolled {
 .monster-zone.monster-live .monster-carousel .monster-can,
 .monster-subzone.monster-live .monster-carousel .monster-can,
 .monster-subzone.monster-live .monster-can,
+.monster-subzone.monster-live .monster-service-can,
 .what-offer.monster-live .monster-can {
   animation-play-state: running;
 }
