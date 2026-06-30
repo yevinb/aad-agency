@@ -15,12 +15,12 @@
 
 .premium-orb {
   position: absolute;
-  top: 15%;
-  right: 10%;
+  top: 5%;
+  right: 18%;
   width: min(55vw, 520px);
   height: min(55vw, 520px);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 0, 0.14) 0%, rgba(0, 212, 255, 0.06) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.14) 0%, rgba(0, 255, 0, 0.04) 40%, transparent 70%);
   filter: blur(40px);
   animation: premiumOrbPulse 6s ease-in-out infinite alternate;
 }
@@ -29,8 +29,8 @@
   position: absolute;
   border-radius: 50%;
   border: 1px solid;
-  top: 50%;
-  left: 58%;
+  top: 28%;
+  left: 72%;
   transform: translate(-50%, -50%);
   animation: premiumRingSpin 24s linear infinite;
 }
@@ -45,10 +45,10 @@
 .premium-ring-2 {
   width: min(52vw, 460px);
   height: min(52vw, 460px);
-  border-color: rgba(0, 212, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.2);
   animation-direction: reverse;
   animation-duration: 32s;
-  box-shadow: 0 0 80px rgba(0, 212, 255, 0.08);
+  box-shadow: 0 0 80px rgba(0, 255, 0, 0.1);
 }
 
 .premium-ring-3 {
