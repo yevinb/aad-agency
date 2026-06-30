@@ -56,7 +56,7 @@
   }
 
   function initGlassStats() {
-    var nums = document.querySelectorAll('.glass-stat-num[data-count]');
+    var nums = document.querySelectorAll('.fp-stat-num[data-count], .glass-stat-num[data-count]');
     if (!nums.length) return;
 
     var obs = new IntersectionObserver(function (entries) {
