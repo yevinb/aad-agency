@@ -388,6 +388,7 @@ body.classic {
 .classic .mobile-link { font-family: var(--display); color: #fff; }
 .classic .mobile-wa { border-color: var(--wa-green); color: var(--wa-green); }
 
+@media (min-width: 768px) {
   .classic .slide-inner { padding: 0 48px; max-width: 800px; }
   .classic nav { padding: 20px 48px; }
 }
